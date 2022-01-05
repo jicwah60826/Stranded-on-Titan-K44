@@ -57,15 +57,18 @@ public class PlayerController : MonoBehaviour
 
         ///////////*********** Handle Jumping ********** ///////////
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            moveInput.y = jumpPower; //Jump player the player 
-            canDoubleJump = true;
-        }
-        else if (canDoubleJump && Input.GetKeyDown(KeyCode.Space))
-        {
-            moveInput.y = jumpPower;
-            canDoubleJump = false;
+            if (canJump)
+            {
+                moveInput.y = jumpPower;
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump == true)
+            {
+                moveInput.y = jumpPower;
+                canDoubleJump = false;
+            }
         }
 
         ///////////*********** Move the Player ********** ///////////
