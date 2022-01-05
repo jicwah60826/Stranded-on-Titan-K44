@@ -6,12 +6,15 @@ public class PlayerController : MonoBehaviour
 {
 
     // Define Global Variables
-    public float moveSpeed, gravityModifier, mouseSensitivity;
+    public float moveSpeed, gravityModifier, jumpPower, mouseSensitivity;
     public bool invertX, invertY;
     public CharacterController charCon;
 
     private Vector3 moveInput;
     public Transform camTrans;
+    public Transform groundCheckPoint; // item that will define what is ground
+    public LayerMask whatIsGround;
+    private bool canJump;
 
     // Start is called before the first frame update
     void Start()
@@ -41,17 +44,31 @@ public class PlayerController : MonoBehaviour
         moveInput.y = yStore;
 
         //Modify the Y value of the player to be world physics * the gravity modifier. This will control how high or easy we can jump
-        moveInput.y  += Physics.gravity.y * gravityModifier * Time.deltaTime;
+        moveInput.y += Physics.gravity.y * gravityModifier * Time.deltaTime;
 
-        if(charCon.isGrounded){
+        if (charCon.isGrounded)
+        {
             //if we are on the ground
             moveInput.y = Physics.gravity.y * gravityModifier * Time.deltaTime;
         }
 
-        // Move the player based on the moveInput Vector3
+        ///////////*********** Handle Jumping ********** ///////////
+
+        // Do an overlapp spehere at groundChecPoint for .25f to check how many objects we have hit that have layermask whatIsGround
+        canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
+        Debug.Log("canJump = " + canJump);
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            Debug.Log("pressed space");
+            moveInput.y = jumpPower; //Jump player the player 
+            canJump = false;
+        }
+
+        ///////////*********** Move the Player ********** ///////////
         charCon.Move(moveInput * Time.deltaTime);
 
-        ///////////*********** Get Mouse Movement / Control Camera Rotation ********** ///////////
+        ///////////*********** Rotate Player / Control Camera Rotation ********** ///////////
         Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * mouseSensitivity;
 
         //Check Invert X or Y axis flips are
