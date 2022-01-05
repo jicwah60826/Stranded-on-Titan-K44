@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     // Define Global Variables
-    public float moveSpeed, gravityModifier, jumpPower, mouseSensitivity;
+    public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity;
     public bool invertX, invertY;
     public CharacterController charCon;
 
@@ -38,7 +38,16 @@ public class PlayerController : MonoBehaviour
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize();
-        moveInput = moveInput * moveSpeed;
+
+        // Run or Walk
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveInput = moveInput * runSpeed;
+        }
+        else
+        {
+            moveInput = moveInput * moveSpeed;
+        }
 
         //Re-Calc Y velocity after above updates are applied
         moveInput.y = yStore;
