@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Transform camTrans;
     public Transform groundCheckPoint; // item that will define what is ground
     public LayerMask whatIsGround;
-    private bool canJump;
+    private bool canJump, canDoubleJump;
 
     // Start is called before the first frame update
     void Start()
@@ -52,17 +52,20 @@ public class PlayerController : MonoBehaviour
             moveInput.y = Physics.gravity.y * gravityModifier * Time.deltaTime;
         }
 
-        ///////////*********** Handle Jumping ********** ///////////
-
-        // Do an overlapp spehere at groundChecPoint for .25f to check how many objects we have hit that have layermask whatIsGround
+        // check if we are within range of any ground layer object
         canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
-        Debug.Log("canJump = " + canJump);
+
+        ///////////*********** Handle Jumping ********** ///////////
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            Debug.Log("pressed space");
             moveInput.y = jumpPower; //Jump player the player 
-            canJump = false;
+            canDoubleJump = true;
+        }
+        else if (canDoubleJump && Input.GetKeyDown(KeyCode.Space))
+        {
+            moveInput.y = jumpPower;
+            canDoubleJump = false;
         }
 
         ///////////*********** Move the Player ********** ///////////
