@@ -6,16 +6,12 @@ public class PlayerController : MonoBehaviour
 {
 
     // Define Global Variables
-    public float moveSpeed;
+    public float moveSpeed, gravityModifier, mouseSensitivity;
+    public bool invertX, invertY;
     public CharacterController charCon;
 
     private Vector3 moveInput;
     public Transform camTrans;
-
-    public float mouseSensitivity;
-
-    public bool invertX;
-    public bool invertY;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +27,26 @@ public class PlayerController : MonoBehaviour
         //moveInput.x = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
         //moveInput.z = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime;
 
+        //Store current Y velocity before every update
+        float yStore = moveInput.y;
+
         Vector3 vertMove = transform.forward * Input.GetAxisRaw("Vertical");
         Vector3 horiMove = transform.forward * Input.GetAxisRaw("Horizontal");
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize();
         moveInput = moveInput * moveSpeed;
+
+        //Re-Calc Y velocity after above updates are applied
+        moveInput.y = yStore;
+
+        //Modify the Y value of the player to be world physics * the gravity modifier. This will control how high or easy we can jump
+        moveInput.y  += Physics.gravity.y * gravityModifier * Time.deltaTime;
+
+        if(charCon.isGrounded){
+            //if we are on the ground
+            moveInput.y = Physics.gravity.y * gravityModifier * Time.deltaTime;
+        }
 
         // Move the player based on the moveInput Vector3
         charCon.Move(moveInput * Time.deltaTime);
