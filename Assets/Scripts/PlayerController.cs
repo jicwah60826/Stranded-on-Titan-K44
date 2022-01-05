@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviour
     public Transform camTrans;
     public Transform groundCheckPoint; // item that will define what is ground
     public LayerMask whatIsGround;
-    private bool canJump, canDoubleJump;
+    private bool canJump, canDoubleJump, isRunning;
+
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -43,10 +45,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             moveInput = moveInput * runSpeed;
+            isRunning = true;
         }
         else
         {
             moveInput = moveInput * moveSpeed;
+            isRunning = false;
         }
 
         //Re-Calc Y velocity after above updates are applied
@@ -102,5 +106,10 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+        // Animations
+        anim.SetFloat("moveSpeed", moveInput.magnitude); // set the moveSpeed paramater in the animation controller to be the magnitude of how much player is moving
+        anim.SetBool("isRunning", isRunning); //set the isRunning param in the Player animation
+        anim.SetBool("onGround", canJump); //set the onGround param in the Player animation
     }
 }

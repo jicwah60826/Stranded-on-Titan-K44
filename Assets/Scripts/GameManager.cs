@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Hide / Lock cursor movement in game window
         Cursor.lockState = CursorLockMode.Locked;
     }
 }
