@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 670467227}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3876,11 +3876,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theEnemy: {fileID: 5648849265970080793, guid: 030bd002073096a47a07c3061edee9bd, type: 3}
-  spawnCount: 1
+  spawnCount: 100
   spawnInterval: 0.1
-  spawnDelayTime: 5
-  yPosLow: 0
-  yPosHigh: 2
 --- !u!1 &2119714433
 GameObject:
   m_ObjectHideFlags: 0
