@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     public Animator anim;
 
+    public GameObject bullet;
+
+    public Transform firePoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,6 +110,11 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+        // Handle Shooting
+        if(Input.GetMouseButtonDown(0)){
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
+        }
 
         // Animations
         anim.SetFloat("moveSpeed", moveInput.magnitude); // set the moveSpeed paramater in the animation controller to be the magnitude of how much player is moving
