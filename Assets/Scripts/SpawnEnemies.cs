@@ -22,9 +22,12 @@ public class SpawnEnemies : MonoBehaviour
 
     private void Update()
     {
-        // start spawnDelayCounter
-        spawnDelayCounter -= Time.deltaTime;
-        Debug.Log("spawnDelayCounter:" + spawnDelayCounter);
+        if (spawnDelayCounter > 0)
+        {
+            // Countdown timer
+            spawnDelayCounter -= Time.deltaTime;
+            // Debug.Log("spawnDelayCounter:" + spawnDelayCounter);
+        }
 
         if (spawnDelayCounter <= 0)
         {
@@ -45,12 +48,3 @@ public class SpawnEnemies : MonoBehaviour
         }
     }
 }
-
-
-
-/* -17, 13
-1.7, -23
-
-
-z = 13, 23
-x = -17, 1.7 */

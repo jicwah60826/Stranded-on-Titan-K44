@@ -112,7 +112,27 @@ public class PlayerController : MonoBehaviour
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
         // Handle Shooting
-        if(Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            RaycastHit hit; //project  raycast from object
+
+            //check if raycast is hitting anything starting from the camera location. Store values in the"hit" raycase object and go out forward for 50 units.
+            if (Physics.Raycast(camTrans.position, camTrans.forward, out hit, 50f))
+            {
+                // if raycast hits something greater than 2 units out
+                if (Vector3.Distance(camTrans.position, hit.point) > 2f)
+                {
+                    firePoint.LookAt(hit.point);
+                }
+            }
+            else
+            {
+                // if no ray is hit within 50 units, send ray straight out from the camera position and rotation for 30 units
+                // just so it looks like it's still shooting at the center of the screen
+                firePoint.LookAt(camTrans.position + (camTrans.forward * 30f));
+            }
+
             Instantiate(bullet, firePoint.position, firePoint.rotation);
         }
 

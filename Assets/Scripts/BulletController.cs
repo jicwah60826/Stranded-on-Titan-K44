@@ -6,6 +6,7 @@ public class BulletController : MonoBehaviour
 {
 
     public float moveSpeed, lifeTime;
+
     public Rigidbody theRB;
 
     public GameObject impactEffect;
@@ -25,7 +26,15 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //check what object tag the bullet collided with
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("You hit an enemy");
+            Destroy(other.gameObject);
+        }
+
         Destroy(gameObject);
-        Instantiate(impactEffect, transform.position, transform.rotation);
+        Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
     }
 }
