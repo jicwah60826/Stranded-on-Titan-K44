@@ -30,8 +30,9 @@ public class BulletController : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy")
         {
+            // Destroy(other.gameObject);
             Debug.Log("You hit an enemy");
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy();
         }
 
         Destroy(gameObject);
