@@ -11,6 +11,8 @@ public class BulletController : MonoBehaviour
 
     public GameObject impactEffect;
 
+    public int damage = 1;
+
     // Update is called once per frame
     void Update()
     {
@@ -32,7 +34,7 @@ public class BulletController : MonoBehaviour
         {
             // Destroy(other.gameObject);
             Debug.Log("You hit an enemy");
-            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy();
+            other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
 
         Destroy(gameObject);
