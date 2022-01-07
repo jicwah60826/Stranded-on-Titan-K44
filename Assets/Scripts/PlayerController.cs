@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    public static PlayerController instance;
+
     // Define Global Variables
     public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity;
     public bool invertX, invertY;
@@ -21,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
 
     public Transform firePoint;
+
+    private void Awake() {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
