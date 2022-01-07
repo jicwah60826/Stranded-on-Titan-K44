@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public float distanceToChase = 10f, distanceToLose = 15f;
 
     private Vector3 targetPoint;
+
+    public NavMeshAgent agent;
 
 
     // Start is called before the first frame update
