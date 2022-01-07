@@ -7,20 +7,24 @@ public class EnemyController : MonoBehaviour
 {
 
     public float moveSpeed;
-    public Rigidbody theRB;
+    //public Rigidbody theRB;
 
     private bool chasing;
     public float distanceToChase = 10f, distanceToLose = 15f;
 
-    private Vector3 targetPoint;
+    private Vector3 targetPoint, startPoint;
 
     public NavMeshAgent agent;
+
+    public float keepChasingTime;
+    private float chaseCounter;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        startPoint = transform.position; // store initial position of enemy
     }
 
     // Update is called once per frame
@@ -37,16 +41,31 @@ public class EnemyController : MonoBehaviour
             {
                 chasing = true;
             }
+
+            if (chaseCounter > 0)
+            {
+                chaseCounter -= Time.deltaTime;
+                Debug.Log("chaseCounter: " + chaseCounter);
+
+                if (chaseCounter <= 0)
+                {
+                    agent.destination = startPoint;
+                    Debug.Log("Sending Enemy back to ttartPoint");
+                }
+            }
         }
         else
         {
-            transform.LookAt(targetPoint); //look at the transform position of the player controller instance
-            theRB.velocity = transform.forward * moveSpeed; //move the enemy forward by the moveSpeed
+            //transform.LookAt(targetPoint); //look at the transform position of the player controller instance
+            //theRB.velocity = transform.forward * moveSpeed; //move the enemy forward by the moveSpeed
+
+            agent.destination = targetPoint;
 
             // stop chasing player if outside range of distance to lose
             if (Vector3.Distance(transform.position, targetPoint) > distanceToLose)
             {
                 chasing = false;
+                chaseCounter = keepChasingTime;
             }
 
         }
