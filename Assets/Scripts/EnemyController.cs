@@ -5,10 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-
-    public float moveSpeed;
-    //public Rigidbody theRB;
-
     private bool chasing;
     public float distanceToChase = 10f, distanceToLose = 15f, distanceToStop;
 
@@ -18,6 +14,14 @@ public class EnemyController : MonoBehaviour
 
     public float keepChasingTime;
     private float chaseCounter;
+
+    public GameObject bullet; // bullet object to fire
+    public Transform firePoint; // location to fire bullets from
+
+    public float fireRate; // delay between each bullet
+    public float waitTimeToFire; // amount of time to wait until firing on player once the chase begins
+    private float fireCount; // countdown timer between each shot
+
 
 
 
@@ -40,6 +44,8 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, targetPoint) < distanceToChase)
             {
                 chasing = true;
+
+                fireCount = waitTimeToFire;
             }
 
             if (chaseCounter > 0)
@@ -56,8 +62,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            //transform.LookAt(targetPoint); //look at the transform position of the player controller instance
-            //theRB.velocity = transform.forward * moveSpeed; //move the enemy forward by the moveSpeed
+            // Begin chasing the player
 
             if (Vector3.Distance(transform.position, targetPoint) > distanceToStop)
             {
@@ -68,13 +73,21 @@ public class EnemyController : MonoBehaviour
                 agent.destination = transform.position; // if within the distance to chase area, enemy stops moving
             }
 
-
-
             // stop chasing player if outside range of distance to lose
             if (Vector3.Distance(transform.position, targetPoint) > distanceToLose)
             {
                 chasing = false;
                 chaseCounter = keepChasingTime;
+            }
+
+            fireCount -= Time.deltaTime; // begin countdown timer between each shot
+
+            if (fireCount <= 0)
+            {
+                // when fireCount reaches 0, reset it back to fireRate
+                fireCount = fireRate;
+                //Fire a bullet
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
             }
 
         }

@@ -13,6 +13,8 @@ public class BulletController : MonoBehaviour
 
     public int damage = 1;
 
+    public bool damageEnemy, damagePlayer;
+
     // Update is called once per frame
     void Update()
     {
@@ -30,11 +32,16 @@ public class BulletController : MonoBehaviour
     {
         //check what object tag the bullet collided with
 
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
             // Destroy(other.gameObject);
             Debug.Log("You hit an enemy");
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+        }
+        if (other.gameObject.tag == "Player" && damagePlayer)
+        {
+            // Destroy(other.gameObject);
+            Debug.Log("Player has been hit at " + transform.position);
         }
 
         Destroy(gameObject);
