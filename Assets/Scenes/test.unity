@@ -3461,6 +3461,7 @@ MonoBehaviour:
   moveSpeed: 4
   distanceToChase: 15
   distanceToLose: 20
+  distanceToStop: 2
   agent: {fileID: 1672247630}
   keepChasingTime: 5
 --- !u!195 &1672247630

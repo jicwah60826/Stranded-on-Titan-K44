@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     //public Rigidbody theRB;
 
     private bool chasing;
-    public float distanceToChase = 10f, distanceToLose = 15f;
+    public float distanceToChase = 10f, distanceToLose = 15f, distanceToStop;
 
     private Vector3 targetPoint, startPoint;
 
@@ -59,7 +59,16 @@ public class EnemyController : MonoBehaviour
             //transform.LookAt(targetPoint); //look at the transform position of the player controller instance
             //theRB.velocity = transform.forward * moveSpeed; //move the enemy forward by the moveSpeed
 
-            agent.destination = targetPoint;
+            if (Vector3.Distance(transform.position, targetPoint) > distanceToStop)
+            {
+                agent.destination = targetPoint; // enemy keeps moving if outside distance to stop range
+            }
+            else
+            {
+                agent.destination = transform.position; // if within the distance to chase area, enemy stops moving
+            }
+
+
 
             // stop chasing player if outside range of distance to lose
             if (Vector3.Distance(transform.position, targetPoint) > distanceToLose)
