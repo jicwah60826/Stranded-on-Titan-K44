@@ -52,7 +52,9 @@ public class EnemyController : MonoBehaviour
             {
                 chasing = true;
 
-                fireCount = waitTimeToFire;
+                // fireCount = waitTimeToFire;
+                shootTimeCounter = timeToShoot; // initialize the shootTimeCounter
+                shotWaitCounter = waitBetweenShots; // initialize the shotWaitCounter
             }
 
             if (chaseCounter > 0)
@@ -102,7 +104,7 @@ public class EnemyController : MonoBehaviour
 
                 if (shootTimeCounter > 0)
                 {
-                    // as long as the shoot time countdown clock has time on it, enemy can
+                    // as long as the shoot time countdown clock has time on it, enemy can shoot
                     fireCount -= Time.deltaTime; // begin countdown timer between each shot
 
                     if (fireCount <= 0)
@@ -112,6 +114,8 @@ public class EnemyController : MonoBehaviour
                         //Fire a bullet
                         Instantiate(bullet, firePoint.position, firePoint.rotation);
                     }
+                    // enemy stops while shooting
+                    agent.destination = transform.position; // freeze enemy in place while enemy is shooting
                 }
 
                 else

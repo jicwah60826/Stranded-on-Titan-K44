@@ -4317,5 +4317,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8600544453447977317, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
+      propertyPath: fireRate
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600544453447977317, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
+      propertyPath: timeToShoot
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600544453447977317, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
+      propertyPath: waitTimeToFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600544453447977317, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
+      propertyPath: waitBetweenShots
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
