@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8600544452709301673}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -31.7, y: 0, z: -5.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cff63d314c34574fa4dd6212de6924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyExplosionFX: {fileID: 7082287820599628477, guid: dfebc36049a7a5c4ba1d43d6c5f8c96f, type: 3}
   currentHealth: 5
 --- !u!114 &8600544453447977317
 MonoBehaviour:
@@ -275,10 +276,11 @@ MonoBehaviour:
   keepChasingTime: 5
   bullet: {fileID: 5874321473036919688, guid: 4e62b402dccdd304d90444634bc253e7, type: 3}
   firePoint: {fileID: 8600544453204733004}
-  fireRate: 0.3
+  fireRate: 0.25
   waitTimeToFire: 1
-  waitBetweenShots: 0.5
-  timeToShoot: 2
+  waitBetweenShots: 0.25
+  timeToShoot: 1.5
+  fieldOfView: 45
 --- !u!195 &8600544453447977318
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -289,7 +291,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 720

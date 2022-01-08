@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour
 {
+    public GameObject enemyExplosionFX; // Explosion effect for enemy killed
 
     public int currentHealth = 5;
 
@@ -25,6 +26,7 @@ public class EnemyHealthController : MonoBehaviour
         currentHealth -= damageAmount; // de-iterate enemy health
         if(currentHealth <=0){
             Destroy(gameObject);
+            Instantiate(enemyExplosionFX, transform.position, transform.rotation);
         }
     }
 }
