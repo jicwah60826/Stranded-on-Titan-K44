@@ -22,6 +22,11 @@ public class EnemyController : MonoBehaviour
     public float waitTimeToFire; // amount of time to wait until firing on player once the chase begins
     private float fireCount; // countdown timer between each shot
 
+    public float waitBetweenShots; // time to wait between each shot
+    public float timeToShoot; // length of time that enemy continues shooting
+    private float shotWaitCounter; //countdown timer for the waitBetweenShots
+    private float shootTimeCounter; // countdown timer for the timeToShoot
+
 
 
 
@@ -29,6 +34,8 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         startPoint = transform.position; // store initial position of enemy
+        shootTimeCounter = timeToShoot; // initialize the shootTimeCounter
+        shotWaitCounter = waitBetweenShots; // initialize the shotWaitCounter
     }
 
     // Update is called once per frame
@@ -80,16 +87,40 @@ public class EnemyController : MonoBehaviour
                 chaseCounter = keepChasingTime;
             }
 
-            fireCount -= Time.deltaTime; // begin countdown timer between each shot
-
-            if (fireCount <= 0)
+            if (shotWaitCounter > 0)
             {
-                // when fireCount reaches 0, reset it back to fireRate
-                fireCount = fireRate;
-                //Fire a bullet
-                Instantiate(bullet, firePoint.position, firePoint.rotation);
+                shotWaitCounter -= Time.deltaTime; //begin the shotWaitCounter
+                if (shotWaitCounter <= 0)
+                {
+                    shootTimeCounter = timeToShoot;
+                }
             }
+            else
+            {
+                //shot wait counter has run out - enemy can shoot now
+                shootTimeCounter -= Time.deltaTime; // begin the shootTimeCounter
 
+                if (shootTimeCounter > 0)
+                {
+                    // as long as the shoot time countdown clock has time on it, enemy can
+                    fireCount -= Time.deltaTime; // begin countdown timer between each shot
+
+                    if (fireCount <= 0)
+                    {
+                        // when fireCount reaches 0, reset it back to fireRate
+                        fireCount = fireRate;
+                        //Fire a bullet
+                        Instantiate(bullet, firePoint.position, firePoint.rotation);
+                    }
+                }
+
+                else
+                {
+                    //shoot time counter has run out - enemy has run out of shooting time
+                    // reset the shotWaitCounter so that enemy has to wait between shots again
+                    shotWaitCounter = waitBetweenShots;
+                }
+            }
         }
     }
 }
