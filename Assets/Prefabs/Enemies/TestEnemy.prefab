@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cff63d314c34574fa4dd6212de6924e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyExplosionFX: {fileID: 7082287820599628477, guid: dfebc36049a7a5c4ba1d43d6c5f8c96f, type: 3}
+  enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
   currentHealth: 5
 --- !u!114 &8600544453447977317
 MonoBehaviour:
@@ -276,11 +276,11 @@ MonoBehaviour:
   keepChasingTime: 5
   bullet: {fileID: 5874321473036919688, guid: 4e62b402dccdd304d90444634bc253e7, type: 3}
   firePoint: {fileID: 8600544453204733004}
-  fireRate: 0.25
+  fireRate: 0.3
   waitTimeToFire: 1
-  waitBetweenShots: 0.25
+  waitBetweenShots: 0.5
   timeToShoot: 1.5
-  fieldOfView: 45
+  fieldOfView: 30
 --- !u!195 &8600544453447977318
 NavMeshAgent:
   m_ObjectHideFlags: 0
