@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // enemy will look around on Y axis for player, but will look up or down. Ensures enemy does not float up into air if player jumps
+        // enemy will look around on Y axis for player, but will not look up or down. Ensures enemy does not float up into air if player jumps
         targetPoint = PlayerController.instance.transform.position;
         targetPoint.y = transform.position.y;
 
@@ -111,6 +111,11 @@ public class EnemyController : MonoBehaviour
                     {
                         // when fireCount reaches 0, reset it back to fireRate
                         fireCount = fireRate;
+
+
+                        // Enemy firepoint always rotates towards player. Ensure enemy firepoint is up towards player eyeline
+                        firePoint.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.5f, 0f));
+
                         //Fire a bullet
                         Instantiate(bullet, firePoint.position, firePoint.rotation);
                     }

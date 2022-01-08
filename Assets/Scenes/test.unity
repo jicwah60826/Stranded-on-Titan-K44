@@ -4333,5 +4333,13 @@ PrefabInstance:
       propertyPath: waitBetweenShots
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8600544453447977318, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
+      propertyPath: m_Speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600544453447977318, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4d0a9a3cdfb66468be345c00781e80, type: 3}
