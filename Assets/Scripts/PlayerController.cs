@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -46,8 +45,8 @@ public class PlayerController : MonoBehaviour
         //Store current Y velocity before every update
         float yStore = moveInput.y;
 
-        Vector3 vertMove = transform.forward * Input.GetAxisRaw("Vertical");
-        Vector3 horiMove = transform.right * Input.GetAxisRaw("Horizontal");
+        Vector3 vertMove = transform.forward * Input.GetAxis("Vertical");
+        Vector3 horiMove = transform.right * Input.GetAxis("Horizontal");
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize();
