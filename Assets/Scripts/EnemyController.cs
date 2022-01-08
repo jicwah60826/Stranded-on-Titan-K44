@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
 
     public float waitBetweenShots; // time to wait between each shot
     public float timeToShoot; // length of time that enemy continues shooting
+    public float fieldOfView; // angle amount from the player that enemy is allowed to fire within
     private float shotWaitCounter; //countdown timer for the waitBetweenShots
     private float shootTimeCounter; // countdown timer for the timeToShoot
 
@@ -116,8 +117,20 @@ public class EnemyController : MonoBehaviour
                         // Enemy firepoint always rotates towards player. Ensure enemy firepoint is up towards player eyeline
                         firePoint.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.5f, 0f));
 
-                        //Fire a bullet
-                        Instantiate(bullet, firePoint.position, firePoint.rotation);
+                        // get direct amount that player is from enemy
+                        Vector3 targetDirection = PlayerController.instance.transform.position - transform.position;
+
+                        // get the angle amount from our target direction to the player
+                        float angle = Vector3.SignedAngle(targetDirection, transform.forward, Vector3.up);
+
+                        if (Mathf.Abs(angle) < fieldOfView) // Mathf.bs ensures we also feed in a positive value in the event the angle returned is a negative value
+                        {
+                            //Fire a bullet
+                            Instantiate(bullet, firePoint.position, firePoint.rotation);
+                        }
+
+
+
                     }
                     // enemy stops while shooting
                     agent.destination = transform.position; // freeze enemy in place while enemy is shooting
