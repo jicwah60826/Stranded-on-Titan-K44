@@ -28,8 +28,7 @@ public class EnemyController : MonoBehaviour
     private float shotWaitCounter; //countdown timer for the waitBetweenShots
     private float shootTimeCounter; // countdown timer for the timeToShoot
 
-
-
+    // public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -127,6 +126,9 @@ public class EnemyController : MonoBehaviour
                         {
                             //Fire a bullet
                             Instantiate(bullet, firePoint.position, firePoint.rotation);
+                            // Enemy firing animation
+                            // anim.SetTrigger("fireShot");
+
                         }
 
 
