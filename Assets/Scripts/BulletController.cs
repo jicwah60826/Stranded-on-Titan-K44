@@ -11,7 +11,8 @@ public class BulletController : MonoBehaviour
 
     public GameObject impactEffect;
 
-    public int damage = 1;
+    public int damage;
+    public int headShotMultiplier;
 
     public bool damageEnemy, damagePlayer;
 
@@ -35,9 +36,18 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
             // Destroy(other.gameObject);
-            Debug.Log("You hit an enemy");
+            Debug.Log("Enemy Bodyshot");
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
+
+        // Check if headshot to enemy
+        if (other.gameObject.tag == "Headshot" && damageEnemy)
+        {
+            Debug.Log("Enemy Headshot");
+            // Call the DamageEnemy script on the parent of this game object
+            other.transform.parent.GetComponent<EnemyHealthController>().DamageEnemy(damage * headShotMultiplier);
+        }
+
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
             // Destroy(other.gameObject);

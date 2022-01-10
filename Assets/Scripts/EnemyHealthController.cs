@@ -23,6 +23,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public void DamageEnemy(int damageAmount)
     {
+        
         currentHealth -= damageAmount; // de-iterate enemy health
         if(currentHealth <=0){
             Destroy(gameObject);

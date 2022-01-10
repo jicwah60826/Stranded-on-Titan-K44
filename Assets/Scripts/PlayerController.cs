@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
         //Store current Y velocity before every update
         float yStore = moveInput.y;
 
-        Vector3 vertMove = transform.forward * Input.GetAxis("Vertical");
-        Vector3 horiMove = transform.right * Input.GetAxis("Horizontal");
+        Vector3 vertMove = transform.forward * Input.GetAxisRaw("Vertical");
+        Vector3 horiMove = transform.right * Input.GetAxisRaw("Horizontal");
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize();
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
             moveInput = moveInput * runSpeed;
             isRunning = true;
         }
+
         else
         {
             moveInput = moveInput * moveSpeed;
@@ -146,5 +147,16 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("moveSpeed", moveInput.magnitude); // set the moveSpeed paramater in the animation controller to be the magnitude of how much player is moving
         anim.SetBool("isRunning", isRunning); //set the isRunning param in the Player animation
         anim.SetBool("onGround", canJump); //set the onGround param in the Player animation
+
+/*         // TEST
+        if (Input.anyKey)
+        {
+            //Debug.Log("user input detected");
+        }
+        else
+        {
+            //Debug.Log("I got nothing");
+
+        } */
     }
 }

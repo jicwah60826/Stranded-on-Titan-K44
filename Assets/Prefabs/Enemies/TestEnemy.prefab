@@ -281,6 +281,7 @@ MonoBehaviour:
   waitBetweenShots: 2
   timeToShoot: 1
   fieldOfView: 30
+  anim: {fileID: 0}
 --- !u!195 &8600544453447977318
 NavMeshAgent:
   m_ObjectHideFlags: 0

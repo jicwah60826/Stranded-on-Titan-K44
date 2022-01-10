@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
     private float shotWaitCounter; //countdown timer for the waitBetweenShots
     private float shootTimeCounter; // countdown timer for the timeToShoot
 
-    // public Animator anim;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, targetPoint) < distanceToChase)
             {
                 chasing = true;
+                anim.SetBool("isMoving", true);
 
                 // fireCount = waitTimeToFire;
                 shootTimeCounter = timeToShoot; // initialize the shootTimeCounter
@@ -65,8 +66,16 @@ public class EnemyController : MonoBehaviour
                 if (chaseCounter <= 0)
                 {
                     agent.destination = startPoint;
-                    Debug.Log("Sending Enemy back to ttartPoint");
+                    Debug.Log("Sending Enemy back to startPoint");
                 }
+            }
+
+            // how much distance does enemy still have to player
+            if(agent.remainingDistance < .25f){
+                anim.SetBool("isMoving", false);
+            }
+            else{
+                anim.SetBool("isMoving", true);
             }
         }
         else
@@ -91,11 +100,13 @@ public class EnemyController : MonoBehaviour
 
             if (shotWaitCounter > 0)
             {
+                // Player Moving again
                 shotWaitCounter -= Time.deltaTime; //begin the shotWaitCounter
                 if (shotWaitCounter <= 0)
                 {
                     shootTimeCounter = timeToShoot;
                 }
+                anim.SetBool("isMoving", true);
             }
             else
             {
@@ -127,7 +138,8 @@ public class EnemyController : MonoBehaviour
                             //Fire a bullet
                             Instantiate(bullet, firePoint.position, firePoint.rotation);
                             // Enemy firing animation
-                            // anim.SetTrigger("fireShot");
+                            anim.SetTrigger("fireShot");
+                            anim.SetBool("isMoving", false);
 
                         }
 
