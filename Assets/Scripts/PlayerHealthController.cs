@@ -7,8 +7,15 @@ public class PlayerHealthController : MonoBehaviour
 
     public static PlayerHealthController instance;
 
+    [Header("Player Health")]
+    [Space]
+    [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
+    [Tooltip("Player current health. This is what is reduced with damage or increased with a pickup.")]
     public int currentHealth;
+    [Space]
+    [Header("Grace Period")]
+    [Tooltip("The amount of time the player goes without damager after being shot.")]
     public float invicibleLength;
     private float invicibleCounter;
 
@@ -47,15 +54,20 @@ public class PlayerHealthController : MonoBehaviour
             {
                 // Player dead
                 Debug.Log("Player has been killed");
-                gameObject.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
+                gameObject.SetActive(false); // disable player controls / movement
+
+                currentHealth = 0;  // reset health to 0 so healthbar display never shows a negative #
+
+                GameManager.instance.PlayerDied(); // call player function from GameManager
+
+
             }
         }
         invicibleCounter = invicibleLength;
         updateHealthBarText();
     }
 
-        private void updateHealthBarText()
+    private void updateHealthBarText()
     {
         UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
         UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maximumHealth;

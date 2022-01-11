@@ -6,9 +6,12 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private bool chasing;
-    public float distanceToChase = 10f, distanceToLose = 15f, distanceToStop;
+    public float distanceToChase = 10f;
+    public float distanceToLose = 15f;
+    public float distanceToStop;
 
-    private Vector3 targetPoint, startPoint;
+    private Vector3 targetPoint;
+    private Vector3 startPoint;
 
     public NavMeshAgent agent;
 
@@ -138,9 +141,9 @@ public class EnemyController : MonoBehaviour
                             //Fire a bullet
                             Instantiate(bullet, firePoint.position, firePoint.rotation);
                             // Enemy firing animation
+
                             anim.SetTrigger("fireShot");
                             anim.SetBool("isMoving", false);
-
                         }
 
 

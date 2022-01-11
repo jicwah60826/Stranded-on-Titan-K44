@@ -13,6 +13,6 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        instance = this; // allow this script to be accessed anywhere
     }
 }

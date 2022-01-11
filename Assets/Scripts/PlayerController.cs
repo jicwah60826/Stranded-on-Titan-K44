@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        instance = this; // allow this script to be accessed anywhere
     }
 
     // Start is called before the first frame update
