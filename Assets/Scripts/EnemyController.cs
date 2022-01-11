@@ -74,10 +74,12 @@ public class EnemyController : MonoBehaviour
             }
 
             // how much distance does enemy still have to player
-            if(agent.remainingDistance < .25f){
+            if (agent.remainingDistance < .25f)
+            {
                 anim.SetBool("isMoving", false);
             }
-            else{
+            else
+            {
                 anim.SetBool("isMoving", true);
             }
         }
@@ -113,51 +115,57 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                //shot wait counter has run out - enemy can shoot now
-                shootTimeCounter -= Time.deltaTime; // begin the shootTimeCounter
 
-                if (shootTimeCounter > 0)
+                if (PlayerController.instance.gameObject.activeInHierarchy)
                 {
-                    // as long as the shoot time countdown clock has time on it, enemy can shoot
-                    fireCount -= Time.deltaTime; // begin countdown timer between each shot
 
-                    if (fireCount <= 0)
+                    //shot wait counter has run out - enemy can shoot now
+                    shootTimeCounter -= Time.deltaTime; // begin the shootTimeCounter
+
+                    if (shootTimeCounter > 0)
                     {
-                        // when fireCount reaches 0, reset it back to fireRate
-                        fireCount = fireRate;
+                        // as long as the shoot time countdown clock has time on it, enemy can shoot
+                        fireCount -= Time.deltaTime; // begin countdown timer between each shot
 
-
-                        // Enemy firepoint always rotates towards player. Ensure enemy firepoint is up towards player eyeline
-                        firePoint.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.5f, 0f));
-
-                        // get direct amount that player is from enemy
-                        Vector3 targetDirection = PlayerController.instance.transform.position - transform.position;
-
-                        // get the angle amount from our target direction to the player
-                        float angle = Vector3.SignedAngle(targetDirection, transform.forward, Vector3.up);
-
-                        if (Mathf.Abs(angle) < fieldOfView) // Mathf.bs ensures we also feed in a positive value in the event the angle returned is a negative value
+                        if (fireCount <= 0)
                         {
-                            //Fire a bullet
-                            Instantiate(bullet, firePoint.position, firePoint.rotation);
-                            // Enemy firing animation
+                            // when fireCount reaches 0, reset it back to fireRate
+                            fireCount = fireRate;
 
-                            anim.SetTrigger("fireShot");
-                            anim.SetBool("isMoving", false);
+
+                            // Enemy firepoint always rotates towards player. Ensure enemy firepoint is up towards player eyeline
+                            firePoint.LookAt(PlayerController.instance.transform.position + new Vector3(0f, 1.5f, 0f));
+
+                            // get direct amount that player is from enemy
+                            Vector3 targetDirection = PlayerController.instance.transform.position - transform.position;
+
+                            // get the angle amount from our target direction to the player
+                            float angle = Vector3.SignedAngle(targetDirection, transform.forward, Vector3.up);
+
+                            if (Mathf.Abs(angle) < fieldOfView) // Mathf.bs ensures we also feed in a positive value in the event the angle returned is a negative value
+                            {
+                                //Fire a bullet
+                                Instantiate(bullet, firePoint.position, firePoint.rotation);
+                                // Enemy firing animation
+
+                                anim.SetTrigger("fireShot");
+                                anim.SetBool("isMoving", false);
+                            }
+
+
+
                         }
-
-
-
+                        // enemy stops while shooting
+                        agent.destination = transform.position; // freeze enemy in place while enemy is shooting
                     }
-                    // enemy stops while shooting
-                    agent.destination = transform.position; // freeze enemy in place while enemy is shooting
-                }
 
-                else
-                {
-                    //shoot time counter has run out - enemy has run out of shooting time
-                    // reset the shotWaitCounter so that enemy has to wait between shots again
-                    shotWaitCounter = waitBetweenShots;
+                    else
+                    {
+                        //shoot time counter has run out - enemy has run out of shooting time
+                        // reset the shotWaitCounter so that enemy has to wait between shots again
+                        shotWaitCounter = waitBetweenShots;
+                    }
+
                 }
             }
         }

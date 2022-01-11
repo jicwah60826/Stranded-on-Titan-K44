@@ -57,10 +57,7 @@ public class PlayerHealthController : MonoBehaviour
                 gameObject.SetActive(false); // disable player controls / movement
 
                 currentHealth = 0;  // reset health to 0 so healthbar display never shows a negative #
-
                 GameManager.instance.PlayerDied(); // call player function from GameManager
-
-
             }
         }
         invicibleCounter = invicibleLength;

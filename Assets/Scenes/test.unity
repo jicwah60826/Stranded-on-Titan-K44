@@ -586,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d33869b3a3e874c9dc27ac567b9398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitAfterDying: 2
 --- !u!1001 &101697395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8645,7 +8646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1602e7e603130524b9e9d777c12b1979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 50
+  maximumHealth: 10
   currentHealth: 0
   invicibleLength: 0.5
 --- !u!1 &1360469528

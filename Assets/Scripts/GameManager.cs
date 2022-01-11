@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     private Object[] textures;
 
+    public float waitAfterDying;
+    private float reSpawnTimer;
+
 
     private void Awake()
     {
@@ -22,12 +25,17 @@ public class GameManager : MonoBehaviour
     {
         // Hide / Lock cursor movement in game window
         Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     public void PlayerDied()
     {
+        StartCoroutine(PlayerDiedCo());
+    }
 
+    public IEnumerator PlayerDiedCo()
+    {
+        yield return new WaitForSeconds(waitAfterDying);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // get the name of the currently active scene and re-load / start it over.
-
     }
 }
