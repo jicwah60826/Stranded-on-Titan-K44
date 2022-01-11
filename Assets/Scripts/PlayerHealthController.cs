@@ -21,6 +21,10 @@ public class PlayerHealthController : MonoBehaviour
     void Start()
     {
         currentHealth = maximumHealth;
+
+        UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
+        updateHealthBarText();
+
     }
 
     private void Update()
@@ -48,5 +52,12 @@ public class PlayerHealthController : MonoBehaviour
             }
         }
         invicibleCounter = invicibleLength;
+        updateHealthBarText();
+    }
+
+        private void updateHealthBarText()
+    {
+        UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
+        UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maximumHealth;
     }
 }
