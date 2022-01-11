@@ -136,11 +136,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.531315
+      value: 7.6
       objectReference: {fileID: 0}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_LocalPosition.y
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.283107
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8264,6 +8264,7 @@ GameObject:
   - component: {fileID: 1349707275}
   - component: {fileID: 1349707276}
   - component: {fileID: 1349707277}
+  - component: {fileID: 1349707278}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -8353,6 +8354,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1349707278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349707273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1602e7e603130524b9e9d777c12b1979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maximumHealth: 10
+  currentHealth: 0
+  invicibleLength: 1
 --- !u!1 &1414508358
 GameObject:
   m_ObjectHideFlags: 0
@@ -8695,7 +8711,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eb84e8f99e5b2c4a87a94b83f847877, type: 2}
+  - {fileID: 2100000, guid: f132ac980987333419dcdb8e5faea365, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

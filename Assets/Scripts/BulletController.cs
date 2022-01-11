@@ -52,6 +52,7 @@ public class BulletController : MonoBehaviour
         {
             // Destroy(other.gameObject);
             Debug.Log("Player has been hit at " + transform.position);
+            other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
         Destroy(gameObject);
