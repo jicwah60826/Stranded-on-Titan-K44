@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        updateAmmotText();
     }
     // Update is called once per frame
     void Update()
@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
         }
 
         ///////////*********** Move the Player ********** ///////////
+        //moveInput = Vector3.Lerp(moveInput, movement, Time.deltaTime * movementAcceleration); // TEST ME
         charCon.Move(moveInput * Time.deltaTime);
 
         ///////////*********** Rotate Player / Control Camera Rotation ********** ///////////
@@ -120,8 +121,8 @@ public class PlayerController : MonoBehaviour
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
 
-        // Handle Shooting
-        if (Input.GetMouseButtonDown(0))
+        // Handle Shooting - single shots (each shot delayed by fire rate amount)
+        if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
         {
 
             RaycastHit hit; //project  raycast from object
@@ -149,7 +150,8 @@ public class PlayerController : MonoBehaviour
         // Auto-firing (if enabled on Gun)
         if (Input.GetMouseButton(0) && activeGun.canAutoFire)
         {
-            if (activeGun.fireCounter <= 0){
+            if (activeGun.fireCounter <= 0)
+            {
                 FireShot();
             }
 
@@ -163,8 +165,17 @@ public class PlayerController : MonoBehaviour
 
     public void FireShot()
     {
-        Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
-        activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
+        if (activeGun.currentAmmo > 0)
+        {
+            Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
+            activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
+            activeGun.currentAmmo--;
+            updateAmmotText();
+        }
+    }
 
+    private void updateAmmotText()
+    {
+        UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo; //ensure active gun current ammo always displayed at start
     }
 }

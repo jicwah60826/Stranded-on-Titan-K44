@@ -10,6 +10,8 @@ public class GunController : MonoBehaviour
     public bool canAutoFire;
     public float fireRate;
 
+    public int currentAmmo;
+
     [HideInInspector]
     public float fireCounter; //making this accesible to other scripts, but not visible in the inspector
 
