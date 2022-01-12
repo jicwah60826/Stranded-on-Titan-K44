@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class AmmoPickup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private bool collected;
+    private void OnTriggerEnter(Collider other)
     {
-        
+
+        if (other.gameObject.tag == "Player" && !collected)
+        {
+            //give ammo to player
+            PlayerController.instance.activeGun.GetAmmo(); // call the GetAmmo function on the GunController script that we have tied to the PlayerController
+
+            Destroy(gameObject);
+            collected = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

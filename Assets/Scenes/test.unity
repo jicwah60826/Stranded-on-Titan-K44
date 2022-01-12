@@ -1477,9 +1477,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 5874321473036919688, guid: 6095f2108cb30f94f88cf95b8d9dd6b1, type: 3}
+  pickupAmount: 25
   canAutoFire: 1
   fireRate: 0.07
-  currentAmmo: 500
+  currentAmmo: 50
   fireCounter: 0
 --- !u!1 &510917205
 GameObject:

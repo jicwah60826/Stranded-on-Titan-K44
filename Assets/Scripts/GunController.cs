@@ -10,7 +10,7 @@ public class GunController : MonoBehaviour
     public bool canAutoFire;
     public float fireRate;
 
-    public int currentAmmo;
+    public int currentAmmo, pickupAmount;
 
     [HideInInspector]
     public float fireCounter; //making this accesible to other scripts, but not visible in the inspector
@@ -28,5 +28,11 @@ public class GunController : MonoBehaviour
         {
             fireCounter -= Time.deltaTime; //begin the fireCounter countdown after each shot
         }
+    }
+
+    public void GetAmmo()
+    {
+        currentAmmo += pickupAmount;
+        UIController.instance.ammoText.text = "AMMO: " + currentAmmo; //ensure active gun current ammo always displayed at start
     }
 }

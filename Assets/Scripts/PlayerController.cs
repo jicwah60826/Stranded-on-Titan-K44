@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        updateAmmotText();
+        UpdateAmmoText();
     }
     // Update is called once per frame
     void Update()
@@ -170,11 +170,11 @@ public class PlayerController : MonoBehaviour
             Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
             activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
             activeGun.currentAmmo--;
-            updateAmmotText();
+            UpdateAmmoText();
         }
     }
 
-    private void updateAmmotText()
+    private void UpdateAmmoText()
     {
         UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo; //ensure active gun current ammo always displayed at start
     }
