@@ -69,4 +69,18 @@ public class PlayerHealthController : MonoBehaviour
         UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
         UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maximumHealth;
     }
+
+    public void HealPlayer(int healAmount)
+    {
+        currentHealth += healAmount;
+
+        if (currentHealth > maximumHealth)
+        {
+            currentHealth = maximumHealth;
+        }
+
+        //update slider and text
+        updateHealthBarText();
+
+    }
 }

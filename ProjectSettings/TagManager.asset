@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Headshot
+  - Ammo Pickup
+  - Health Pickup
   layers:
   - Default
   - TransparentFX
