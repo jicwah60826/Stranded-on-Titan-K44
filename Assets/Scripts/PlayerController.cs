@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    public GunController activeGun;
+
     public static PlayerController instance;
 
     // Define Global Variables
@@ -140,23 +142,29 @@ public class PlayerController : MonoBehaviour
                 firePoint.LookAt(camTrans.position + (camTrans.forward * 30f));
             }
 
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
+            //Instantiate(bullet, firePoint.position, firePoint.rotation);
+            FireShot();
+        }
+
+        // Auto-firing (if enabled on Gun)
+        if (Input.GetMouseButton(0) && activeGun.canAutoFire)
+        {
+            if (activeGun.fireCounter <= 0){
+                FireShot();
+            }
+
         }
 
         // Animations
         anim.SetFloat("moveSpeed", moveInput.magnitude); // set the moveSpeed paramater in the animation controller to be the magnitude of how much player is moving
         anim.SetBool("isRunning", isRunning); //set the isRunning param in the Player animation
         anim.SetBool("onGround", canJump); //set the onGround param in the Player animation
+    }
 
-/*         // TEST
-        if (Input.anyKey)
-        {
-            //Debug.Log("user input detected");
-        }
-        else
-        {
-            //Debug.Log("I got nothing");
+    public void FireShot()
+    {
+        Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
+        activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
 
-        } */
     }
 }
