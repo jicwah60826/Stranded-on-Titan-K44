@@ -9066,7 +9066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae100c0031d46d54caeaa5924b5d4eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeGun: {fileID: 1740458428}
+  activeGun: {fileID: 506751310}
   moveSpeed: 8
   runSpeed: 12
   jumpPower: 8
@@ -9082,6 +9082,11 @@ MonoBehaviour:
     m_Bits: 64
   anim: {fileID: 1349707277}
   firePoint: {fileID: 1682554685}
+  allGuns:
+  - {fileID: 506751310}
+  - {fileID: 350821770}
+  - {fileID: 1740458428}
+  currentGun: 0
 --- !u!143 &1349707276
 CharacterController:
   m_ObjectHideFlags: 0
@@ -9879,7 +9884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1740458427
 Transform:
   m_ObjectHideFlags: 0
@@ -9908,8 +9913,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 5874321473036919688, guid: a0c227d79692a5345ac8980701b58259, type: 3}
-  canAutoFire: 1
-  fireRate: 1
+  canAutoFire: 0
+  fireRate: 0.5
   currentAmmo: 5
   pickupAmount: 2
   fireCounter: 0

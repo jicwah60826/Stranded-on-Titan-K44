@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
 
     public Transform firePoint;
 
+    public List<GunController> allGuns = new List<GunController>();
+    public int currentGun;
+
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
@@ -34,6 +37,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        activeGun = allGuns[currentGun]; //define the active gun as the curent gun listed in the inspector
+        activeGun.gameObject.SetActive(true);
+
         UpdateAmmoText();
     }
     // Update is called once per frame
@@ -153,8 +159,15 @@ public class PlayerController : MonoBehaviour
             if (activeGun.fireCounter <= 0)
             {
                 FireShot();
+                Debug.Log("Call FireShot function");
             }
 
+        }
+
+        // Run Switch Gun when tab is pressed
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchGun();
         }
 
         // Animations
@@ -177,5 +190,23 @@ public class PlayerController : MonoBehaviour
     private void UpdateAmmoText()
     {
         UIController.instance.ammoText.text = "AMMO: " + activeGun.currentAmmo; //ensure active gun current ammo always displayed at start
+    }
+
+    public void SwitchGun()
+    {
+
+        activeGun.gameObject.SetActive(false);
+
+        currentGun++;
+
+        if (currentGun >= allGuns.Count)
+        {
+            currentGun = 0; //reset back to start if on last gun. Allows to loop through the guns
+        }
+
+        //select a new, then set it to active
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+        UpdateAmmoText();
     }
 }
