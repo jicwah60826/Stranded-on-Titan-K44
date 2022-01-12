@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public Animator anim;
 
-    public GameObject bullet;
+    //public GameObject bullet;
 
     public Transform firePoint;
 
