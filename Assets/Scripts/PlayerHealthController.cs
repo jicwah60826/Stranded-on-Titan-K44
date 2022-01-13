@@ -28,7 +28,6 @@ public class PlayerHealthController : MonoBehaviour
     void Start()
     {
         currentHealth = maximumHealth;
-
         UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
         updateHealthBarText();
 
@@ -36,9 +35,11 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("invicibleCounter: " + invicibleCounter);
-        Debug.Log("player health: " + currentHealth);
+        IncincibleCounter();
+    }
 
+    private void IncincibleCounter()
+    {
         if (invicibleCounter > 0)
         {
             invicibleCounter -= Time.deltaTime; // begin invincible countdown once player is first shot

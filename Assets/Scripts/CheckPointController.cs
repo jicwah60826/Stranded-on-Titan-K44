@@ -10,6 +10,16 @@ public class CheckPointController : MonoBehaviour
 
     private void Start()
     {
+        HandleCheckPointSpawn();
+    }
+
+    private void Update()
+    {
+        ClearCheckPointSpawn();
+    }
+
+    private void HandleCheckPointSpawn()
+    {
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "_cp"))
         {
             if (PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_cp") == cpName)
@@ -22,7 +32,7 @@ public class CheckPointController : MonoBehaviour
         }
     }
 
-    private void Update()
+    private static void ClearCheckPointSpawn()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
