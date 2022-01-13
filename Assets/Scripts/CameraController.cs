@@ -5,7 +5,26 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 
+    public static CameraController instance;
+
     public Transform target;
+
+    private float startFOV;
+    private float targetFOV;
+
+    public float zoomSpeed; // how fast we zoom in down gun sights
+
+    public Camera theCam;
+
+    private void Awake() {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        startFOV = theCam.fieldOfView;
+        targetFOV = startFOV;
+    }
 
     // Update is called once per frame
     void LateUpdate()
@@ -18,5 +37,17 @@ public class CameraController : MonoBehaviour
         // rotate the camera the same as the specified target object
         transform.rotation = target.rotation;
 
+        theCam.fieldOfView = Mathf.Lerp(theCam.fieldOfView, targetFOV, zoomSpeed * Time.deltaTime); // smooth move between the 2 values at a certain speed
+
+    }
+
+    public void ZoomIn(float newZoom)
+    {
+        targetFOV = newZoom;
+    }
+
+    public void ZoomOut()
+    {
+        targetFOV = startFOV;
     }
 }

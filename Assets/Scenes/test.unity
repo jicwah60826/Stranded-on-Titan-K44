@@ -1146,6 +1146,7 @@ MonoBehaviour:
   pickupAmount: 25
   firePoint: {fileID: 1670928092}
   fireCounter: 0
+  zoomAmount: 30
 --- !u!4 &359942057 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7369311698937796799, guid: f6883946f22ad324d9fe28f839575bdb, type: 3}
@@ -1598,6 +1599,7 @@ MonoBehaviour:
   pickupAmount: 15
   firePoint: {fileID: 641795299}
   fireCounter: 0
+  zoomAmount: 40
 --- !u!1 &510917205
 GameObject:
   m_ObjectHideFlags: 0
@@ -8211,6 +8213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1975423783}
+  zoomSpeed: 5
+  theCam: {fileID: 963194227}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10016,6 +10020,7 @@ MonoBehaviour:
   pickupAmount: 2
   firePoint: {fileID: 1116471602}
   fireCounter: 0
+  zoomAmount: 20
 --- !u!1001 &1753928810
 PrefabInstance:
   m_ObjectHideFlags: 0

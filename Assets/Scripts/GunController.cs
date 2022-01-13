@@ -17,6 +17,8 @@ public class GunController : MonoBehaviour
     [HideInInspector]
     public float fireCounter; //making this accesible to other scripts, but not visible in the inspector
 
+    public float zoomAmount;
+
     // Start is called before the first frame update
     void Start()
     {

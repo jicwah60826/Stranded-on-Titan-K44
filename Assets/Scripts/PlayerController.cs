@@ -47,7 +47,18 @@ public class PlayerController : MonoBehaviour
     {
 
         ToggleFlashlight();
+        PlayerMovement();
+        SingleShots();
+        MultiShots();
+        GunSwitching();
+        AimDownSight();
+        PlayerAnimations();
+    }
 
+    ////////////*****************     FUNCTIONS *****************////////////
+
+    private void PlayerMovement()
+    {
         ///////////*********** Get Keyboard / Game Controller input ********** ///////////
 
         //moveInput.x = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
@@ -90,21 +101,7 @@ public class PlayerController : MonoBehaviour
         // check if we are within range of any ground layer object
         canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
 
-        ///////////*********** Handle Jumping ********** ///////////
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (canJump)
-            {
-                moveInput.y = jumpPower;
-                canDoubleJump = true;
-            }
-            else if (canDoubleJump == true)
-            {
-                moveInput.y = jumpPower;
-                canDoubleJump = false;
-            }
-        }
+        HandleJumping();
 
         ///////////*********** Move the Player ********** ///////////
         //moveInput = Vector3.Lerp(moveInput, movement, Time.deltaTime * movementAcceleration); // TEST ME
@@ -129,7 +126,46 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+    }
 
+    private void HandleJumping()
+    {
+        ///////////*********** Handle Jumping ********** ///////////
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (canJump)
+            {
+                moveInput.y = jumpPower;
+                canDoubleJump = true;
+            }
+            else if (canDoubleJump == true)
+            {
+                moveInput.y = jumpPower;
+                canDoubleJump = false;
+            }
+        }
+    }
+
+    private void PlayerAnimations()
+    {
+        // Animations
+        anim.SetFloat("moveSpeed", moveInput.magnitude); // set the moveSpeed paramater in the animation controller to be the magnitude of how much player is moving
+        anim.SetBool("isRunning", isRunning); //set the isRunning param in the Player animation
+        anim.SetBool("onGround", canJump); //set the onGround param in the Player animation
+    }
+
+    private void GunSwitching()
+    {
+        // Run Switch Gun when tab is pressed
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchGun();
+        }
+    }
+
+    private void SingleShots()
+    {
         // Handle Shooting - single shots (each shot delayed by fire rate amount)
         if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
         {
@@ -155,7 +191,10 @@ public class PlayerController : MonoBehaviour
             //Instantiate(bullet, firePoint.position, firePoint.rotation);
             FireShot();
         }
+    }
 
+    private void MultiShots()
+    {
         // Auto-firing (if enabled on Gun)
         if (Input.GetMouseButton(0) && activeGun.canAutoFire)
         {
@@ -166,17 +205,20 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+    }
 
-        // Run Switch Gun when tab is pressed
-        if (Input.GetKeyDown(KeyCode.Tab))
+    private void AimDownSight()
+    {
+        //Handle Aim down sight
+        if (Input.GetMouseButtonDown(1))
         {
-            SwitchGun();
+            CameraController.instance.ZoomIn(activeGun.zoomAmount);
         }
 
-        // Animations
-        anim.SetFloat("moveSpeed", moveInput.magnitude); // set the moveSpeed paramater in the animation controller to be the magnitude of how much player is moving
-        anim.SetBool("isRunning", isRunning); //set the isRunning param in the Player animation
-        anim.SetBool("onGround", canJump); //set the onGround param in the Player animation
+        if (Input.GetMouseButtonUp(1))
+        {
+            CameraController.instance.ZoomOut();
+        }
     }
 
     public void FireShot()
