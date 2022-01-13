@@ -12,6 +12,8 @@ public class GunController : MonoBehaviour
 
     public int currentAmmo, pickupAmount;
 
+    public Transform firePoint;
+
     [HideInInspector]
     public float fireCounter; //making this accesible to other scripts, but not visible in the inspector
 

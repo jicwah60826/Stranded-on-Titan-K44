@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround;
     private bool canJump, canDoubleJump, isRunning;
 
-    public Animator anim;
+    public GameObject flashLight;
+    private bool lightOn;
 
-    //public GameObject bullet;
+    public Animator anim;
 
     public Transform firePoint;
 
@@ -37,14 +38,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activeGun = allGuns[currentGun]; //define the active gun as the curent gun listed in the inspector
-        activeGun.gameObject.SetActive(true);
+        currentGun--; //de-iterate the active gun index
+        SwitchGun(); //invoke switch gun function
 
-        UpdateAmmoText();
     }
     // Update is called once per frame
     void Update()
     {
+
+        ToggleFlashlight();
+
         ///////////*********** Get Keyboard / Game Controller input ********** ///////////
 
         //moveInput.x = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
@@ -195,9 +198,11 @@ public class PlayerController : MonoBehaviour
     public void SwitchGun()
     {
 
-        activeGun.gameObject.SetActive(false);
+        activeGun.gameObject.SetActive(false); //de-activate current game object (note: they are de-activated in the scene by default)
 
-        currentGun++;
+        currentGun++; // iterate the current gun. If we had a -1 for example (from when the de-teration occurred in the start function), the active gun is now 0.
+
+        // We then continue on with the below. The updateAmmo text is run at game start now as well as when we do an actual switch gun via tab key.
 
         if (currentGun >= allGuns.Count)
         {
@@ -208,5 +213,17 @@ public class PlayerController : MonoBehaviour
         activeGun = allGuns[currentGun];
         activeGun.gameObject.SetActive(true);
         UpdateAmmoText();
+
+        firePoint.position = activeGun.firePoint.position; /* set the firePoint game object on the player controller to be the position of the firePoint gameobject of the gun that is now active */
+    }
+
+    public void ToggleFlashlight()
+    {
+        //if (Input.GetKey(KeyCode.T))
+        if (Input.GetMouseButtonDown(2))
+        {
+            lightOn = !lightOn;
+            flashLight.SetActive(lightOn);
+        }
     }
 }
