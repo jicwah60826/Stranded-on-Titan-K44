@@ -17,7 +17,8 @@ public class PlayerHealthController : MonoBehaviour
     [Header("Grace Period")]
     [Tooltip("The amount of time the player goes without damager after being shot.")]
     public float invicibleLength;
-    private float invicibleCounter;
+    private float invincibleCounter;
+    public bool useInvicDelay;
 
     private void Awake()
     {
@@ -35,22 +36,25 @@ public class PlayerHealthController : MonoBehaviour
 
     private void Update()
     {
-        IncincibleCounter();
+        InvincibleCounter();
     }
 
-    private void IncincibleCounter()
+    private void InvincibleCounter()
     {
-        if (invicibleCounter > 0)
+        if (invincibleCounter > 0)
         {
-            invicibleCounter -= Time.deltaTime; // begin invincible countdown once player is first shot
+            invincibleCounter -= Time.deltaTime; // begin invincible countdown once player is first shot
         }
     }
 
     public void DamagePlayer(int damageAmount)
     {
-        if (invicibleCounter <= 0)
+        if (invincibleCounter <= 0 || useInvicDelay == false)
         {
             currentHealth -= damageAmount; // de-iterate player health
+
+            UIController.instance.ShowDamage(); // show damage
+
             if (currentHealth <= 0)
             {
                 // Player dead
@@ -61,7 +65,7 @@ public class PlayerHealthController : MonoBehaviour
                 GameManager.instance.PlayerDied(); // call player function from GameManager
             }
         }
-        invicibleCounter = invicibleLength;
+        invincibleCounter = invicibleLength;
         updateHealthBarText();
     }
 

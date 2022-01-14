@@ -12,8 +12,25 @@ public class UIController : MonoBehaviour
     public Text healthText;
     public Text ammoText;
 
+    public Image damageEffect;
+    public float damageAlphaTarget;
+    public float damageFadeSpeed;
+
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
+    }
+
+    private void Update()
+    {
+        if (damageEffect.color.a > 0)
+        {
+            // Fade the damage effect alpha out. Using a Mathf that uses the damage fade speed
+            damageEffect.color  = new Color(damageEffect.color.r, damageEffect.color.g, damageEffect.color.b, Mathf.MoveTowards(damageEffect.color.a, 0f, damageFadeSpeed * Time.deltaTime));
+        }
+    }
+    public void ShowDamage()
+    {
+        damageEffect.color = new Color(damageEffect.color.r, damageEffect.color.g, damageEffect.color.b, damageAlphaTarget);
     }
 }
