@@ -9,6 +9,14 @@ public class Spinner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!UIController.instance.pauseScreen.activeInHierarchy)
+        {
+            HandleRotation();
+        }
+    }
+
+    public void HandleRotation()
+    {
         transform.Rotate(xRotation, yRotation, zRotation);
     }
 }

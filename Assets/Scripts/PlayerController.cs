@@ -59,14 +59,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ToggleFlashlight();
-        PlayerMovement();
-        HandleShooting();
-        //SingleShots();
-        //MultiShots();
-        GunSwitching();
-        AimDownSight();
-        PlayerAnimations();
+        if (!UIController.instance.pauseScreen.activeInHierarchy)
+        {
+            ToggleFlashlight();
+            PlayerMovement();
+            HandleShooting();
+            //SingleShots();
+            //MultiShots();
+            GunSwitching();
+            AimDownSight();
+            PlayerAnimations();
+        }
+
     }
 
     ////////////*****************     FUNCTIONS *****************////////////

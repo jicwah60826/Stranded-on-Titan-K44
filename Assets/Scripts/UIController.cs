@@ -16,6 +16,8 @@ public class UIController : MonoBehaviour
     public float damageAlphaTarget;
     public float damageFadeSpeed;
 
+    public GameObject pauseScreen;
+
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
