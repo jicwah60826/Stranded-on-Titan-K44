@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 gunStartPos;
     public float adsSpeed;
 
+    public List<GunController> unlockableGuns = new List<GunController>();
+
 
     private void Awake()
     {
@@ -289,6 +291,34 @@ public class PlayerController : MonoBehaviour
         {
             lightOn = !lightOn;
             flashLight.SetActive(lightOn);
+        }
+    }
+
+    public void AddGun(string gunToAdd)
+    {
+        bool gunUnlocked = false;
+
+        if (unlockableGuns.Count > 0)
+        {
+            for (int i = 0; i < unlockableGuns.Count; i++)
+            {
+                if (unlockableGuns[i].gunName == gunToAdd)
+                {
+                    gunUnlocked = true;
+
+                    allGuns.Add(unlockableGuns[i]);
+
+                    unlockableGuns.Remove(unlockableGuns[i]);
+
+                    i = unlockableGuns.Count;
+                }
+            }
+        }
+
+        if (gunUnlocked)
+        {
+            currentGun = allGuns.Count - 2; // set the current gun to the highest level gun to ensure when we switch guns, it is switched to the gun we just picked up.
+            SwitchGun();
         }
     }
 }
