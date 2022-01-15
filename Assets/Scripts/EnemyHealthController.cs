@@ -23,9 +23,11 @@ public class EnemyHealthController : MonoBehaviour
 
     public void DamageEnemy(int damageAmount)
     {
-        
+
         currentHealth -= damageAmount; // de-iterate enemy health
-        if(currentHealth <=0){
+        AudioManager.instance.PlaySFX(2); // play sfx element from audio manager SFX list
+        if (currentHealth <= 0)
+        {
             Destroy(gameObject);
             Instantiate(enemyExplosionFX, transform.position, transform.rotation);
         }

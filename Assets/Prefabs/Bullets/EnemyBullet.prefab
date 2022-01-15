@@ -115,8 +115,8 @@ MonoBehaviour:
   lifeTime: 3
   theRB: {fileID: 5874321473036919683}
   impactEffect: {fileID: 1850889903821977099, guid: 05d0983409ae66e4cb766869110191f7, type: 3}
-  damage: 2
-  headShotMultiplier: 2
+  damage: 5
+  headShotMultiplier: 1
   damageEnemy: 0
   damagePlayer: 1
 --- !u!54 &5874321473036919683
@@ -251,7 +251,7 @@ AudioSource:
   m_GameObject: {fileID: 5874321473036919688}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4758870492840032896, guid: c42013ef2849300428bf78c76fc33b63, type: 2}
   m_audioClip: {fileID: 8300000, guid: d21544144035aa949baa8768f91b61b9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

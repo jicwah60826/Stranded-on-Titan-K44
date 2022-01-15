@@ -54,15 +54,17 @@ public class PlayerHealthController : MonoBehaviour
             currentHealth -= damageAmount; // de-iterate player health
 
             UIController.instance.ShowDamage(); // show damage
+            AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
 
             if (currentHealth <= 0)
             {
                 // Player dead
                 Debug.Log("Player has been killed");
                 gameObject.SetActive(false); // disable player controls / movement
-
                 currentHealth = 0;  // reset health to 0 so healthbar display never shows a negative #
                 GameManager.instance.PlayerDied(); // call player function from GameManager
+                AudioManager.instance.StopBGM(); // stop the background music
+                AudioManager.instance.PlaySFX(6); // play sfx element from audio manager SFX list
             }
         }
         invincibleCounter = invicibleLength;

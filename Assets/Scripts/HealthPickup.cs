@@ -12,6 +12,7 @@ public class HealthPickup : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerHealthController.instance.HealPlayer(healAmount);
+            AudioManager.instance.PlaySFX(5); // play sfx element from audio manager SFX list
             Destroy(gameObject);
         }
     }

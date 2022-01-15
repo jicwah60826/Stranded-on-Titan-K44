@@ -156,10 +156,12 @@ public class PlayerController : MonoBehaviour
             {
                 moveInput.y = jumpPower;
                 canDoubleJump = true;
+                AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
             }
             else if (canDoubleJump == true)
             {
                 moveInput.y = jumpPower;
+                AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
                 canDoubleJump = false;
             }
         }
@@ -179,57 +181,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             SwitchGun();
+            AudioManager.instance.PlaySFX(10); // play sfx element from audio manager SFX list
         }
     }
 
-    /*     private void SingleShots()
-        { 
-            // Handle Shooting - single shots (each shot delayed by fire rate amount)
-            if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
-            {
-
-                RaycastHit hit; //project  raycast from object
-
-                //check if raycast is hitting anything starting from the camera location. Store values in the"hit" raycase object and go out forward for 50 units.
-                if (Physics.Raycast(camTrans.position, camTrans.forward, out hit, 50f))
-                {
-                    // if raycast hits something greater than 2 units out
-                    if (Vector3.Distance(camTrans.position, hit.point) > 2f)
-                    {
-                        firePoint.LookAt(hit.point);
-                    }
-                }
-                else
-    {
-        // if no ray is hit within 50 units, send ray straight out from the camera position and rotation for 30 units
-        // just so it looks like it's still shooting at the center of the screen
-        firePoint.LookAt(camTrans.position + (camTrans.forward * 30f));
-    }
-
-    //Instantiate(bullet, firePoint.position, firePoint.rotation);
-    FireShot();
-            }
-
-            */
-    //}
-
-    /*     private void MultiShots()
-    {
-        // Auto-firing (if enabled on Gun)
-        if (Input.GetMouseButton(0) && activeGun.canAutoFire)
-        {
-            if (activeGun.fireCounter <= 0)
-            {
-                FireShot();
-                Debug.Log("Call FireShot function");
-            }
-
-        }
-    } */
-
-
-
-    // Handle Shooting
     private void HandleShooting()
     {
         // Handle Shooting - single shots (each shot delayed by fire rate amount)
@@ -351,6 +306,7 @@ public class PlayerController : MonoBehaviour
         {
             lightOn = !lightOn;
             flashLight.SetActive(lightOn);
+            AudioManager.instance.PlaySFX(11); // play sfx element from audio manager SFX list
         }
     }
 

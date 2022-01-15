@@ -25,6 +25,7 @@ public class CheckPointController : MonoBehaviour
             if (PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "_cp") == cpName)
             {
                 // do stuff
+                AudioManager.instance.PlaySFX(1); // play sfx element from audio manager SFX list
                 PlayerController.instance.transform.position = transform.position;
                 Debug.Log("Player starting at" + cpName);
             }
