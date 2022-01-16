@@ -13,34 +13,25 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity;
     public bool invertX, invertY;
     public CharacterController charCon;
-
     private Vector3 moveInput;
     public Transform camTrans;
     public Transform groundCheckPoint; // item that will define what is ground
     public LayerMask whatIsGround;
     private bool canJump, canDoubleJump, isRunning;
-
     public GameObject flashLight;
     private bool lightOn;
-
     public Animator anim;
-
     public Transform firePoint;
-
     public List<GunController> allGuns = new List<GunController>();
     public int currentGun;
-
-
     public Transform adsPoint;
     public Transform gunHolder;
     private Vector3 gunStartPos;
     public float adsSpeed;
-
     public GameObject muzzeFlash;
     public float muzzFlashDelay;
-
     public List<GunController> unlockableGuns = new List<GunController>();
-
+    private float playerSpeed;
 
     private void Awake()
     {
@@ -63,9 +54,8 @@ public class PlayerController : MonoBehaviour
         {
             ToggleFlashlight();
             PlayerMovement();
-            HandleShooting();
-            //SingleShots();
-            //MultiShots();
+            SingleShots();
+            MultiShots();
             GunSwitching();
             AimDownSight();
             PlayerAnimations();
@@ -185,7 +175,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleShooting()
+    private void SingleShots()
     {
         // Handle Shooting - single shots (each shot delayed by fire rate amount)
         if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
@@ -212,7 +202,11 @@ public class PlayerController : MonoBehaviour
             //Instantiate(bullet, firePoint.position, firePoint.rotation);
             FireShot();
         }
+    }
 
+
+    private void MultiShots()
+    {
         // Auto-firing (if enabled on Gun)
         if (Input.GetMouseButton(0) && activeGun.canAutoFire)
         {
