@@ -35,8 +35,8 @@ public class BulletController : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
-            // Destroy(other.gameObject);
             Debug.Log("Enemy Bodyshot");
+            impactFX();
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
 
@@ -44,17 +44,22 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Headshot" && damageEnemy)
         {
             Debug.Log("Enemy Headshot");
+            impactFX();
             // Call the DamageEnemy script on the parent of this game object
             other.transform.parent.GetComponent<EnemyHealthController>().DamageEnemy(damage * headShotMultiplier);
         }
 
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
-            // Destroy(other.gameObject);
+
             Debug.Log("Player has been hit at " + transform.position);
+            impactFX();
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
+    }
 
+    public void impactFX()
+    {
         Destroy(gameObject);
         Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
     }
