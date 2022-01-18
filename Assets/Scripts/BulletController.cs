@@ -32,12 +32,17 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //check what object tag the bullet collided with
-
         if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
             Debug.Log("Enemy Bodyshot");
             impactFX();
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+        }
+
+        if (other.gameObject.tag == "Turret" && damageEnemy)
+        {
+            impactFX();
+            other.gameObject.GetComponent<TurretHealthController>().DamageTurret(damage);
         }
 
         // Check if headshot to enemy
@@ -56,6 +61,8 @@ public class BulletController : MonoBehaviour
             impactFX();
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
+        // do bullet impact and destroy bullet
+        impactFX();
     }
 
     public void impactFX()

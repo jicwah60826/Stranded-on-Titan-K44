@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8692035090159693162
 Transform:
@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ring (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}
 --- !u!1 &8386025819460400021 stripped
@@ -245,6 +249,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ring
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}
 --- !u!1 &8386025818785005971 stripped
@@ -356,6 +364,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}
       propertyPath: m_Name
       value: Ring (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b81d3b2d1411944a91b4bd126efcb6, type: 3}

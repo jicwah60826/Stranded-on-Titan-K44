@@ -19,6 +19,7 @@ public class PlayerHealthController : MonoBehaviour
     public float invicibleLength;
     private float invincibleCounter;
     public bool useInvicDelay;
+    public bool receiveDamage;
 
     private void Awake()
     {
@@ -37,6 +38,16 @@ public class PlayerHealthController : MonoBehaviour
     private void Update()
     {
         InvincibleCounter();
+        DevDeBug();
+    }
+
+    public void DevDeBug()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            receiveDamage = !receiveDamage; // toggle the boolean to the opposite of what it currently is
+            currentHealth = maximumHealth; // reset player health
+        }
     }
 
     private void InvincibleCounter()
@@ -49,9 +60,15 @@ public class PlayerHealthController : MonoBehaviour
 
     public void DamagePlayer(int damageAmount)
     {
+
         if (invincibleCounter <= 0 || useInvicDelay == false)
         {
-            currentHealth -= damageAmount; // de-iterate player health
+            if (receiveDamage == true)
+            {
+                currentHealth -= damageAmount; // de-iterate player health
+            }
+
+
 
             UIController.instance.ShowDamage(); // show damage
             AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list

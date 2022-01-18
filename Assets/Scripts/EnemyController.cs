@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
 
         if (!chasing)
         {
-            // is enemy position less than diatance to chase? If so, chase!
+            // is enemy position less than distance to chase? If so, chase!
             if (Vector3.Distance(transform.position, targetPoint) < distanceToChase)
             {
                 chasing = true;
@@ -93,7 +93,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                agent.destination = transform.position; // if within the distance to chase area, enemy stops moving
+                agent.destination = transform.position; // if OUTSIDE the distance to chase area, enemy stops moving
             }
 
             // stop chasing player if outside range of distance to lose
@@ -166,6 +166,11 @@ public class EnemyController : MonoBehaviour
                         shotWaitCounter = waitBetweenShots;
                     }
 
+                }
+                else
+                {
+                    // Player dead / no longer active: make enemies stop chasing and go back to spawn point
+                    agent.destination = transform.position;
                 }
             }
         }

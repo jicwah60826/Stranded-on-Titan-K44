@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     public CharacterController charCon;
     private Vector3 moveInput;
     public Transform camTrans;
-    public Transform groundCheckPoint; // item that will define what is ground
-    public LayerMask whatIsGround;
+    public Transform groundCheckPoint; // item that will define WHERE the ground is
+    public LayerMask whatIsGround; // Layer mask that defines WHAT the ground is
     private bool canJump, canDoubleJump, isRunning;
     public GameObject flashLight;
     private bool lightOn;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float muzzFlashDelay;
     public List<GunController> unlockableGuns = new List<GunController>();
     private float playerSpeed;
+    public bool useAmmo;
 
     private void Awake()
     {
@@ -54,8 +55,8 @@ public class PlayerController : MonoBehaviour
         {
             ToggleFlashlight();
             PlayerMovement();
-            SingleShots();
-            MultiShots();
+            DevDeBug();
+            HandleShooting();
             GunSwitching();
             AimDownSight();
             PlayerAnimations();
@@ -64,6 +65,14 @@ public class PlayerController : MonoBehaviour
     }
 
     ////////////*****************     FUNCTIONS *****************////////////
+
+    private void DevDeBug()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            useAmmo = !useAmmo; // toggle the useAmmo boolean
+        }
+    }
 
     private void PlayerMovement()
     {
@@ -175,8 +184,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SingleShots()
+    private void HandleShooting()
     {
+
         // Handle Shooting - single shots (each shot delayed by fire rate amount)
         if (Input.GetMouseButtonDown(0) && activeGun.fireCounter <= 0)
         {
@@ -187,6 +197,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(camTrans.position, camTrans.forward, out hit, 50f))
             {
                 // if raycast hits something greater than 2 units out
+
                 if (Vector3.Distance(camTrans.position, hit.point) > 2f)
                 {
                     firePoint.LookAt(hit.point);
@@ -202,12 +213,8 @@ public class PlayerController : MonoBehaviour
             //Instantiate(bullet, firePoint.position, firePoint.rotation);
             FireShot();
         }
-    }
 
-
-    private void MultiShots()
-    {
-        // Auto-firing (if enabled on Gun)
+        // Multiple Shots / Auto-Firing (if enabled on gun)
         if (Input.GetMouseButton(0) && activeGun.canAutoFire)
         {
             if (activeGun.fireCounter <= 0)
@@ -261,7 +268,10 @@ public class PlayerController : MonoBehaviour
             Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
             StartCoroutine(MuzzleFlash()); // muzzle flash coroutine
             activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
-            activeGun.currentAmmo--;
+            if (useAmmo)
+            {
+                activeGun.currentAmmo--;
+            }
             UpdateAmmoText();
         }
     }
