@@ -8,7 +8,6 @@ TagManager:
   - Headshot
   - Ammo Pickup
   - Health Pickup
-  - Turret
   layers:
   - Default
   - TransparentFX

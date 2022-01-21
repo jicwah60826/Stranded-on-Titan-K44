@@ -71,11 +71,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5709559292214927124}
   - component: {fileID: 5709559292214927127}
-  - component: {fileID: 3502451500888943919}
   - component: {fileID: 2018834710}
+  - component: {fileID: 743660385}
   m_Layer: 0
   m_Name: Turret
-  m_TagString: Turret
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,22 +112,9 @@ MonoBehaviour:
   timeBetweenShots: 0.25
   rotateSpeed: 5
   rotateOffset: 10
+  lockOnSpeed: 1.5
   gun: {fileID: 4082824743919409901}
   firePoint: {fileID: 5709559291306151077}
---- !u!114 &3502451500888943919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5709559292214927125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29c64c2fbbcf4d54085fd0974731f394, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
-  currentHealth: 8
 --- !u!65 &2018834710
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,6 +128,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.56, z: 1}
   m_Center: {x: 0, y: 0.54, z: 0}
+--- !u!114 &743660385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5709559292214927125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cff63d314c34574fa4dd6212de6924e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
+  currentHealth: 12
 --- !u!1001 &5709559291501577298
 PrefabInstance:
   m_ObjectHideFlags: 0

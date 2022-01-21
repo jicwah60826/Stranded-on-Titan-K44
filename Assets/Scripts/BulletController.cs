@@ -39,11 +39,11 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
 
-        if (other.gameObject.tag == "Turret" && damageEnemy)
+/*         if (other.gameObject.tag == "Turret" && damageEnemy)
         {
             impactFX();
             other.gameObject.GetComponent<TurretHealthController>().DamageTurret(damage);
-        }
+        } */
 
         // Check if headshot to enemy
         if (other.gameObject.tag == "Headshot" && damageEnemy)

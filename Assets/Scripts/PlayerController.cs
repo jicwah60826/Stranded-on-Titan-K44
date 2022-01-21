@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     private float playerSpeed;
     public bool useAmmo;
 
+    private float bounceAmount;
+    private bool bounce;
+
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
@@ -163,6 +166,14 @@ public class PlayerController : MonoBehaviour
                 AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
                 canDoubleJump = false;
             }
+        }
+
+        // Handle Bouncing
+        if (bounce)
+        {
+            bounce = false; //toggle the bounce bool
+            moveInput.y = bounceAmount; // applty the bounce
+            canDoubleJump = true; // allow double jump if bouncepad hit
         }
     }
 
@@ -340,5 +351,14 @@ public class PlayerController : MonoBehaviour
             currentGun = allGuns.Count - 2; // set the current gun to the highest level gun to ensure when we switch guns, it is switched to the gun we just picked up.
             SwitchGun();
         }
+    }
+
+    public void Bounce(float bounceForce)
+    {
+
+        bounceAmount = bounceForce;
+        bounce = true;
+
+
     }
 }
