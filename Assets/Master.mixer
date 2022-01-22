@@ -33,6 +33,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-1939307538745851956
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0c3fc1ce82007914e8560e96ca0b1223
+  m_EffectName: Attenuation
+  m_MixLevel: 31edf4fd085ea0c4685f7008859ce1dd
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -54,6 +68,7 @@ AudioMixerController:
     - 8a2a857734f1b134e93bfbe21f840ba5
     - e03a8ffebddb6434cadb42c5d2bce5f7
     - e6e315056dfd37e428a5bc08dcb55e78
+    - c24c0f1c738d5d441bfb335ec8b6fa4a
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -69,6 +84,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -5484096023849650541}
   - {fileID: 4758870492840032896}
+  - {fileID: 4953077682163459014}
   m_Volume: e4e240be531bd0f44ac7f6ddb6a0c4e8
   m_Pitch: 7efcf935f8a9bca4391954d640ea7780
   m_Send: 00000000000000000000000000000000
@@ -102,8 +118,9 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 275a3873f54f4af4f98b6b5750cc67a5
   m_FloatValues:
-    13a8f38305d728943bfdb2b635d10448: -35
-    08ba88941bdc62447860beb7a1d98d2e: -4.9356413
+    13a8f38305d728943bfdb2b635d10448: -80
+    08ba88941bdc62447860beb7a1d98d2e: -0.3976258
+    0c0a36470c5d2fc4abe7ebad7799dcc6: -4.9356413
     e4e240be531bd0f44ac7f6ddb6a0c4e8: 0
   m_TransitionOverrides: {}
 --- !u!243 &4758870492840032896
@@ -121,6 +138,25 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -2532792791898537322}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &4953077682163459014
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ambience
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: c24c0f1c738d5d441bfb335ec8b6fa4a
+  m_Children: []
+  m_Volume: 0c0a36470c5d2fc4abe7ebad7799dcc6
+  m_Pitch: cefd089ba3d94b84298093121f4b9ef2
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -1939307538745851956}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0

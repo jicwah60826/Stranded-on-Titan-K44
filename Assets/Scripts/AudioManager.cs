@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    public AudioSource bgMusic;
+    public AudioSource bgMusic, bgAmbience;
 
     public AudioSource[] soundEffects;
 
