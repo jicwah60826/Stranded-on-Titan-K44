@@ -10,32 +10,20 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     // Define Global Variables
-    public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity;
-    public bool invertX, invertY;
+    public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay, playerSpeed;
+    public bool invertX, invertY, useAmmo;
     public CharacterController charCon;
-    private Vector3 moveInput;
-    public Transform camTrans;
-    public Transform groundCheckPoint; // item that will define WHERE the ground is
+    public Transform camTrans, firePoint, groundCheckPoint /* item that will define WHERE the ground is */, adsPoint, gunHolder;
     public LayerMask whatIsGround; // Layer mask that defines WHAT the ground is
-    private bool canJump, canDoubleJump, isRunning;
-    public GameObject flashLight;
-    private bool lightOn;
+    public GameObject flashLight, muzzeFlash;
     public Animator anim;
-    public Transform firePoint;
     public List<GunController> allGuns = new List<GunController>();
     public int currentGun;
-    public Transform adsPoint;
-    public Transform gunHolder;
-    private Vector3 gunStartPos;
-    public float adsSpeed;
-    public GameObject muzzeFlash;
-    public float muzzFlashDelay;
     public List<GunController> unlockableGuns = new List<GunController>();
-    private float playerSpeed;
-    public bool useAmmo;
 
+    private Vector3 moveInput, gunStartPos;
     private float bounceAmount;
-    private bool bounce;
+    private bool bounce, canJump, canDoubleJump, isRunning, lightOn;
 
     private void Awake()
     {
