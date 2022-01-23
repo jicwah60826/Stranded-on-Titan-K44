@@ -111,12 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe76e671a1fa1994d9392b08e0d46d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 30
   lifeTime: 3
   theRB: {fileID: 5874321473036919683}
   impactEffect: {fileID: 1850889903821977099, guid: 05d0983409ae66e4cb766869110191f7, type: 3}
-  damage: 5
-  headShotMultiplier: 1
+  damage: 2
+  headShotMultiplier: 2
   damageEnemy: 0
   damagePlayer: 1
 --- !u!54 &5874321473036919683
@@ -262,10 +262,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0
-  MaxDistance: 63.04
+  MinDistance: 1
+  MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

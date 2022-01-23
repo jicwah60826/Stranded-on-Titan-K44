@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5709559291306151082}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.093, y: 0.15200001, z: 0.415}
+  m_LocalPosition: {x: 0.004, y: 0.127, z: 0.428}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4082824743919409901}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 2018834710}
   - component: {fileID: 743660385}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: turret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,9 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec8828e937a9734684806a2cac67458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 5874321473036919688, guid: 4e62b402dccdd304d90444634bc253e7, type: 3}
+  bullet: {fileID: 5874321473036919688, guid: b86dd0f1da413784cb4b67ceed673abd, type: 3}
   rangeToTargetPlayer: 20
-  timeBetweenShots: 0.25
+  timeBetweenShots: 0.5
   rotateSpeed: 5
   rotateOffset: 10
   lockOnSpeed: 1.5
