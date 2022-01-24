@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,27 +63,34 @@ public class PlayerHealthController : MonoBehaviour
 
         if (invincibleCounter <= 0 || useInvicDelay == false)
         {
-            if (receiveDamage == true)
+
+            // if level is NOT ending - then we can allow the below
+            if (!GameManager.instance.levelEnding)
             {
-                currentHealth -= damageAmount; // de-iterate player health
+                if (receiveDamage == true)
+                {
+                    currentHealth -= damageAmount; // de-iterate player health
+                }
+
+
+
+                UIController.instance.ShowDamage(); // show damage
+                AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
+                AudioManager.instance.PlaySFX(12); // play sfx element from audio manager SFX list
+
+                if (currentHealth <= 0)
+                {
+                    // Player dead
+                    Debug.Log("Player has been killed");
+                    gameObject.SetActive(false); // disable player controls / movement
+                    currentHealth = 0;  // reset health to 0 so healthbar display never shows a negative #
+                    GameManager.instance.PlayerDied(); // call player function from GameManager
+                    AudioManager.instance.StopBGM(); // stop the background music
+                    AudioManager.instance.PlaySFX(6); // play sfx element from audio manager SFX list
+                }
             }
 
 
-
-            UIController.instance.ShowDamage(); // show damage
-            AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
-            AudioManager.instance.PlaySFX(12); // play sfx element from audio manager SFX list
-
-            if (currentHealth <= 0)
-            {
-                // Player dead
-                Debug.Log("Player has been killed");
-                gameObject.SetActive(false); // disable player controls / movement
-                currentHealth = 0;  // reset health to 0 so healthbar display never shows a negative #
-                GameManager.instance.PlayerDied(); // call player function from GameManager
-                AudioManager.instance.StopBGM(); // stop the background music
-                AudioManager.instance.PlaySFX(6); // play sfx element from audio manager SFX list
-            }
         }
         invincibleCounter = invicibleLength;
         updateHealthBarText();

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public float waitAfterDying;
     private float reSpawnTimer;
+    [HideInInspector] public bool levelEnding;
 
 
     private void Awake()

@@ -115,8 +115,9 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
+                //Only allow the enemy to shoot if we are NOT paused OR the level is ending
 
-                if (PlayerController.instance.gameObject.activeInHierarchy)
+                if (PlayerController.instance.gameObject.activeInHierarchy && !GameManager.instance.levelEnding)
                 {
 
                     //shot wait counter has run out - enemy can shoot now

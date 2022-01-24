@@ -27,7 +27,7 @@ public class Turret : MonoBehaviour
     private void handleShooting()
     {
 
-        if (PlayerController.instance.gameObject.activeInHierarchy)
+        if (PlayerController.instance.gameObject.activeInHierarchy && !GameManager.instance.levelEnding)
         {
             if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToTargetPlayer)
             {
