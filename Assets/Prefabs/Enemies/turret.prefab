@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3388098772361011349, guid: 363923a2348ee03499dc46883030b346, type: 3}
-  rangeToTargetPlayer: 20
-  timeBetweenShots: 0.8
+  rangeToTargetPlayer: 25
+  timeBetweenShots: 0.7
   rotateSpeed: 5
   rotateOffset: 10
   lockOnSpeed: 1.5

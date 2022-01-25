@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private float bounceAmount;
     private bool bounce, canJump, canDoubleJump, isRunning, lightOn;
 
+    public float maximumStamina;
+    private float currentStamina;
+
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
@@ -34,6 +37,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         useAmmo = true;
+        currentStamina = maximumStamina;
+        UIController.instance.staminaSlider.maxValue = maximumStamina; //set stamina slider max value
         currentGun--; //de-iterate the active gun index
         SwitchGun(); //invoke switch gun function
 
@@ -49,6 +54,7 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
             DevDeBug();
             HandleShooting();
+            HandleStamina();
             GunSwitching();
             AimDownSight();
             PlayerAnimations();
@@ -83,7 +89,7 @@ public class PlayerController : MonoBehaviour
         moveInput.Normalize();
 
         // Run or Walk
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0)
         {
             moveInput = moveInput * runSpeed;
             isRunning = true;
@@ -135,6 +141,25 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+    }
+
+    private void HandleStamina()
+    {
+        if (isRunning == true)
+        {
+            // begin decreasing the stamina bar
+            currentStamina -= Time.deltaTime;
+            Debug.Log("currentStamina: " + currentStamina);
+        }
+        else
+        {
+            currentStamina += Time.deltaTime;
+        }
+        if (currentStamina >= maximumStamina)
+        {
+            currentStamina = maximumStamina;
+        }
+        UIController.instance.staminaSlider.value = currentStamina;
     }
 
     private void HandleJumping()
