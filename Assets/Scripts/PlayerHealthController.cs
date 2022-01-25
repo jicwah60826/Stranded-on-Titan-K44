@@ -12,7 +12,7 @@ public class PlayerHealthController : MonoBehaviour
     [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
     [Tooltip("Player current health. This is what is reduced with damage or increased with a pickup.")]
-    public int currentHealth;
+    private int currentHealth;
     [Space]
     [Header("Grace Period")]
     [Tooltip("The amount of time the player goes without damager after being shot.")]
@@ -29,6 +29,7 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        receiveDamage = true;
         currentHealth = maximumHealth;
         UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
         updateHealthBarText();

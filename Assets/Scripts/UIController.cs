@@ -20,8 +20,9 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; // allow this script to be accessed anywhere 
-    }
+        instance = this; // allow this script to be accessed anywhere
+        blackScreen.gameObject.SetActive(true); //enable black on awake
+        }
 
     private void Update()
     {

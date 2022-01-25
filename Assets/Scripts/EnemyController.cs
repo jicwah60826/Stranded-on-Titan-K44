@@ -48,6 +48,7 @@ public class EnemyController : MonoBehaviour
         targetPoint = PlayerController.instance.transform.position;
         targetPoint.y = transform.position.y;
 
+
         if (!chasing)
         {
             // is enemy position less than distance to chase? If so, chase!
@@ -56,7 +57,7 @@ public class EnemyController : MonoBehaviour
                 chasing = true;
                 anim.SetBool("isMoving", true);
 
-                // fireCount = waitTimeToFire;
+                fireCount = waitTimeToFire;
                 shootTimeCounter = timeToShoot; // initialize the shootTimeCounter
                 shotWaitCounter = waitBetweenShots; // initialize the shotWaitCounter
             }
@@ -152,9 +153,6 @@ public class EnemyController : MonoBehaviour
                                 anim.SetTrigger("fireShot");
                                 anim.SetBool("isMoving", false);
                             }
-
-
-
                         }
                         // enemy stops while shooting
                         agent.destination = transform.position; // freeze enemy in place while enemy is shooting

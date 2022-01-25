@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        useAmmo = true;
         currentGun--; //de-iterate the active gun index
         SwitchGun(); //invoke switch gun function
 
