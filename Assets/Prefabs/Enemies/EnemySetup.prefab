@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
-  currentHealth: 5
+  currentHealth: 10
 --- !u!114 &5788084343695527874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,13 +188,13 @@ MonoBehaviour:
   distanceToLose: 40
   distanceToStop: 2
   agent: {fileID: 5788084343695527873}
-  keepChasingTime: 5
+  keepChasingTime: 0.5
   bullet: {fileID: 5874321473036919688, guid: b86dd0f1da413784cb4b67ceed673abd, type: 3}
   firePoint: {fileID: 5788084343854901995}
-  fireRate: 0.3
-  waitTimeToFire: 1
-  waitBetweenShots: 2
-  timeToShoot: 1
+  fireRate: 0.2
+  waitTimeToFire: 0
+  waitBetweenShots: 0.5
+  timeToShoot: 2
   fieldOfView: 30
   anim: {fileID: 5788084343475340522}
 --- !u!195 &5788084343695527873

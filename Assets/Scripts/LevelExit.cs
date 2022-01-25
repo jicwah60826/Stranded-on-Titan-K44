@@ -13,9 +13,10 @@ public class LevelExit : MonoBehaviour
         if(other.tag == "Player"){
             Debug.Log("load next level");
             StartCoroutine(EndLevelCo());
-            AudioManager.instance.PlaySFX(13); // play level exit from audio manager SFX list
             GameManager.instance.levelEnding = true;
-            AudioManager.instance.StopBGM();
+            AudioManager.instance.LevelVictory();
+            //clear checkpoint
+            PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_cp", ""); // clear out stored value for cpname
         }
     }
 

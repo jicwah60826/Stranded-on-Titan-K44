@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3388098772361011349, guid: 363923a2348ee03499dc46883030b346, type: 3}
   rangeToTargetPlayer: 20
-  timeBetweenShots: 0.5
+  timeBetweenShots: 0.8
   rotateSpeed: 5
   rotateOffset: 10
   lockOnSpeed: 1.5
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
-  currentHealth: 12
+  currentHealth: 20
 --- !u!1001 &5709559291501577298
 PrefabInstance:
   m_ObjectHideFlags: 0
