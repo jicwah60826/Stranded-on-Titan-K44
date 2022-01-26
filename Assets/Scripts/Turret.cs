@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToTargetPlayer)
             {
-                Debug.Log("Player now within range of turret");
+                //Debug.Log("Player now within range of turret");
 
                 /* SMOOTHLY rotate the turret to face the plater once player is within range.
                 The Code below takes into account the CURRENT rotation angle of the turret so that
@@ -55,7 +55,7 @@ public class Turret : MonoBehaviour
             }
             else
             {
-                Debug.Log("Player not within range of turret");
+                //Debug.Log("Player not within range of turret");
                 shotCounter = timeBetweenShots; //reset shot counter
                 gun.rotation = Quaternion.Lerp(gun.rotation, Quaternion.Euler(0f, gun.rotation.eulerAngles.y + rotateOffset, 0f), rotateSpeed * Time.deltaTime); // rotate the turret around based on rotateSpeed
             }

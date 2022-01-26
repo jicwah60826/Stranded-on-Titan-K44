@@ -58,12 +58,12 @@ public class TestEnemyController : MonoBehaviour
             if (chaseCounter > 0)
             {
                 chaseCounter -= Time.deltaTime;
-                Debug.Log("chaseCounter: " + chaseCounter);
+                //Debug.Log("chaseCounter: " + chaseCounter);
 
                 if (chaseCounter <= 0)
                 {
                     agent.destination = startPoint;
-                    Debug.Log("Sending Enemy back to ttartPoint");
+                    //Debug.Log("Sending Enemy back to ttartPoint");
                 }
             }
         }

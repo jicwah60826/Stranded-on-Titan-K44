@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     // Define Global Variables
     public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay, playerSpeed;
-    public bool invertX, invertY, useAmmo;
+    public bool invertX, invertY, useAmmo, canRun = true;
     public CharacterController charCon;
     public Transform camTrans, firePoint, groundCheckPoint /* item that will define WHERE the ground is */, adsPoint, gunHolder;
     public LayerMask whatIsGround; // Layer mask that defines WHAT the ground is
@@ -23,10 +23,14 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveInput, gunStartPos;
     private float bounceAmount;
-    private bool bounce, canJump, canDoubleJump, isRunning, lightOn;
+    private bool bounce, canJump, canDoubleJump, isRunning, lightOn, hasStamina = true;
 
     public float maximumStamina;
     private float currentStamina;
+    public float staminaDrainSpeed; // used for giving buffs or debuffs to the stamina DRAIN speed
+    public float staminaRegainSpeed; // used for giving buffs or debuffs to the stamina REGAIN speed
+    public float waitToRegainStamina; // amount of wait time before stamina begins to go back up
+    private bool isStaminaCoRoutineExecuting;
 
     private void Awake()
     {
@@ -89,7 +93,7 @@ public class PlayerController : MonoBehaviour
         moveInput.Normalize();
 
         // Run or Walk
-        if (Input.GetKey(KeyCode.LeftShift) && currentStamina > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && canRun == true && !isStaminaCoRoutineExecuting)
         {
             moveInput = moveInput * runSpeed;
             isRunning = true;
@@ -145,49 +149,88 @@ public class PlayerController : MonoBehaviour
 
     private void HandleStamina()
     {
+        // begin decreasing the stamina bar if player is running
         if (isRunning == true)
         {
-            // begin decreasing the stamina bar
-            currentStamina -= Time.deltaTime;
-            Debug.Log("currentStamina: " + currentStamina);
+            currentStamina -= Time.deltaTime * staminaDrainSpeed;
         }
         else
+        // // begin increasing the stamina bar after coRoutine is done running
         {
-            currentStamina += Time.deltaTime;
+            if (!isStaminaCoRoutineExecuting)
+            {
+                currentStamina += Time.deltaTime * staminaRegainSpeed; // increase stamina bar back over time
+            }
         }
+
+        // ensure we don't exceed max stamina allowed
         if (currentStamina >= maximumStamina)
         {
             currentStamina = maximumStamina;
         }
+
+        // Define if player has stamina or not
+        if (currentStamina > 0)
+        {
+            hasStamina = true;
+            canRun = true;
+        }
+        else
+        {
+            hasStamina = false;
+            canRun = false;
+            //start coroutine
+            StartCoroutine(StaminaDepletedCo());
+        }
+
+        Debug.Log("hasStamina = " + hasStamina);
+
+        // update stamina bar per the currentStamina amount
         UIController.instance.staminaSlider.value = currentStamina;
+        //Debug.Log("currentStamina: " + currentStamina);
+    }
+
+    private IEnumerator StaminaDepletedCo()
+    {
+        isStaminaCoRoutineExecuting = true;
+        Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
+        yield return new WaitForSeconds(waitToRegainStamina);
+        hasStamina = true;
+        canRun = true;
+        isStaminaCoRoutineExecuting = false;
+        Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
     }
 
     private void HandleJumping()
     {
         ///////////*********** Handle Jumping ********** ///////////
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        // only allow jumping if player has stamina
+        if (hasStamina == true && !isStaminaCoRoutineExecuting)
         {
-            if (canJump)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                moveInput.y = jumpPower;
-                canDoubleJump = true;
-                AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
+                if (canJump)
+                {
+                    moveInput.y = jumpPower;
+                    canDoubleJump = true;
+                    AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
+                }
+                else if (canDoubleJump == true)
+                {
+                    moveInput.y = jumpPower;
+                    AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
+                    canDoubleJump = false;
+                }
             }
-            else if (canDoubleJump == true)
-            {
-                moveInput.y = jumpPower;
-                AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
-                canDoubleJump = false;
-            }
-        }
 
-        // Handle Bouncing
-        if (bounce)
-        {
-            bounce = false; //toggle the bounce bool
-            moveInput.y = bounceAmount; // applty the bounce
-            canDoubleJump = true; // allow double jump if bouncepad hit
+            // Handle Bouncing
+            if (bounce)
+            {
+                bounce = false; //toggle the bounce bool
+                moveInput.y = bounceAmount; // applty the bounce
+                canDoubleJump = true; // allow double jump if bouncepad hit
+            }
         }
     }
 
@@ -245,7 +288,7 @@ public class PlayerController : MonoBehaviour
             if (activeGun.fireCounter <= 0)
             {
                 FireShot();
-                Debug.Log("Call FireShot function");
+                //("Call FireShot function");
             }
 
         }

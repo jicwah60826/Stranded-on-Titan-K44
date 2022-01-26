@@ -12,7 +12,7 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Player"){
-            Debug.Log("load next level");
+            //Debug.Log("load next level");
             StartCoroutine(EndLevelCo());
             GameManager.instance.levelEnding = true;
             //AudioManager.instance.LevelVictory();

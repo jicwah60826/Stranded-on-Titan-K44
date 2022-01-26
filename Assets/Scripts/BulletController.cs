@@ -34,7 +34,7 @@ public class BulletController : MonoBehaviour
         //check what object tag the bullet collided with
         if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
-            Debug.Log("Enemy Bodyshot");
+            //Debug.Log("Enemy Bodyshot");
             impactFX();
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
@@ -48,7 +48,7 @@ public class BulletController : MonoBehaviour
         // Check if headshot to enemy
         if (other.gameObject.tag == "Headshot" && damageEnemy)
         {
-            Debug.Log("Enemy Headshot");
+            //Debug.Log("Enemy Headshot");
             impactFX();
             // Call the DamageEnemy script on the parent of this game object
             other.transform.parent.GetComponent<EnemyHealthController>().DamageEnemy(damage * headShotMultiplier);
@@ -57,7 +57,7 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
 
-            Debug.Log("Player has been hit at " + transform.position);
+            //Debug.Log("Player has been hit at " + transform.position);
             impactFX();
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }

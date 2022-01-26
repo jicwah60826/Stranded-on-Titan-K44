@@ -26,7 +26,7 @@ public class CheckPointController : MonoBehaviour
             {
                 // do stuff
                 PlayerController.instance.transform.position = transform.position;
-                Debug.Log("Player starting at" + cpName);
+                //Debug.Log("Player starting at" + cpName);
             }
 
         }
@@ -37,7 +37,7 @@ public class CheckPointController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_cp", ""); // clear out stored value for cpname
-            Debug.Log("cpName cleared from playerprefs");
+            //Debug.Log("cpName cleared from playerprefs");
         }
     }
 
@@ -47,7 +47,7 @@ public class CheckPointController : MonoBehaviour
         {
             PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_cp", cpName);
             AudioManager.instance.PlaySFX(1); // play sfx element from audio manager SFX list
-            Debug.Log("Player hit" + cpName);
+            //Debug.Log("Player hit" + cpName);
         }
     }
 }

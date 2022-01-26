@@ -24,7 +24,7 @@ public class RocketExplosion : MonoBehaviour
         //check what object tag the bullet collided with
         if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
-            Debug.Log("Enemy hit by rocket");
+            //Debug.Log("Enemy hit by rocket");
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
 
@@ -32,7 +32,7 @@ public class RocketExplosion : MonoBehaviour
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
 
-            Debug.Log("Player has been hit at " + transform.position);
+            //Debug.Log("Player has been hit at " + transform.position);
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
         }
 
@@ -45,7 +45,7 @@ public class RocketExplosion : MonoBehaviour
         if (destroyTimer <= 0)
         {
             Destroy(gameObject);
-            Debug.Log("rocket destroyed from scene");
+            //Debug.Log("rocket destroyed from scene");
         }
     }
 }
