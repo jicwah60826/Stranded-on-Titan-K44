@@ -5135,7 +5135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &776025121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8395,6 +8395,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySetup
       objectReference: {fileID: 0}
+    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
+      propertyPath: timeToShoot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
+      propertyPath: distanceToLose
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
+      propertyPath: waitTimeToFire
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
+      propertyPath: distanceToChase
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
+      propertyPath: keepChasingTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
+      propertyPath: waitBetweenShots
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -8663,7 +8687,6 @@ MonoBehaviour:
   mouseSensitivity: 2
   adsSpeed: 1
   muzzFlashDelay: 0.05
-  playerSpeed: 0
   invertX: 0
   invertY: 0
   useAmmo: 0
@@ -8687,8 +8710,8 @@ MonoBehaviour:
   - {fileID: 350821770}
   - {fileID: 1740458428}
   - {fileID: 471074092}
-  maximumStamina: 5
-  staminaDrainSpeed: 0.75
+  maximumStamina: 2
+  staminaDrainSpeed: 0.25
   staminaRegainSpeed: 0.25
   waitToRegainStamina: 2
 --- !u!143 &1349707276
@@ -8740,9 +8763,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1602e7e603130524b9e9d777c12b1979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 50
+  maximumHealth: 100
   invicibleLength: 0.1
-  useInvicDelay: 1
+  useInvicDelay: 0
   receiveDamage: 1
 --- !u!4 &1350131102 stripped
 Transform:
@@ -18384,6 +18407,10 @@ PrefabInstance:
     - target: {fileID: 8548747825470062164, guid: 07c4ee3c831cfb143aa016de24738fee, type: 3}
       propertyPath: m_Name
       value: EnemyBall Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548747825470062164, guid: 07c4ee3c831cfb143aa016de24738fee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8548747825470062165, guid: 07c4ee3c831cfb143aa016de24738fee, type: 3}
       propertyPath: m_RootOrder

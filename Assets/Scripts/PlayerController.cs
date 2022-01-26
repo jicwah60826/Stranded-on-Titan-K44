@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     // Define Global Variables
-    public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay, playerSpeed;
+    public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay;
     public bool invertX, invertY, useAmmo, canRun = true;
     public CharacterController charCon;
     public Transform camTrans, firePoint, groundCheckPoint /* item that will define WHERE the ground is */, adsPoint, gunHolder;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     public float staminaDrainSpeed; // used for giving buffs or debuffs to the stamina DRAIN speed
     public float staminaRegainSpeed; // used for giving buffs or debuffs to the stamina REGAIN speed
     public float waitToRegainStamina; // amount of wait time before stamina begins to go back up
-    private bool isStaminaCoRoutineExecuting;
+    private bool isStaminaCoRoutineExecuting = false;
 
     private void Awake()
     {
@@ -192,6 +192,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator StaminaDepletedCo()
     {
+
+        if (isStaminaCoRoutineExecuting == true)
+            yield break; //leave the function is it already executing...
+
         isStaminaCoRoutineExecuting = true;
         Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
         yield return new WaitForSeconds(waitToRegainStamina);
