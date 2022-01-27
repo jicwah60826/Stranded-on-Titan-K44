@@ -17,13 +17,14 @@ public class LevelExit : MonoBehaviour
             GameManager.instance.levelEnding = true;
             //AudioManager.instance.LevelVictory();
             AudioSource.PlayClipAtPoint(levelExitMusic, other.gameObject.transform.position);
-            //clear checkpoint
-            PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_cp", ""); // clear out stored value for cpname
         }
     }
 
     private IEnumerator EndLevelCo(){
         yield return new WaitForSeconds(waitToEndLevel);
+        //clear checkpoint
+        PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "_cp", ""); // clear out stored value for cpname
+        //Load next level
         SceneManager.LoadScene(nextLevel);
     }
 }
