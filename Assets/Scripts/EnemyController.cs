@@ -57,6 +57,7 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, targetPoint) < distanceToChase)
             {
                 chasing = true;
+                Debug.Log("zz3 - update: chasing = " + chasing);
                 anim.SetBool("isMoving", true);
 
                 fireCount = waitTimeToFire;
@@ -105,6 +106,7 @@ public class EnemyController : MonoBehaviour
                 if (!wasShot)
                 {
                     chasing = false;
+                    Debug.Log("zz4 - update: chasing = " + chasing);
                     chaseCounter = keepChasingTime;
                 }
 
@@ -191,5 +193,7 @@ public class EnemyController : MonoBehaviour
         //Enemy shot - make player chase towards player
         wasShot = true;
         chasing = true;
+        Debug.Log("zz1 - GetShot: wasShot = " + wasShot);
+        Debug.Log("zz2 - GetShot: chasing = " + chasing);
     }
 }

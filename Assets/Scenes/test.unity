@@ -1395,17 +1395,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5709559292214927124, guid: 50d0e8e7b336fdb4f8a764d9cad3163a, type: 3}
   m_PrefabInstance: {fileID: 944694262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &596782040 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-  m_PrefabInstance: {fileID: 1276541582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647b5e240d9aebf47b7607ed5cd90ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &615298587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7394138038021056775, guid: 2cd97d4bfd18d50458561528dead0784, type: 3}
@@ -3251,34 +3240,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySetup
       objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: timeToShoot
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: distanceToLose
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: waitTimeToFire
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: distanceToChase
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: keepChasingTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527874, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: waitBetweenShots
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5788084343695527880, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
-      propertyPath: theEC
-      value: 
-      objectReference: {fileID: 596782040}
     - target: {fileID: 7896600836291507171, guid: 96f5e6ddec921784c866dc751938fd09, type: 3}
       propertyPath: m_RootOrder
       value: 3
