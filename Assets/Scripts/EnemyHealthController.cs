@@ -8,6 +8,8 @@ public class EnemyHealthController : MonoBehaviour
 
     public int currentHealth = 5;
 
+    public EnemyController theEC;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +27,19 @@ public class EnemyHealthController : MonoBehaviour
     {
 
         currentHealth -= damageAmount; // de-iterate enemy health
-        AudioManager.instance.PlaySFX(2); // play sfx element from audio manager SFX list
+
+        // check if this enemy has an EnemyController script attached
+        if (theEC != null)
+        {
+            // call the GetShot function within the EnemyController script
+            theEC.GetShot();
+        }
+
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
             Instantiate(enemyExplosionFX, transform.position, transform.rotation);
+            AudioManager.instance.PlaySFX(2); // play sfx element from audio manager SFX list
         }
     }
 }

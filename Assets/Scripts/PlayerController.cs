@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public float waitToRegainStamina; // amount of wait time before stamina begins to go back up
     private bool isStaminaCoRoutineExecuting = false;
 
+    public float maxCamTiltAngle = 60f;
+
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
@@ -129,7 +131,7 @@ public class PlayerController : MonoBehaviour
         ///////////*********** Rotate Player / Control Camera Rotation ********** ///////////
         Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * mouseSensitivity;
 
-        //Check Invert X or Y axis flips are
+        //Check Invert X or Y axis flips
         if (invertX)
         {
             mouseInput.x = -mouseInput.x;
@@ -145,6 +147,17 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+        //clamp the camera tilt angle when player looking down
+        if (camTrans.rotation.eulerAngles.x > maxCamTiltAngle && camTrans.rotation.eulerAngles.x < 180f)
+        {
+            camTrans.rotation = Quaternion.Euler(maxCamTiltAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
+        //clamp the camera tilt angle when player looking up
+        else if (camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360 - maxCamTiltAngle)
+        {
+            camTrans.rotation = Quaternion.Euler(-maxCamTiltAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
     }
 
     private void HandleStamina()
