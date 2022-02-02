@@ -33,6 +33,8 @@ public class EnemyController : MonoBehaviour
 
     public Animator anim;
 
+    private bool wasShot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,7 +103,6 @@ public class EnemyController : MonoBehaviour
             // stop chasing player if outside range of distance to lose
             if (Vector3.Distance(transform.position, targetPoint) > distanceToLose)
             {
-<<<<<<< HEAD
                 if (!wasShot)
                 {
                     chasing = false;
@@ -113,10 +114,6 @@ public class EnemyController : MonoBehaviour
             else
             {
                 wasShot = false;
-=======
-                chasing = false;
-                chaseCounter = keepChasingTime;
->>>>>>> TEST
             }
 
             if (shotWaitCounter > 0)
@@ -189,7 +186,6 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-<<<<<<< HEAD
 
     public void GetShot()
     {
@@ -200,6 +196,4 @@ public class EnemyController : MonoBehaviour
         Debug.Log("zz1 - GetShot: wasShot = " + wasShot);
         Debug.Log("zz2 - GetShot: chasing = " + chasing);
     }
-=======
->>>>>>> TEST
 }
