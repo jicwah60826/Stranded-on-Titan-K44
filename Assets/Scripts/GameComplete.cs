@@ -17,6 +17,7 @@ public class GameComplete : MonoBehaviour
     private void Start()
     {
         StartCoroutine(ShowObjectsCo());
+        Cursor.lockState = CursorLockMode.None; //show and unlock cursor
     }
 
     private void Update() {
