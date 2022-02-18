@@ -15,7 +15,7 @@ MonoBehaviour:
   prefabs:
   - gameObject: {fileID: 919132149155446097, guid: 6638c826e30b0064b84190ecfade0e55, type: 3}
     settings:
-      m_Strength: 85.03488
+      m_Strength: 45.566444
       m_RotationRangeMin: {x: 2.8346462, y: 0, z: 0}
       m_RotationRangeMax: {x: 7.559054, y: 360, z: 5.669289}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -48,18 +48,18 @@ MonoBehaviour:
   - gameObject: {fileID: 919132149155446097, guid: 0bb7374386e88c340a3db487c448e69e, type: 3}
     settings:
       m_Strength: 50
-      m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 1, y: 135.1181, z: 1}
-      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_RotationRangeMin: {x: 6.6141734, y: 9.448819, z: 12.283465}
+      m_RotationRangeMax: {x: 48.188946, y: 42.519672, z: 51.078743}
+      m_ScaleRangeMin: {x: 0.1, y: 0.1, z: 0.1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
       m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 1
+      m_UniformBool: 0
       m_XRotationBool: 1
       m_YRotationBool: 1
-      m_ZRotationBool: 0
-      m_XScaleBool: 0
-      m_YScaleBool: 0
-      m_ZScaleBool: 0
+      m_ZRotationBool: 1
+      m_XScaleBool: 1
+      m_YScaleBool: 1
+      m_ZScaleBool: 1
     name: AlienPlant03
   - gameObject: {fileID: 919132149155446097, guid: ad00742831315ad4795641b6eb44d7e9, type: 3}
     settings:
@@ -79,25 +79,25 @@ MonoBehaviour:
     name: AlienPlant04
   - gameObject: {fileID: 919132149155446097, guid: af5329cff129f5a4eb269e8183dd8f49, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 1
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 360, z: 0}
-      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
-      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 0, y: 1.8835626}
+      m_RotationRangeMax: {x: 5, y: 360, z: 5}
+      m_ScaleRangeMin: {x: 0.2, y: 0.2, z: 0.2}
+      m_ScaleRangeMax: {x: 1.5, y: 1.5, z: 1.5}
+      m_UniformScale: {x: 0.6849315, y: 2.5684943}
       m_UniformBool: 1
-      m_XRotationBool: 0
+      m_XRotationBool: 1
       m_YRotationBool: 1
-      m_ZRotationBool: 0
-      m_XScaleBool: 0
-      m_YScaleBool: 0
-      m_ZScaleBool: 0
+      m_ZRotationBool: 1
+      m_XScaleBool: 1
+      m_YScaleBool: 1
+      m_ZScaleBool: 1
     name: AlienPlant04a
   - gameObject: {fileID: 919132149155446097, guid: c9802e2bb5eda1d41a86e1a621b0afbe, type: 3}
     settings:
-      m_Strength: 50
-      m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 1.2, y: 192.75589, z: 1.2}
+      m_Strength: 60.367107
+      m_RotationRangeMin: {x: 29.29134, y: 0, z: 44.40945}
+      m_RotationRangeMax: {x: 56.94803, y: 192.75589, z: 80.57008}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
       m_UniformScale: {x: 0.38356167, y: 1.1027397}

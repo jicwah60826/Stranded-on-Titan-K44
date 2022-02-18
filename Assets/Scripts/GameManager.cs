@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    public float fixedUpdateTime = .005f;
+
     private Object[] textures;
 
     public float waitAfterDying;
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         /* This doubles the number of times per second the fixedUpdate will run. You can keep decreasing the multiplier to increase number of checks. */
-        Time.fixedDeltaTime = Time.timeScale * 0.005f; // Normally multiplied by 0.02 to make 50 checks a second.
+        Time.fixedDeltaTime = Time.timeScale * fixedUpdateTime; // Normally multiplied by 0.02 to make 50 checks a second.
 
         textures = Resources.LoadAll("Art", typeof(Texture2D)); // load all textures on game start
 
