@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d953221af52931049a5f3fed67c7850e
   - enabled: 0
-    path: Assets/Scenes/test.unity
+    path: Assets/Scenes/Dev_Test_Staging.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: Assets/Scenes/GameComplete.unity
     guid: bd59ed7c48a3e264e9d37ac40f04009d
   - enabled: 1
-    path: Assets/Scenes/TemplateScene.unity
+    path: Assets/Scenes/Level1_Crashsite.unity
     guid: 55cd664c4cc6de249b17ff6141f51f75
   m_configObjects: {}

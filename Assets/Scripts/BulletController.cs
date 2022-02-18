@@ -11,6 +11,8 @@ public class BulletController : MonoBehaviour
 
     public GameObject impactEffect;
 
+    public Collider bulletCollider;
+
     public int damage;
     public int headShotMultiplier;
 
@@ -39,11 +41,11 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
         }
 
-/*         if (other.gameObject.tag == "Turret" && damageEnemy)
-        {
-            impactFX();
-            other.gameObject.GetComponent<TurretHealthController>().DamageTurret(damage);
-        } */
+        /*         if (other.gameObject.tag == "Turret" && damageEnemy)
+                {
+                    impactFX();
+                    other.gameObject.GetComponent<TurretHealthController>().DamageTurret(damage);
+                } */
 
         // Check if headshot to enemy
         if (other.gameObject.tag == "Headshot" && damageEnemy)
@@ -67,7 +69,15 @@ public class BulletController : MonoBehaviour
 
     public void impactFX()
     {
-        Destroy(gameObject);
+        // Do impact Effect
         Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
+
+        // Disable the collider on the bullet
+        bulletCollider.enabled = false;
+
+        // Destroy after 5 seconds
+        Destroy(gameObject, 5);
+
+
     }
 }

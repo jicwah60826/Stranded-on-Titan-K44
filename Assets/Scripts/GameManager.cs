@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
         // Hide / Lock cursor movement in game window
         Cursor.lockState = CursorLockMode.Locked;
 
+        //Set Cursor to not be visible
+        Cursor.visible = false;
+
     }
 
     private void Update()

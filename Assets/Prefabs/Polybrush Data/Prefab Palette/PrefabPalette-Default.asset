@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc38003c0e0db6641a4762d4f392de52, type: 3}
+  m_Name: PrefabPalette-Default
+  m_EditorClassIdentifier: 
+  prefabs:
+  - gameObject: {fileID: 919132149155446097, guid: 6638c826e30b0064b84190ecfade0e55, type: 3}
+    settings:
+      m_Strength: 45.566444
+      m_RotationRangeMin: {x: 2.8346462, y: 0, z: 0}
+      m_RotationRangeMax: {x: 7.559054, y: 360, z: 5.669289}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 0.55479455, y: 1.1027399}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 1
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: AlienPlant02
+  - gameObject: {fileID: 919132149155446097, guid: 890817facc198d84a928f742b6d2a559, type: 3}
+    settings:
+      m_Strength: 43.921936
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 360, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 0.28082192, y: 0.6917808}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 1
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: AlienPlant01
+  - gameObject: {fileID: 919132149155446097, guid: 0bb7374386e88c340a3db487c448e69e, type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 6.6141734, y: 9.448819, z: 12.283465}
+      m_RotationRangeMax: {x: 48.188946, y: 42.519672, z: 51.078743}
+      m_ScaleRangeMin: {x: 0.1, y: 0.1, z: 0.1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 1}
+      m_UniformBool: 0
+      m_XRotationBool: 1
+      m_YRotationBool: 1
+      m_ZRotationBool: 1
+      m_XScaleBool: 1
+      m_YScaleBool: 1
+      m_ZScaleBool: 1
+    name: AlienPlant03
+  - gameObject: {fileID: 919132149155446097, guid: ad00742831315ad4795641b6eb44d7e9, type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 360, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 0, y: 1.7808201}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 1
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: AlienPlant04
+  - gameObject: {fileID: 919132149155446097, guid: af5329cff129f5a4eb269e8183dd8f49, type: 3}
+    settings:
+      m_Strength: 1
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 5, y: 360, z: 5}
+      m_ScaleRangeMin: {x: 0.2, y: 0.2, z: 0.2}
+      m_ScaleRangeMax: {x: 1.5, y: 1.5, z: 1.5}
+      m_UniformScale: {x: 0.6849315, y: 2.5684943}
+      m_UniformBool: 1
+      m_XRotationBool: 1
+      m_YRotationBool: 1
+      m_ZRotationBool: 1
+      m_XScaleBool: 1
+      m_YScaleBool: 1
+      m_ZScaleBool: 1
+    name: AlienPlant04a
+  - gameObject: {fileID: 919132149155446097, guid: c9802e2bb5eda1d41a86e1a621b0afbe, type: 3}
+    settings:
+      m_Strength: 60.367107
+      m_RotationRangeMin: {x: 29.29134, y: 0, z: 44.40945}
+      m_RotationRangeMax: {x: 56.94803, y: 192.75589, z: 80.57008}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 0.38356167, y: 1.1027397}
+      m_UniformBool: 1
+      m_XRotationBool: 1
+      m_YRotationBool: 1
+      m_ZRotationBool: 1
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: AlienPlant05

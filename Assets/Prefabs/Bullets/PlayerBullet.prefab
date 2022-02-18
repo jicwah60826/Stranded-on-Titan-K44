@@ -115,6 +115,7 @@ MonoBehaviour:
   lifeTime: 5
   theRB: {fileID: 5874321473036919683}
   impactEffect: {fileID: 1850889903821977099, guid: 6c60bc4b94202054dbaa2bdd6cdd3714, type: 3}
+  bulletCollider: {fileID: 5874321473036919695}
   damage: 2
   headShotMultiplier: 2
   damageEnemy: 1
