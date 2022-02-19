@@ -18,6 +18,8 @@ public class BulletController : MonoBehaviour
 
     public bool damageEnemy, damagePlayer;
 
+    private float disableColliderCounter = .01f;
+
     // Update is called once per frame
     void Update()
     {
@@ -72,8 +74,13 @@ public class BulletController : MonoBehaviour
         // Do impact Effect
         Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
 
-        // Disable the collider on the bullet
-        bulletCollider.enabled = false;
+        disableColliderCounter -= Time.deltaTime; // begin disableColliderCounter countdown
+
+        if (disableColliderCounter <= 0)
+        {
+            // Disable the collider on the bullet
+            bulletCollider.enabled = false;
+        }
 
         // Destroy after 5 seconds
         Destroy(gameObject, 5);

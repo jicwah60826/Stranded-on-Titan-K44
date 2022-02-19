@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 5709559292214927127}
   - component: {fileID: 2018834710}
   - component: {fileID: 743660385}
+  - component: {fileID: 7592389458913304925}
   m_Layer: 0
   m_Name: turret
   m_TagString: Enemy
@@ -142,6 +143,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
   currentHealth: 20
+  theEC: {fileID: 0}
+--- !u!114 &7592389458913304925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5709559292214927125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b841dc9bd803743907935ba69ee3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5709559291501577298
 PrefabInstance:
   m_ObjectHideFlags: 0
