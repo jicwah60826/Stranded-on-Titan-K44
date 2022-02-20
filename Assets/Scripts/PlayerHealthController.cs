@@ -12,7 +12,7 @@ public class PlayerHealthController : MonoBehaviour
     [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
     [Tooltip("Player current health. This is what is reduced with damage or increased with a pickup.")]
-    private int currentHealth;
+    public int currentHealth;
     [Space]
     [Header("Grace Period")]
     [Tooltip("The amount of time the player goes without damager after being shot.")]
@@ -32,23 +32,13 @@ public class PlayerHealthController : MonoBehaviour
         receiveDamage = true;
         currentHealth = maximumHealth;
         UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
-        updateHealthBarText();
+        UpdateHealthBarText();
 
     }
 
     private void Update()
     {
         InvincibleCounter();
-        DevDeBug();
-    }
-
-    public void DevDeBug()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            receiveDamage = !receiveDamage; // toggle the boolean to the opposite of what it currently is
-            currentHealth = maximumHealth; // reset player health
-        }
     }
 
     private void InvincibleCounter()
@@ -93,10 +83,10 @@ public class PlayerHealthController : MonoBehaviour
 
         }
         invincibleCounter = invicibleLength;
-        updateHealthBarText();
+        UpdateHealthBarText();
     }
 
-    private void updateHealthBarText()
+    public void UpdateHealthBarText()
     {
         UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
         UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maximumHealth;
@@ -112,7 +102,7 @@ public class PlayerHealthController : MonoBehaviour
         }
 
         //update slider and text
-        updateHealthBarText();
+        UpdateHealthBarText();
 
     }
 }

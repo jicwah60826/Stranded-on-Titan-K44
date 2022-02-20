@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool levelEnding;
     [Header("Way Point Markers")]
     [Tooltip("The parent game object item for ALL waypoint markersa in the game / level")]
-    public GameObject wayPointMarkers;
-    [Tooltip("Select if Waypoint indicator should be enabled in the game")]
-    public bool markersOn = false;
+    public GameObject wayPointSystem;
+    public bool hasWayPointPerk;
+    public bool wayPointsEnabled;
 
     private void Awake()
     {
@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
         textures = Resources.LoadAll("Art", typeof(Texture2D)); // load all textures on game start
 
         instance = this; // allow this script to be accessed anywhere
+
+        PlayerAbilities();
+
     }
     // Start is called before the first frame update
     void Start()
@@ -39,7 +42,6 @@ public class GameManager : MonoBehaviour
         //Set Cursor to not be visible
         Cursor.visible = false;
 
-        WayPointMarkers();
     }
 
     private void Update()
@@ -49,52 +51,119 @@ public class GameManager : MonoBehaviour
             PauseUnPause();
         }
 
-        if (Input.GetKeyDown(KeyCode.Y) && PlayerPrefs.GetString("wayPointsAllowed") == "true")
-        {
-            // toggle markers on/off
-            markersOn = !markersOn;
-            Debug.Log("wayPointsAllowed are allowed, now invoking function WayPointMarkers");
-            WayPointMarkers();
-        }
-
-        HandlePlayerPrefs();
-
+        PlayerAbilities();
+        HandleWayPointMarkers();
+        DevCommands();
     }
 
-    public void HandlePlayerPrefs()
+
+    private void PlayerAbilities()
     {
+        ///// ***** WAY POINT PERK ***** /////
+
+        // get value of hasWayPointPerk
+        if (PlayerPrefs.HasKey("hasWayPointPerk"))
+        {
+            Debug.Log("hasWayPointPerk exists");
+
+            //set hasWayPoint bool based on hasWayPointPerk player pref
+            if (PlayerPrefs.GetString("hasWayPointPerk") == "true")
+            {
+                hasWayPointPerk = true;
+                Debug.Log("hasWayPointPerk = " + hasWayPointPerk);
+            }
+        }
+    }
+
+    private void HandleWayPointMarkers()
+    {
+        if (wayPointSystem != null)
+        {
+            if (Input.GetKeyDown(KeyCode.Y) && wayPointSystem != null)
+            {
+                if (hasWayPointPerk)
+                {
+                    // toggle wayPointsEnabled
+                    wayPointsEnabled = !wayPointsEnabled;
+                    Debug.Log("wayPointsEnabled set to " + wayPointsEnabled);
+                }
+                else
+                {
+                    Debug.Log("wayPoint perk not earned yet");
+                }
+            }
+
+            //handle waypoint visibility
+            if (hasWayPointPerk)
+            {
+                if (wayPointsEnabled)
+                {
+                    wayPointSystem.SetActive(wayPointsEnabled);
+                }
+
+            }
+            else
+            {
+                // hide waypoints if player does not haver the perk
+                wayPointSystem.SetActive(false);
+            }
+
+            if (wayPointsEnabled)
+            {
+                wayPointSystem.SetActive(true);
+            }
+            else
+            {
+                wayPointSystem.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("waypoint system needs to be assigned in game manager");
+        }
+    }
+
+    private void DevCommands()
+    {
+        /////***** CLEAR WAYPOINT ABILITY *****/////
+
         if (Input.GetKeyDown(KeyCode.L))
         {
-            //clear all player prefs;
-            PlayerPrefs.DeleteAll();
-            Debug.Log("all player prefs cleared");
-            // Disable things related to player abilities
-            wayPointMarkers.SetActive(false);
+            PlayerPrefs.DeleteKey("hasWayPointPerk");
+            hasWayPointPerk = false;
+            wayPointsEnabled = false;
+            Debug.Log("hasWayPointPerk removed by player");
+        }
+
+        /////***** TOGGLE PLAYER RECEIVE DAMAGE *****/////
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            // Toggle the player receiving damage or not
+            PlayerHealthController.instance.receiveDamage = !PlayerHealthController.instance.receiveDamage;
+            if (PlayerHealthController.instance.receiveDamage == false)
+            {
+                Debug.Log("player is now invincible!");
+                //reset player health
+                PlayerHealthController.instance.currentHealth = PlayerHealthController.instance.maximumHealth;
+                PlayerHealthController.instance.UpdateHealthBarText();
+            }
+            else
+            {
+                Debug.Log("player can receive damage");
+            }
+        }
+
+        /////***** TOGGLE PLAYER INFINITE AMMO *****/////
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            // Toggle usage of ammo
+            PlayerController.instance.useAmmo = !PlayerController.instance.useAmmo;
         }
     }
 
 
-
-
-    public void WayPointMarkers()
-    {
-        //if (PlayerPrefs.GetString("wayPointsAllowed") == "true")
-        //{
-        if (markersOn)
-        {
-            Debug.Log("markers are enabled in scene");
-            wayPointMarkers.SetActive(true);
-        }
-        else if (!markersOn)
-        {
-            Debug.Log("markers are disabled in scene");
-            wayPointMarkers.SetActive(false);
-        }
-        //}
-
-
-
-    }
 
     public void PlayerDied()
     {

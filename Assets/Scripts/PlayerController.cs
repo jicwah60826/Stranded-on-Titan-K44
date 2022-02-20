@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
         {
             ToggleFlashlight();
             PlayerMovement();
-            DevDeBug();
             HandleShooting();
             HandleStamina();
             GunSwitching();
@@ -67,14 +66,6 @@ public class PlayerController : MonoBehaviour
     }
 
     ////////////*****************     FUNCTIONS *****************////////////
-
-    private void DevDeBug()
-    {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            useAmmo = !useAmmo; // toggle the useAmmo boolean
-        }
-    }
 
     private void PlayerMovement()
     {
