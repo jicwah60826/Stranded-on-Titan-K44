@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
     public float waitAfterDying;
     private float reSpawnTimer;
     [HideInInspector] public bool levelEnding;
-
+    [Header("Way Point Markers")]
+    [Tooltip("The parent game object item for ALL waypoint markersa in the game / level")]
+    public GameObject wayPointMarkers;
+    [Tooltip("Select if Waypoint indicator should be enabled in the game")]
+    public bool markersOn = false;
 
     private void Awake()
     {
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
         //Set Cursor to not be visible
         Cursor.visible = false;
 
+        WayPointMarkers();
     }
 
     private void Update()
@@ -43,6 +48,52 @@ public class GameManager : MonoBehaviour
         {
             PauseUnPause();
         }
+
+        if (Input.GetKeyDown(KeyCode.Y) && PlayerPrefs.GetString("wayPointsAllowed") == "true")
+        {
+            // toggle markers on/off
+            markersOn = !markersOn;
+            Debug.Log("wayPointsAllowed are allowed, now invoking function WayPointMarkers");
+            WayPointMarkers();
+        }
+
+        HandlePlayerPrefs();
+
+    }
+
+    public void HandlePlayerPrefs()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            //clear all player prefs;
+            PlayerPrefs.DeleteAll();
+            Debug.Log("all player prefs cleared");
+            // Disable things related to player abilities
+            wayPointMarkers.SetActive(false);
+        }
+    }
+
+
+
+
+    public void WayPointMarkers()
+    {
+        //if (PlayerPrefs.GetString("wayPointsAllowed") == "true")
+        //{
+        if (markersOn)
+        {
+            Debug.Log("markers are enabled in scene");
+            wayPointMarkers.SetActive(true);
+        }
+        else if (!markersOn)
+        {
+            Debug.Log("markers are disabled in scene");
+            wayPointMarkers.SetActive(false);
+        }
+        //}
+
+
+
     }
 
     public void PlayerDied()
@@ -58,16 +109,36 @@ public class GameManager : MonoBehaviour
 
     public void PauseUnPause()
     {
+
+        // NOTE: this function is only called when we hit the escape key
+
+        // If pause menus is active in the hierarchy - then disable it and return to the game
         if (UIController.instance.pauseScreen.activeInHierarchy)
         {
+            // disable the pause menu overlay
             UIController.instance.pauseScreen.SetActive(false);
+
+            // lock the cursor back onto the screen
             Cursor.lockState = CursorLockMode.Locked;
+
+            // un-freeze time
             Time.timeScale = 1f;
+
+            // Hide cursor
+            Cursor.visible = false;
         }
         else
         {
+            // enable the pause menu overlay
             UIController.instance.pauseScreen.SetActive(true);
+
+            // unlock the cursor so user can navigate the menus
             Cursor.lockState = CursorLockMode.None;
+
+            // Show Cursor
+            Cursor.visible = false;
+
+            // freeze time
             Time.timeScale = 0f;
         }
     }

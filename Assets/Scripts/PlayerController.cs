@@ -377,7 +377,6 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleFlashlight()
     {
-        //if (Input.GetKey(KeyCode.T))
         if (Input.GetMouseButtonDown(2))
         {
             lightOn = !lightOn;

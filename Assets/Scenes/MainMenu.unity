@@ -2351,7 +2351,7 @@ GameObject:
   - component: {fileID: 1134730394}
   - component: {fileID: 1134730393}
   m_Layer: 0
-  m_Name: Title Screen
+  m_Name: Title Screen Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
