@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
 
         instance = this; // allow this script to be accessed anywhere
 
-        PlayerAbilities();
-
     }
     // Start is called before the first frame update
     void Start()
@@ -41,6 +39,9 @@ public class GameManager : MonoBehaviour
 
         //Set Cursor to not be visible
         Cursor.visible = false;
+
+        PlayerAbilities();
+        PauseUnPause();
 
     }
 
@@ -182,10 +183,21 @@ public class GameManager : MonoBehaviour
         // NOTE: this function is only called when we hit the escape key
 
         // If pause menus is active in the hierarchy - then disable it and return to the game
-        if (UIController.instance.pauseScreen.activeInHierarchy)
+        if (UIController.instance.pauseScreenOverlay.activeInHierarchy)
         {
+
+            // un-pause all sounds in game
+            //AudioListener.pause = false;
+
             // disable the pause menu overlay
-            UIController.instance.pauseScreen.SetActive(false);
+            UIController.instance.pauseScreenOverlay.SetActive(false);
+            //re-enable the Pause Menu Main for future use
+            UIController.instance.pauseMenuMain.SetActive(true);
+
+            //Disable all sub-menus
+            UIController.instance.audioSubMenu.SetActive(false);
+            UIController.instance.controlsSubMenu.SetActive(false);
+
 
             // lock the cursor back onto the screen
             Cursor.lockState = CursorLockMode.Locked;
@@ -199,7 +211,10 @@ public class GameManager : MonoBehaviour
         else
         {
             // enable the pause menu overlay
-            UIController.instance.pauseScreen.SetActive(true);
+            UIController.instance.pauseScreenOverlay.SetActive(true);
+
+            // pause all sounds in game
+            //AudioListener.pause = true;
 
             // unlock the cursor so user can navigate the menus
             Cursor.lockState = CursorLockMode.None;

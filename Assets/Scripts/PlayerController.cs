@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!UIController.instance.pauseScreen.activeInHierarchy && !GameManager.instance.levelEnding)
+        if (!UIController.instance.pauseScreenOverlay.activeInHierarchy && !GameManager.instance.levelEnding)
         {
             ToggleFlashlight();
             PlayerMovement();

@@ -20,6 +20,7 @@ public class PlayerHealthController : MonoBehaviour
     private float invincibleCounter;
     public bool useInvicDelay;
     public bool receiveDamage;
+    private int playerPrefMaxHealth;
 
     private void Awake()
     {
@@ -33,12 +34,17 @@ public class PlayerHealthController : MonoBehaviour
         currentHealth = maximumHealth;
         UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
         UpdateHealthBarText();
-
+        PlayerPrefHealthAmount();
     }
 
     private void Update()
     {
         InvincibleCounter();
+    }
+
+    private void PlayerPrefHealthAmount()
+    {
+
     }
 
     private void InvincibleCounter()
@@ -104,5 +110,11 @@ public class PlayerHealthController : MonoBehaviour
         //update slider and text
         UpdateHealthBarText();
 
+    }
+
+    public void IncreaseMaxHealth(int maxHealthIncreaseAmount)
+    {
+        Debug.Log("current MAX health is " + maximumHealth);
+        Debug.Log(maxHealthIncreaseAmount + " will be added to max health amount");
     }
 }
