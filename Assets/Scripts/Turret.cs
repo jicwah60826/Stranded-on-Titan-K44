@@ -19,6 +19,7 @@ public class Turret : MonoBehaviour
     private bool turretCanFire;
     private bool lineOfSight;
     private int targetLayer;
+    private bool wasShot;
 
 
     private float waitToInvoke = 2f; //seconds before the first invoke;
@@ -72,7 +73,7 @@ public class Turret : MonoBehaviour
 
         if (PlayerController.instance.gameObject.activeInHierarchy && !GameManager.instance.levelEnding)
         {
-            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToTargetPlayer)
+            if (Vector3.Distance(transform.position, PlayerController.instance.transform.position) < rangeToTargetPlayer || wasShot)
             {
                 /* SMOOTHLY rotate the turret to face the player once player is within range.
                 The Code below takes into account the CURRENT rotation angle of the turret so that
@@ -101,9 +102,10 @@ public class Turret : MonoBehaviour
                 }
 
             }
-            else
+            else if (lineOfSight == false)
             {
                 //Debug.Log("Player not within range of turret");
+                wasShot = false;
                 shotCounter = fireRate; //reset shot counter
                 gun.rotation = Quaternion.Lerp(gun.rotation, Quaternion.Euler(0f, gun.rotation.eulerAngles.y + rotateOffset, 0f), rotateSpeed * Time.deltaTime); // rotate the turret around based on rotateSpeed
             }
@@ -115,4 +117,14 @@ public class Turret : MonoBehaviour
         turretCanFire = !turretCanFire;
         //Debug.Log("turretCanFire = " + turretCanFire);
     }
+
+    public void TurretShot()
+    {
+
+        //Enemy shot - make enemy chase towards and / or start firing player
+        wasShot = true;
+        //chasing = true;
+        Debug.Log("zz1 - TurretShot: wasShot = " + wasShot);
+    }
+
 }

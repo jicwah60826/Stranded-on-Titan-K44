@@ -187,7 +187,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void GetShot()
+    public void EnemyShot()
     {
 
         //Enemy shot - make enemy chase towards and / or start firing player

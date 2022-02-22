@@ -145,6 +145,7 @@ MonoBehaviour:
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
   currentHealth: 20
   theEC: {fileID: 0}
+  theTurret: {fileID: 5709559292214927127}
 --- !u!1001 &5709559291501577298
 PrefabInstance:
   m_ObjectHideFlags: 0

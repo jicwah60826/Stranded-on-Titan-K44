@@ -10,18 +10,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public EnemyController theEC;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public Turret theTurret;
 
     public void DamageEnemy(int damageAmount)
     {
@@ -30,8 +19,14 @@ public class EnemyHealthController : MonoBehaviour
 
         if (theEC != null)
         {
-            theEC.GetShot();
+            theEC.EnemyShot();
         }
+
+        if (theTurret != null)
+        {
+            theTurret.TurretShot();
+        }
+
         AudioManager.instance.PlaySFX(2); // play sfx element from audio manager SFX list
         if (currentHealth <= 0)
         {
