@@ -190,7 +190,7 @@ public class EnemyController : MonoBehaviour
     public void GetShot()
     {
 
-        //Enemy shot - make player chase towards player
+        //Enemy shot - make enemy chase towards and / or start firing player
         wasShot = true;
         chasing = true;
         Debug.Log("zz1 - GetShot: wasShot = " + wasShot);

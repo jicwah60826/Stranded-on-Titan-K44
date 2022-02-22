@@ -65,13 +65,13 @@ public class GameManager : MonoBehaviour
         // get value of hasWayPointPerk
         if (PlayerPrefs.HasKey("hasWayPointPerk"))
         {
-            Debug.Log("hasWayPointPerk exists");
+            //Debug.Log("hasWayPointPerk exists");
 
             //set hasWayPoint bool based on hasWayPointPerk player pref
             if (PlayerPrefs.GetString("hasWayPointPerk") == "true")
             {
                 hasWayPointPerk = true;
-                Debug.Log("hasWayPointPerk = " + hasWayPointPerk);
+                //Debug.Log("hasWayPointPerk = " + hasWayPointPerk);
             }
         }
     }
@@ -86,11 +86,11 @@ public class GameManager : MonoBehaviour
                 {
                     // toggle wayPointsEnabled
                     wayPointsEnabled = !wayPointsEnabled;
-                    Debug.Log("wayPointsEnabled set to " + wayPointsEnabled);
+                    //Debug.Log("wayPointsEnabled set to " + wayPointsEnabled);
                 }
                 else
                 {
-                    Debug.Log("wayPoint perk not earned yet");
+                    //Debug.Log("wayPoint perk not earned yet");
                 }
             }
 
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("waypoint system needs to be assigned in game manager");
+            //Debug.Log("waypoint system needs to be assigned in game manager");
         }
     }
 

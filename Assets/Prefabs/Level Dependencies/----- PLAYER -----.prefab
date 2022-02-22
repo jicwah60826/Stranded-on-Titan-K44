@@ -767,6 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 100
+  currentHealth: 0
   invicibleLength: 0.1
   useInvicDelay: 0
   receiveDamage: 1

@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(StaminaDepletedCo());
         }
 
-        Debug.Log("hasStamina = " + hasStamina);
+        //Debug.Log("hasStamina = " + hasStamina);
 
         // update stamina bar per the currentStamina amount
         UIController.instance.staminaSlider.value = currentStamina;
