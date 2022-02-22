@@ -16,7 +16,7 @@ public class UIController : MonoBehaviour
     public float damageAlphaTarget;
     public float damageFadeSpeed, blackScreenFadeSpeed;
 
-    public GameObject pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu;
+    public GameObject pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit;
 
     private void Awake()
     {

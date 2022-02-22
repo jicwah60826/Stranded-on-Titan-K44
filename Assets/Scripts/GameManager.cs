@@ -203,6 +203,7 @@ public class GameManager : MonoBehaviour
             //Disable all sub-menus
             UIController.instance.audioSubMenu.SetActive(false);
             UIController.instance.controlsSubMenu.SetActive(false);
+            UIController.instance.confirmQuit.SetActive(false);
 
 
             // lock the cursor back onto the screen
