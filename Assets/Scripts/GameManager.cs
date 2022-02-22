@@ -126,6 +126,9 @@ public class GameManager : MonoBehaviour
 
     private void DevCommands()
     {
+
+        #if UNITY_EDITOR
+
         /////***** CLEAR WAYPOINT ABILITY *****/////
 
         if (Input.GetKeyDown(KeyCode.L))
@@ -162,6 +165,9 @@ public class GameManager : MonoBehaviour
             // Toggle usage of ammo
             PlayerController.instance.useAmmo = !PlayerController.instance.useAmmo;
         }
+
+        #endif
+
     }
 
 
