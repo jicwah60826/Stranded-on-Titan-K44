@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
 
             // Show Cursor
-            Cursor.visible = false;
+            Cursor.visible = true;
 
             // freeze time
             Time.timeScale = 0f;
