@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.DeleteKey("hasWayPointPerk");
             hasWayPointPerk = false;
             wayPointsEnabled = false;
-            Debug.Log("hasWayPointPerk removed by player");
+            //Debug.Log("hasWayPointPerk removed by player");
         }
 
         /////***** TOGGLE PLAYER RECEIVE DAMAGE *****/////
@@ -147,14 +147,14 @@ public class GameManager : MonoBehaviour
             PlayerHealthController.instance.receiveDamage = !PlayerHealthController.instance.receiveDamage;
             if (PlayerHealthController.instance.receiveDamage == false)
             {
-                Debug.Log("player is now invincible!");
+                //Debug.Log("player is now invincible!");
                 //reset player health
                 PlayerHealthController.instance.currentHealth = PlayerHealthController.instance.maximumHealth;
                 PlayerHealthController.instance.UpdateHealthBarText();
             }
             else
             {
-                Debug.Log("player can receive damage");
+                //Debug.Log("player can receive damage");
             }
         }
 

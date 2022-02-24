@@ -23,14 +23,18 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 moveInput, gunStartPos;
     private float bounceAmount;
-    private bool bounce, canJump, canDoubleJump, isRunning, lightOn, hasStamina = true;
+    private bool bounce, canJump, canDoubleJump, isRunning, lightOn, hasStamina = true, onGround, isFalling;
 
     public float maximumStamina;
-    private float currentStamina;
+    private float currentStamina, fallVelocity;
     public float staminaDrainSpeed; // used for giving buffs or debuffs to the stamina DRAIN speed
     public float staminaRegainSpeed; // used for giving buffs or debuffs to the stamina REGAIN speed
     public float waitToRegainStamina; // amount of wait time before stamina begins to go back up
     private bool isStaminaCoRoutineExecuting = false;
+
+    private float distanceToSurface, verticalSpeed, fallStartPos, fallEndPos, fallHeight;
+
+    public float fallHeightThreshold;
 
     private void Awake()
     {
@@ -63,6 +67,11 @@ public class PlayerController : MonoBehaviour
             PlayerAnimations();
         }
 
+    }
+
+    private void LateUpdate()
+    {
+        HandleFallDamage();
     }
 
     ////////////*****************     FUNCTIONS *****************////////////
@@ -188,12 +197,12 @@ public class PlayerController : MonoBehaviour
             yield break; //leave the function is it already executing...
 
         isStaminaCoRoutineExecuting = true;
-        Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
+        //Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
         yield return new WaitForSeconds(waitToRegainStamina);
         hasStamina = true;
         canRun = true;
         isStaminaCoRoutineExecuting = false;
-        Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
+        //Debug.Log("isStaminaCoRoutineExecuting: " + isStaminaCoRoutineExecuting);
     }
 
     private void HandleJumping()
@@ -411,5 +420,85 @@ public class PlayerController : MonoBehaviour
         bounce = true;
 
 
+    }
+
+    public void HandleFallDamage()
+    {
+        RaycastHit hit;
+        Ray downRay = new Ray(transform.position, -Vector3.up);
+
+        // Cast a ray straight downwards.
+        if (Physics.Raycast(downRay, out hit))
+        {
+            distanceToSurface = hit.distance;
+            //Debug.Log("Raycast is hitting something");
+            //Debug.Log("distanceToSurface: " + distanceToSurface);
+        }
+
+        // are we on a surface?
+        if (distanceToSurface <= 1f)
+        {
+            onGround = true;
+            verticalSpeed = 0;
+        }
+        else
+        {
+            onGround = false;
+            verticalSpeed = charCon.velocity.y;
+        }
+
+        //Debug.Log("onGround: " + onGround);
+        //Debug.Log("verticalSpeed: " + verticalSpeed);
+
+        if (!onGround && verticalSpeed < 0)
+        {
+            isFalling = true;
+            fallStartPos = charCon.transform.position.y;
+        }
+        else
+        {
+            isFalling = false;
+            fallEndPos = charCon.transform.position.y;
+        }
+
+        if (onGround && !isFalling)
+        {
+            fallHeight = fallStartPos - fallEndPos;
+            //Debug.Log("fallHeight: " + fallHeight);
+
+            if (fallHeight >= fallHeightThreshold)
+            {
+                //Debug.Log("OUCH");
+            }
+        }
+
+        if (isFalling && !onGround && verticalSpeed >= -20f)
+        {
+            //PlayerHealthController.instance.DamagePlayer(1);
+        }
+
+        if (fallHeight <= fallHeightThreshold && !onGround)
+        {
+            isFalling = true;
+            fallStartPos = charCon.transform.position.y;
+            //Debug.Log("fallStartPos: " + fallStartPos);
+        }
+        else
+        {
+            isFalling = false;
+            onGround = true;
+            fallEndPos = charCon.transform.position.y;
+            fallHeight = 0;
+            //Debug.Log("fallEndPos: " + fallEndPos);
+        }
+
+        Debug.Log("isFalling: " + isFalling);
+
+        fallHeight = fallStartPos - fallEndPos;
+        //Debug.Log("fallHeight: " + fallHeight);
+
+        if(fallHeight >= fallHeightThreshold){
+            Debug.Log("OUCH");
+        }
     }
 }

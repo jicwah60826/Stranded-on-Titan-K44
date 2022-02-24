@@ -49,19 +49,16 @@ public class Turret : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000f))
             {
-                Debug.Log("zz1");
 
                 if (hit.transform.gameObject.layer == targetLayer)
                 {
                     lineOfSight = true;
-                    Debug.Log("zz2");
                 }
                 else
                 {
                     lineOfSight = false;
-                    Debug.Log("zz3");
                 }
-                Debug.Log("Player in lineOfSight = " + lineOfSight);
+                //Debug.Log("Player in lineOfSight = " + lineOfSight);
             }
 
         }
@@ -124,7 +121,7 @@ public class Turret : MonoBehaviour
         //Enemy shot - make enemy chase towards and / or start firing player
         wasShot = true;
         //chasing = true;
-        Debug.Log("zz1 - TurretShot: wasShot = " + wasShot);
+        //Debug.Log("zz1 - TurretShot: wasShot = " + wasShot);
     }
 
 }

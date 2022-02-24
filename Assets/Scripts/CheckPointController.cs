@@ -16,7 +16,7 @@ public class CheckPointController : MonoBehaviour
         if (PlayerPrefs.HasKey("wayPointsAbility"))
         {
          wayPointAbility = PlayerPrefs.GetInt("wayPointsAbility", 0);
-         Debug.Log("wayPointAbility = " + wayPointAbility);
+         //Debug.Log("wayPointAbility = " + wayPointAbility);
         }
     }
 
