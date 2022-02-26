@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour
 
     // Define Global Variables
     public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay;
-    public bool invertX, invertY, useAmmo, canRun = true;
+    public bool useAmmo, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, useGunsAbility;
+    [HideInInspector]
+    public bool canRun = true;
     [HideInInspector]
     public bool gunHolstered;
+    [HideInInspector]
     public CharacterController charCon;
     public Transform camTrans, firePoint, groundCheckPoint /* item that will define WHERE the ground is */, adsPoint, gunHolder;
     public LayerMask whatIsGround; // Layer mask that defines WHAT the ground is
@@ -23,11 +26,19 @@ public class PlayerController : MonoBehaviour
     public int currentGun;
     public List<GunController> unlockableGuns = new List<GunController>();
 
+    //booster boots
+    public bool boosterBootsAbility;
+    // [HideInInspector]
+    public bool canBoostBoots;
+    [Tooltip("The amount of time space bar must be held before boost boots are allowed")]
+    public float boostBootsWaitTime, boosterBootPower;
+    private float boosBootTimer;
+
     private Vector3 moveInput, gunStartPos;
     private float bounceAmount;
     private bool bounce, canJump, canDoubleJump, isRunning, lightOn, hasStamina = true, onGround, isFalling;
 
-    public float maximumStamina;
+    public float maximumStamina, maxCamTiltAngle;
     private float currentStamina, fallVelocity;
     public float staminaDrainSpeed; // used for giving buffs or debuffs to the stamina DRAIN speed
     public float staminaRegainSpeed; // used for giving buffs or debuffs to the stamina REGAIN speed
@@ -46,10 +57,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // no gun at game start
         gunHolstered = true;
 
-        useAmmo = true;
+        // initialize boost boots timer timer
+        boosBootTimer = boostBootsWaitTime;
+
         currentStamina = maximumStamina;
         UIController.instance.staminaSlider.maxValue = maximumStamina; //set stamina slider max value
         currentGun--; //de-iterate the active gun index
@@ -72,6 +84,7 @@ public class PlayerController : MonoBehaviour
             GunSwitching();
             AimDownSight();
             PlayerAnimations();
+            // HandleBoosterBoots();
         }
 
     }
@@ -100,8 +113,9 @@ public class PlayerController : MonoBehaviour
         moveInput.Normalize();
 
         // Run or Walk
-        if (Input.GetKey(KeyCode.LeftShift) && canRun == true && !isStaminaCoRoutineExecuting)
+        if (Input.GetKey(KeyCode.LeftShift) && canRun && !isStaminaCoRoutineExecuting && runAbility)
         {
+
             moveInput = moveInput * runSpeed;
             isRunning = true;
         }
@@ -136,22 +150,24 @@ public class PlayerController : MonoBehaviour
         ///////////*********** Rotate Player / Control Camera Rotation ********** ///////////
         Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * mouseSensitivity;
 
-        //Check Invert X or Y axis flips are
-        if (invertX)
-        {
-            mouseInput.x = -mouseInput.x;
-        }
-
-        if (invertY)
-        {
-            mouseInput.y = -mouseInput.y;
-        }
-
 
         // Apply Y axis rotation (side to side) to player based on Mouse Input
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + mouseInput.x, transform.rotation.eulerAngles.z);
         // Apply X axis rotation (up and down) to camera rotation based on mouse input. The -mouseinput is so that when we move our mouse up, the camera rotation on the X axis is applied correctly and not inverted
         camTrans.rotation = Quaternion.Euler(camTrans.rotation.eulerAngles + new Vector3(-mouseInput.y, 0f, 0f));
+
+
+        /* Build in Camera Tilt protection from little kids like Grahame and Leo moving mouse too fast and flipping camera upside down. */
+        if (camTrans.rotation.eulerAngles.x > maxCamTiltAngle && camTrans.rotation.eulerAngles.x < 180f)
+        {
+            camTrans.rotation = Quaternion.Euler(maxCamTiltAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+        }
+        else if (camTrans.rotation.eulerAngles.x > 180f && camTrans.rotation.eulerAngles.x < 360f - maxCamTiltAngle)
+        {
+            camTrans.rotation = Quaternion.Euler(-maxCamTiltAngle, camTrans.rotation.eulerAngles.y, camTrans.rotation.eulerAngles.z);
+
+        }
+
     }
 
     private void HandleStamina()
@@ -229,13 +245,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (canJump)
+                if (canJump && jumpAbility)
                 {
                     moveInput.y = jumpPower;
                     canDoubleJump = true;
                     AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
                 }
-                else if (canDoubleJump == true)
+                else if (canDoubleJump && doubleJumpAbility)
                 {
                     moveInput.y = jumpPower;
                     AudioManager.instance.PlaySFX(8); // play sfx element from audio manager SFX list
@@ -253,6 +269,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleBoosterBoots()
+    {
+        if (!boosterBootsAbility)
+        {
+            return;
+        }
+
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            boosBootTimer -= Time.deltaTime;
+
+            if (boosBootTimer <= 0)
+            {
+                canBoostBoots = true;
+            }
+        }
+
+        if (boosterBootsAbility && canBoostBoots)
+        {
+            // Gravity test
+            gravityModifier = boosterBootPower;
+        }
+        else
+        {
+            gravityModifier = 2f;
+        }
+
+    }
+
     private void PlayerAnimations()
     {
         // Animations
@@ -263,6 +309,8 @@ public class PlayerController : MonoBehaviour
 
     private void GunSwitching()
     {
+        if (!useGunsAbility) { return; }
+        
         // Run Switch Gun when tab is pressed
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -350,7 +398,7 @@ public class PlayerController : MonoBehaviour
 
     public void FireShot()
     {
-        if (!gunHolstered)
+        if (useGunsAbility && !gunHolstered)
         {
             if (activeGun.currentAmmo > 0)
             {
@@ -373,27 +421,32 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchGun()
     {
-            activeGun.gameObject.SetActive(false); //de-activate current game object (note: they are de-activated in the scene by default)
+        activeGun.gameObject.SetActive(false); //de-activate current game object (note: they are de-activated in the scene by default)
 
-            currentGun++; // iterate the current gun. If we had a -1 for example (from when the de-teration occurred in the start function), the active gun is now 0.
+        currentGun++; // iterate the current gun. If we had a -1 for example (from when the de-teration occurred in the start function), the active gun is now 0.
 
-            // We then continue on with the below. The updateAmmo text is run at game start now as well as when we do an actual switch gun via tab key.
+        // We then continue on with the below. The updateAmmo text is run at game start now as well as when we do an actual switch gun via tab key.
 
-            if (currentGun >= allGuns.Count)
-            {
-                currentGun = 0; //reset back to start if on last gun. Allows to loop through the guns
-            }
+        if (currentGun >= allGuns.Count)
+        {
+            currentGun = 0; //reset back to start if on last gun. Allows to loop through the guns
+        }
 
-            //select a new, then set it to active
-            activeGun = allGuns[currentGun];
-            activeGun.gameObject.SetActive(true);
-            UpdateAmmoText();
+        //select a new, then set it to active
+        activeGun = allGuns[currentGun];
+        activeGun.gameObject.SetActive(true);
+        UpdateAmmoText();
 
-            firePoint.position = activeGun.firePoint.position; /* set the firePoint game object on the player controller to be the position of the firePoint gameobject of the gun that is now active */
+        firePoint.position = activeGun.firePoint.position; /* set the firePoint game object on the player controller to be the position of the firePoint gameobject of the gun that is now active */
     }
 
     public void ToggleFlashlight()
     {
+        if (!flashLightAbility)
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(2))
         {
             lightOn = !lightOn;
@@ -404,7 +457,8 @@ public class PlayerController : MonoBehaviour
 
     public void ToggleHolster()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+
+        if (Input.GetKeyDown(KeyCode.H) && useGunsAbility)
         {
             gunHolstered = !gunHolstered;
             AudioManager.instance.PlaySFX(10); // play sfx element from audio manager SFX list

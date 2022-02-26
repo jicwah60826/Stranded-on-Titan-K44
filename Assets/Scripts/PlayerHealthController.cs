@@ -8,14 +8,24 @@ public class PlayerHealthController : MonoBehaviour
     public static PlayerHealthController instance;
 
     [Header("Player Health")]
-    [Space]
-    [Tooltip("Player maximum health and max air in integers")]
+    public bool injuredAtGameStart;
+    public bool receiveDamage;
+    [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
+    [Space]
+    [Header("Player Oxygen Settings")]
+    public bool useAir;
     public float maximumAir;
+    public float airDepleteRate;
+    public float suffocateBuffer;
+    private float suffocateCounter;
+    public int suffocationDamageAmount;
+    public float suffocationDamageInterval;
+    private float suffocateDamageIntervalTimer;
+    [Space]
     [Tooltip("Player current health and current air. This is what is reduced with damage or increased with a pickup.")]
-    [HideInInspector]
     public int currentHealth;
-    [HideInInspector]
+    [Tooltip("Only used if the Player is injured at game start.")]
     public float currentAir;
     [Space]
     [Header("Grace Period")]
@@ -23,14 +33,8 @@ public class PlayerHealthController : MonoBehaviour
     public float invicibleLength;
     private float invincibleCounter;
     public bool useInvicDelay;
-    public bool receiveDamage;
+    [Space]
     private int playerPrefMaxHealth;
-    public float airDepleteRate;
-    public float suffocateBuffer;
-    private float suffocateCounter;
-    public int suffocationDamageAmount;
-    public float suffocationDamageInterval;
-    private float suffocateDamageIntervalTimer;
 
     private void Awake()
     {
@@ -40,9 +44,17 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        receiveDamage = true;
-        currentHealth = maximumHealth;
-        currentAir = maximumAir;
+        if (!injuredAtGameStart)
+        {
+            currentHealth = maximumHealth;
+            currentAir = maximumAir;
+        }
+        else if (injuredAtGameStart)
+        {
+            currentHealth = 33;
+            currentAir = 33f;
+        }
+
         suffocateCounter = suffocateBuffer;
         suffocateDamageIntervalTimer = suffocationDamageInterval;
         UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
@@ -61,6 +73,11 @@ public class PlayerHealthController : MonoBehaviour
 
     private void DepleteAir()
     {
+        if (!useAir)
+        {
+            return;
+        }
+
         if (currentAir > 0)
         {
             currentAir -= Time.deltaTime / airDepleteRate;

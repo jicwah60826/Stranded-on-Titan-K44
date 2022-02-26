@@ -26,10 +26,22 @@ public class UIController : MonoBehaviour
     {
         //deacticate pause overlay at game start
         pauseScreenOverlay.gameObject.SetActive(false);
-        Debug.Log("UIController: pauseScreenOverlay DISABLED at start");
+        //Debug.Log("UIController: pauseScreenOverlay DISABLED at start");
 
-        //acticate black fader for fade in effect
+        //activate black fader for fade in effect
         blackScreen.gameObject.SetActive(true); //enable black on awake
+
+        //Disable / Enable Air UI based on useAir
+        if (PlayerHealthController.instance.useAir == false)
+        {
+            airText.gameObject.SetActive(false);
+            airSlider.gameObject.SetActive(false);
+        }
+        else
+        {
+            airText.gameObject.SetActive(true);
+            airSlider.gameObject.SetActive(true);
+        }
     }
 
     private void Update()

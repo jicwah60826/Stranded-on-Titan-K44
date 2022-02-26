@@ -1190,10 +1190,13 @@ MonoBehaviour:
   mouseSensitivity: 2
   adsSpeed: 1
   muzzFlashDelay: 0.05
-  invertX: 0
-  invertY: 0
-  useAmmo: 0
+  useAmmo: 1
+  runAbility: 1
+  jumpAbility: 1
+  doubleJumpAbility: 1
+  flashLighAbility: 0
   canRun: 1
+  gunHolstered: 0
   charCon: {fileID: 5178579146541411590}
   camTrans: {fileID: 5178579145941375021}
   firePoint: {fileID: 5178579146206606391}
@@ -1215,6 +1218,7 @@ MonoBehaviour:
   - {fileID: 5178579146176398006}
   - {fileID: 5178579145533050406}
   maximumStamina: 2
+  maxCamTiltAngle: 0
   staminaDrainSpeed: 0.25
   staminaRegainSpeed: 0.1
   waitToRegainStamina: 2
@@ -1231,17 +1235,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1602e7e603130524b9e9d777c12b1979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 100
-  maximumAir: 100
-  currentHealth: 0
-  currentAir: 0
-  invicibleLength: 0.1
-  useInvicDelay: 0
+  injuredAtGameStart: 1
   receiveDamage: 1
+  maximumHealth: 100
+  useAir: 1
+  maximumAir: 100
   airDepleteRate: 1
   suffocateBuffer: 1
   suffocationDamageAmount: 8
   suffocationDamageInterval: 0.5
+  currentHealth: 33
+  currentAir: 0
+  invicibleLength: 0.1
+  useInvicDelay: 0
 --- !u!143 &5178579146541411590
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1294,7 +1300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5178579146582970533
 Transform:
   m_ObjectHideFlags: 0

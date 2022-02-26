@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 337342345671657163}
   - component: {fileID: 2542999260251828737}
   - component: {fileID: 8967405120444227847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BigRock1_Low_v2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5756974105291474294}
   - component: {fileID: 7494014224836178364}
   - component: {fileID: 74942500308029316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AlienPlant04a
   m_TagString: Untagged
   m_Icon: {fileID: 0}

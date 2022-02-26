@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1788855924964803479}
   - component: {fileID: 3421769697856474162}
   - component: {fileID: 619357239710234872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AlienPlant05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

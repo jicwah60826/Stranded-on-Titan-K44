@@ -20,6 +20,7 @@ public class WeaponPickup : MonoBehaviour
             Destroy(gameObject);
             collected = true;
             PlayerController.instance.gunHolstered = false;
+            PlayerController.instance.useGunsAbility = true;
         }
     }
 

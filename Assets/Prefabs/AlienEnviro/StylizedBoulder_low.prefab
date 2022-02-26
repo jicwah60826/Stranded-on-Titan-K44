@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1070374527799424924}
   - component: {fileID: 2971897190152962902}
   - component: {fileID: 8874659242143276602}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StylizedBoulder_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}

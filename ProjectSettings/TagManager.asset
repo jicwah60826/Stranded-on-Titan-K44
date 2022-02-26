@@ -9,6 +9,7 @@ TagManager:
   - Ammo Pickup
   - Health Pickup
   - Air
+  - Waypoint Pickup
   layers:
   - Default
   - TransparentFX

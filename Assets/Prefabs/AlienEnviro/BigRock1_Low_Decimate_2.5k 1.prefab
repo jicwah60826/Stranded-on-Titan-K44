@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9062567597123683467}
   - component: {fileID: 6494263776459960385}
   - component: {fileID: 5321521302971449208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BigRock1_Low_Decimate_2.5k 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

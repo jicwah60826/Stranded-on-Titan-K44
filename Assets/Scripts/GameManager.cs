@@ -192,14 +192,14 @@ public class GameManager : MonoBehaviour
         // If pause menus is active in the hierarchy - then disable it and return to the game
         if (UIController.instance.pauseScreenOverlay.activeInHierarchy)
         {
-            Debug.Log("zz1: GameManager: pauseScreenOverlay is ACTIVE");
+            //Debug.Log("zz1: GameManager: pauseScreenOverlay is ACTIVE");
 
             // un-pause all sounds in game
             //AudioListener.pause = false;
 
             // disable the pause menu overlay
             UIController.instance.pauseScreenOverlay.SetActive(false);
-            Debug.Log("zz2: GameManager: pauseScreenOverlay has been DISABLED");
+            //Debug.Log("zz2: GameManager: pauseScreenOverlay has been DISABLED");
 
             //re-enable the Pause Menu Main for future use
             UIController.instance.pauseMenuMain.SetActive(true);
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
         {
             // enable the pause menu overlay
             UIController.instance.pauseScreenOverlay.SetActive(true);
-            Debug.Log("zz3: GameManager: pauseScreenOverlay is now ACTIVE");
+            //Debug.Log("zz3: GameManager: pauseScreenOverlay is now ACTIVE");
 
             // pause all sounds in game
             //AudioListener.pause = true;

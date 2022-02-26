@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
         startPoint = transform.position; // store initial position of enemy
         shootTimeCounter = timeToShoot; // initialize the shootTimeCounter
         shotWaitCounter = waitBetweenShots; // initialize the shotWaitCounter
+        wasShot = false;
     }
 
     // Update is called once per frame
