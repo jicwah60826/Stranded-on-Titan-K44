@@ -74,7 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba5992a52d4b9f54e9e125e5837286ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthMultiPlier: 2
+  maxHealthMultiplier: 2
+  onScreenMessage: Your MAXIMUM Health has been increased! You now take less damage
 --- !u!1001 &7695712951175389978
 PrefabInstance:
   m_ObjectHideFlags: 0
