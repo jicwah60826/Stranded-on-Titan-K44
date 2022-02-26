@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     // Define Global Variables
     public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay;
     public bool invertX, invertY, useAmmo, canRun = true;
+    [HideInInspector]
+    public bool gunHolstered;
     public CharacterController charCon;
     public Transform camTrans, firePoint, groundCheckPoint /* item that will define WHERE the ground is */, adsPoint, gunHolder;
     public LayerMask whatIsGround; // Layer mask that defines WHAT the ground is
-    public GameObject flashLight, muzzeFlash;
+    public GameObject flashLight, muzzeFlash, playerGuns;
     public Animator anim;
     public List<GunController> allGuns = new List<GunController>();
     public int currentGun;
@@ -44,10 +46,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // no gun at game start
+        gunHolstered = true;
+
         useAmmo = true;
         currentStamina = maximumStamina;
         UIController.instance.staminaSlider.maxValue = maximumStamina; //set stamina slider max value
         currentGun--; //de-iterate the active gun index
+        ToggleHolster();
         SwitchGun(); //invoke switch gun function
 
         gunStartPos = gunHolder.localPosition;
@@ -59,6 +65,7 @@ public class PlayerController : MonoBehaviour
         if (!UIController.instance.pauseScreenOverlay.activeInHierarchy && !GameManager.instance.levelEnding)
         {
             ToggleFlashlight();
+            ToggleHolster();
             PlayerMovement();
             HandleShooting();
             HandleStamina();
@@ -152,7 +159,15 @@ public class PlayerController : MonoBehaviour
         // begin decreasing the stamina bar if player is running
         if (isRunning == true)
         {
-            currentStamina -= Time.deltaTime * staminaDrainSpeed;
+            if (currentStamina > 0)
+            {
+                currentStamina -= Time.deltaTime * staminaDrainSpeed;
+            }
+            else
+            {
+                currentStamina = 0;
+            }
+
         }
         else
         // // begin increasing the stamina bar after coRoutine is done running
@@ -335,16 +350,19 @@ public class PlayerController : MonoBehaviour
 
     public void FireShot()
     {
-        if (activeGun.currentAmmo > 0)
+        if (!gunHolstered)
         {
-            Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
-            StartCoroutine(MuzzleFlash()); // muzzle flash coroutine
-            activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
-            if (useAmmo)
+            if (activeGun.currentAmmo > 0)
             {
-                activeGun.currentAmmo--;
+                Instantiate(activeGun.bullet, firePoint.position, firePoint.rotation); // Fire a Shot
+                StartCoroutine(MuzzleFlash()); // muzzle flash coroutine
+                activeGun.fireCounter = activeGun.fireRate; // reset our fireCounter after each shot
+                if (useAmmo)
+                {
+                    activeGun.currentAmmo--;
+                }
+                UpdateAmmoText();
             }
-            UpdateAmmoText();
         }
     }
 
@@ -355,24 +373,23 @@ public class PlayerController : MonoBehaviour
 
     public void SwitchGun()
     {
+            activeGun.gameObject.SetActive(false); //de-activate current game object (note: they are de-activated in the scene by default)
 
-        activeGun.gameObject.SetActive(false); //de-activate current game object (note: they are de-activated in the scene by default)
+            currentGun++; // iterate the current gun. If we had a -1 for example (from when the de-teration occurred in the start function), the active gun is now 0.
 
-        currentGun++; // iterate the current gun. If we had a -1 for example (from when the de-teration occurred in the start function), the active gun is now 0.
+            // We then continue on with the below. The updateAmmo text is run at game start now as well as when we do an actual switch gun via tab key.
 
-        // We then continue on with the below. The updateAmmo text is run at game start now as well as when we do an actual switch gun via tab key.
+            if (currentGun >= allGuns.Count)
+            {
+                currentGun = 0; //reset back to start if on last gun. Allows to loop through the guns
+            }
 
-        if (currentGun >= allGuns.Count)
-        {
-            currentGun = 0; //reset back to start if on last gun. Allows to loop through the guns
-        }
+            //select a new, then set it to active
+            activeGun = allGuns[currentGun];
+            activeGun.gameObject.SetActive(true);
+            UpdateAmmoText();
 
-        //select a new, then set it to active
-        activeGun = allGuns[currentGun];
-        activeGun.gameObject.SetActive(true);
-        UpdateAmmoText();
-
-        firePoint.position = activeGun.firePoint.position; /* set the firePoint game object on the player controller to be the position of the firePoint gameobject of the gun that is now active */
+            firePoint.position = activeGun.firePoint.position; /* set the firePoint game object on the player controller to be the position of the firePoint gameobject of the gun that is now active */
     }
 
     public void ToggleFlashlight()
@@ -382,6 +399,29 @@ public class PlayerController : MonoBehaviour
             lightOn = !lightOn;
             flashLight.SetActive(lightOn);
             AudioManager.instance.PlaySFX(11); // play sfx element from audio manager SFX list
+        }
+    }
+
+    public void ToggleHolster()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            gunHolstered = !gunHolstered;
+            AudioManager.instance.PlaySFX(10); // play sfx element from audio manager SFX list
+        }
+        if (gunHolstered)
+        {
+            UIController.instance.crosshairs.SetActive(false);
+            UIController.instance.ammoCounter.SetActive(false);
+            UIController.instance.centerDot.SetActive(true);
+            playerGuns.SetActive(false);
+        }
+        if (!gunHolstered)
+        {
+            UIController.instance.crosshairs.SetActive(true);
+            UIController.instance.ammoCounter.SetActive(true);
+            UIController.instance.centerDot.SetActive(false);
+            playerGuns.SetActive(true);
         }
     }
 
@@ -492,13 +532,14 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("fallEndPos: " + fallEndPos);
         }
 
-        Debug.Log("isFalling: " + isFalling);
+        //Debug.Log("isFalling: " + isFalling);
 
         fallHeight = fallStartPos - fallEndPos;
         //Debug.Log("fallHeight: " + fallHeight);
 
-        if(fallHeight >= fallHeightThreshold){
-            Debug.Log("OUCH");
+        if (fallHeight >= fallHeightThreshold)
+        {
+            //Debug.Log("OUCH");
         }
     }
 }

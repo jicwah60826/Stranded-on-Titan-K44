@@ -9,10 +9,14 @@ public class PlayerHealthController : MonoBehaviour
 
     [Header("Player Health")]
     [Space]
-    [Tooltip("Player maximum health in integers")]
+    [Tooltip("Player maximum health and max air in integers")]
     public int maximumHealth;
-    [Tooltip("Player current health. This is what is reduced with damage or increased with a pickup.")]
+    public float maximumAir;
+    [Tooltip("Player current health and current air. This is what is reduced with damage or increased with a pickup.")]
+    [HideInInspector]
     public int currentHealth;
+    [HideInInspector]
+    public float currentAir;
     [Space]
     [Header("Grace Period")]
     [Tooltip("The amount of time the player goes without damager after being shot.")]
@@ -21,6 +25,12 @@ public class PlayerHealthController : MonoBehaviour
     public bool useInvicDelay;
     public bool receiveDamage;
     private int playerPrefMaxHealth;
+    public float airDepleteRate;
+    public float suffocateBuffer;
+    private float suffocateCounter;
+    public int suffocationDamageAmount;
+    public float suffocationDamageInterval;
+    private float suffocateDamageIntervalTimer;
 
     private void Awake()
     {
@@ -32,14 +42,61 @@ public class PlayerHealthController : MonoBehaviour
     {
         receiveDamage = true;
         currentHealth = maximumHealth;
+        currentAir = maximumAir;
+        suffocateCounter = suffocateBuffer;
+        suffocateDamageIntervalTimer = suffocationDamageInterval;
         UIController.instance.healthSlider.maxValue = maximumHealth; //set slider max value
+
         UpdateHealthBarText();
+        UpdateAirTankText();
         PlayerPrefHealthAmount();
+
     }
 
     private void Update()
     {
         InvincibleCounter();
+        DepleteAir();
+    }
+
+    private void DepleteAir()
+    {
+        if (currentAir > 0)
+        {
+            currentAir -= Time.deltaTime / airDepleteRate;
+            UpdateAirTankText();
+        }
+        else if (currentAir <= 0)
+        {
+            currentAir = 0;
+        }
+
+
+        if (currentAir <= 0)
+        {
+            suffocateCounter -= Time.deltaTime;
+
+            if (suffocateCounter <= 0)
+            {
+                //begin counter that hurts playerevery X seconds
+                suffocateDamageIntervalTimer -= Time.deltaTime;
+                if (suffocateDamageIntervalTimer <= 0)
+                {
+                    suffocateDamageIntervalTimer = suffocationDamageInterval;
+                    DamagePlayer(suffocationDamageAmount);
+                }
+            }
+        }
+        else
+        {
+            suffocateCounter = suffocateBuffer;
+
+        }
+
+        if (suffocateCounter <= 0)
+        {
+            // begin countdown clock to hurt player every 
+        }
     }
 
     private void PlayerPrefHealthAmount()
@@ -98,6 +155,12 @@ public class PlayerHealthController : MonoBehaviour
         UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maximumHealth;
     }
 
+    public void UpdateAirTankText()
+    {
+        UIController.instance.airSlider.value = currentAir; // initialize slider value to current air
+        //UIController.instance.airText.text = "AIR: " + currentAir;
+    }
+
     public void HealPlayer(int healAmount)
     {
         currentHealth += healAmount;
@@ -109,6 +172,20 @@ public class PlayerHealthController : MonoBehaviour
 
         //update slider and text
         UpdateHealthBarText();
+
+    }
+
+    public void GiveAir(float airAmount)
+    {
+        currentAir += airAmount;
+
+        if (currentAir > maximumAir)
+        {
+            currentAir = maximumAir;
+        }
+
+        //update air slider and text
+        UpdateAirTankText();
 
     }
 

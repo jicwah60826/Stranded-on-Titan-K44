@@ -19,6 +19,7 @@ public class WeaponPickup : MonoBehaviour
             AudioManager.instance.PlaySFX(10); // play sfx element from audio manager SFX list
             Destroy(gameObject);
             collected = true;
+            PlayerController.instance.gunHolstered = false;
         }
     }
 

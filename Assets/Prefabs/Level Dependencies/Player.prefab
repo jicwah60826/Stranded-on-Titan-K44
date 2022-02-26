@@ -403,12 +403,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5178579145932313205}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.31, y: 0.281, z: 0.43}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.035999984, y: -0.024999976, z: 0.96599984}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5178579146582970533}
-  m_RootOrder: 4
+  m_Father: {fileID: 5178579145941375021}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &5178579145932313227
 Light:
@@ -502,6 +502,7 @@ Transform:
   - {fileID: 5178579146206606391}
   - {fileID: 5178579146789614526}
   - {fileID: 5178579146582970533}
+  - {fileID: 5178579145932313226}
   m_Father: {fileID: 5178579146541411584}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1204,6 +1205,7 @@ MonoBehaviour:
     m_Bits: 2112
   flashLight: {fileID: 5178579145932313205}
   muzzeFlash: {fileID: 5178579146388976102}
+  playerGuns: {fileID: 5178579146582970532}
   anim: {fileID: 5178579146541411591}
   allGuns:
   - {fileID: 5178579145497387588}
@@ -1214,7 +1216,7 @@ MonoBehaviour:
   - {fileID: 5178579145533050406}
   maximumStamina: 2
   staminaDrainSpeed: 0.25
-  staminaRegainSpeed: 0.25
+  staminaRegainSpeed: 0.1
   waitToRegainStamina: 2
   fallHeightThreshold: 8
 --- !u!114 &5178579146541411588
@@ -1230,10 +1232,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 100
+  maximumAir: 100
   currentHealth: 0
+  currentAir: 0
   invicibleLength: 0.1
   useInvicDelay: 0
   receiveDamage: 1
+  airDepleteRate: 1
+  suffocateBuffer: 1
+  suffocationDamageAmount: 8
+  suffocationDamageInterval: 0.5
 --- !u!143 &5178579146541411590
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1281,12 +1289,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5178579146582970533}
   m_Layer: 10
-  m_Name: Gun Holder
+  m_Name: Player Guns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5178579146582970533
 Transform:
   m_ObjectHideFlags: 0
@@ -1302,7 +1310,6 @@ Transform:
   - {fileID: 5178579145390773891}
   - {fileID: 5178579146176398001}
   - {fileID: 5178579145533050401}
-  - {fileID: 5178579145932313226}
   m_Father: {fileID: 5178579145941375021}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

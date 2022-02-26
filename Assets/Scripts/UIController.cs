@@ -8,21 +8,29 @@ public class UIController : MonoBehaviour
 
     public static UIController instance;
 
-    public Slider healthSlider, staminaSlider;
-    public Text healthText;
-    public Text ammoText;
+    public Slider healthSlider, staminaSlider, airSlider;
+    public Text healthText, ammoText, airText;
 
     public Image damageEffect, blackScreen;
     public float damageAlphaTarget;
     public float damageFadeSpeed, blackScreenFadeSpeed;
 
-    public GameObject pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit;
+    public GameObject pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit, crosshairs, ammoCounter, centerDot;
 
     private void Awake()
     {
         instance = this; // allow this script to be accessed anywhere
+    }
+
+    private void Start()
+    {
+        //deacticate pause overlay at game start
+        pauseScreenOverlay.gameObject.SetActive(false);
+        Debug.Log("UIController: pauseScreenOverlay DISABLED at start");
+
+        //acticate black fader for fade in effect
         blackScreen.gameObject.SetActive(true); //enable black on awake
-        }
+    }
 
     private void Update()
     {
@@ -37,7 +45,8 @@ public class UIController : MonoBehaviour
         {
             blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 0f, blackScreenFadeSpeed * Time.deltaTime));
         }
-        else{
+        else
+        {
             blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 1f, blackScreenFadeSpeed * Time.deltaTime));
         }
     }

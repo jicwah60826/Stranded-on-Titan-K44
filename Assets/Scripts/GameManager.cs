@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    // The interval in seconds at which physics and other fixed frame rate updates (like MonoBehaviour's FixedUpdate) are performed.
     public float fixedUpdateTime = .005f;
 
     private Object[] textures;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
 
         PlayerAbilities();
-        PauseUnPause();
+        //PauseUnPause();
 
     }
 
@@ -127,16 +128,16 @@ public class GameManager : MonoBehaviour
     private void DevCommands()
     {
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
 
         /////***** CLEAR WAYPOINT ABILITY *****/////
 
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             PlayerPrefs.DeleteKey("hasWayPointPerk");
             hasWayPointPerk = false;
             wayPointsEnabled = false;
-            //Debug.Log("hasWayPointPerk removed by player");
+            Debug.Log("PlayerPrefs removed by player");
         }
 
         /////***** TOGGLE PLAYER RECEIVE DAMAGE *****/////
@@ -166,7 +167,7 @@ public class GameManager : MonoBehaviour
             PlayerController.instance.useAmmo = !PlayerController.instance.useAmmo;
         }
 
-        #endif
+#endif
 
     }
 
@@ -191,12 +192,15 @@ public class GameManager : MonoBehaviour
         // If pause menus is active in the hierarchy - then disable it and return to the game
         if (UIController.instance.pauseScreenOverlay.activeInHierarchy)
         {
+            Debug.Log("zz1: GameManager: pauseScreenOverlay is ACTIVE");
 
             // un-pause all sounds in game
             //AudioListener.pause = false;
 
             // disable the pause menu overlay
             UIController.instance.pauseScreenOverlay.SetActive(false);
+            Debug.Log("zz2: GameManager: pauseScreenOverlay has been DISABLED");
+
             //re-enable the Pause Menu Main for future use
             UIController.instance.pauseMenuMain.SetActive(true);
 
@@ -219,6 +223,7 @@ public class GameManager : MonoBehaviour
         {
             // enable the pause menu overlay
             UIController.instance.pauseScreenOverlay.SetActive(true);
+            Debug.Log("zz3: GameManager: pauseScreenOverlay is now ACTIVE");
 
             // pause all sounds in game
             //AudioListener.pause = true;
