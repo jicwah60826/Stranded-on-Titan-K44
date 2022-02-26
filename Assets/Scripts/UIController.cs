@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        //deacticate pause overlay at game start
+        //deactivate pause overlay at game start
         pauseScreenOverlay.gameObject.SetActive(false);
         //Debug.Log("UIController: pauseScreenOverlay DISABLED at start");
 

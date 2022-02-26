@@ -137,6 +137,12 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.DeleteKey("hasWayPointPerk");
             hasWayPointPerk = false;
             wayPointsEnabled = false;
+            PlayerController.instance.useGunsAbility = false;
+            PlayerController.instance.runAbility = false;
+            PlayerController.instance.jumpAbility = false;
+            PlayerController.instance.doubleJumpAbility = false;
+            PlayerController.instance.flashLightAbility = false;
+            PlayerController.instance.boosterBootsAbility = false;
             Debug.Log("PlayerPrefs removed by player");
         }
 

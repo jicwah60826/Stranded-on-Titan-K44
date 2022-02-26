@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,7 +12,11 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        //Debug.Log("Loading Main Menu");
+        Debug.Log("Loading Main Menu");
+        //deactivate pause overlay at game start
+        //deactivate pause overlay at game start
+        //UIController.instance.pauseScreenOverlay.SetActive(false);
+        //SceneManager.LoadScene(0);
     }
 
     public void QuitGame()

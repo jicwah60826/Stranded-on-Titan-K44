@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &219961805729796747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 219961805729796745}
+  - component: {fileID: 219961805729796744}
+  m_Layer: 0
+  m_Name: Rock_Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &219961805729796745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219961805729796747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.67, y: 0, z: 0.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &219961805729796744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219961805729796747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cddb961b91031499f9d4119636317b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateSpawner: 0
+  preFabsToSpawn:
+  - {fileID: 301776399610929488, guid: daf87667df815ec48977ce496be0aee1, type: 3}
+  - {fileID: 8584676769948492260, guid: 115ebde79f41342428d70e13a27e5e01, type: 3}
+  - {fileID: 3080745655166355166, guid: 04aa104248b7af54fae75e01c6bbbccc, type: 3}
+  - {fileID: 2202956052243514137, guid: 9d63476b4c10d9e448868a963dd29d2d, type: 3}
+  - {fileID: 109386635152155356, guid: 750125f73beb50b40ad46053f9e7f3a0, type: 3}
+  - {fileID: 1870449658653183624, guid: 96a909300ac90ea40af21789bd4cc491, type: 3}
+  - {fileID: 6698287245267500875, guid: 4d11514711b982440a7d84d53957e490, type: 3}
+  - {fileID: 6698287245267500875, guid: 4d11514711b982440a7d84d53957e490, type: 3}
+  - {fileID: 9047261508784757768, guid: 57b58f5013ca4bb438b9e0fcae211151, type: 3}
+  number: 200
+  xaxis: 15
+  yaxis: 0
+  zaxis: 15
+  doRandomRotation: 1
+  objectMinSize: 0.1
+  objectMaxSize: 0.2
