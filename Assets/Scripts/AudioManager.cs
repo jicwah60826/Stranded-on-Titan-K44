@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,6 +16,28 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            PlayerPrefs.SetFloat("MusicVolume", 0.5f);
+            //sliderMusic.value = 0.5f;
+        }
+        else
+        {
+            //sliderMusic.value = PlayerPrefs.GetFloat("MusicVolume");
+        }
+
+        if (!PlayerPrefs.HasKey("SFXVolume"))
+        {
+            PlayerPrefs.SetFloat("SFXVolume", 1.0f);
+            //sliderSFX.value = 1.0f;
+        }
+        else
+        {
+            //sliderSFX.value = PlayerPrefs.GetFloat("SFXVolume");
+        }
+
     }
 
     public void StopBGM()

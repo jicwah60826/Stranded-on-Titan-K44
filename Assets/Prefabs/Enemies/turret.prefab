@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6801888525559203707}
   - component: {fileID: 712514091263325310}
   m_Layer: 0
-  m_Name: Slider
+  m_Name: Enemy Health Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,8 +61,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4321385009860839954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000000090471}
-  m_LocalScale: {x: 0.027636165, y: 0.057325546, z: 0.038152}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.012957322, y: 0.017900137, z: 0.038152}
   m_Children:
   - {fileID: 8129700661124195277}
   m_Father: {fileID: 2992092782113263821}
@@ -70,7 +70,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000011482, y: -0.00000019692}
+  m_AnchoredPosition: {x: -0, y: -0.47}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &712514091263325310
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Direction: 1
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 6230544951957155044}
   - component: {fileID: 9222928363904027166}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: Enemy Health Slider Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ RectTransform:
   m_GameObject: {fileID: 4719388869693281791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 6801888525559203707}
   m_Father: {fileID: 5709559292214927124}
@@ -368,10 +368,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
-  enemyHealthBar: {fileID: 6957145227485049018}
   currentHealth: 20
   theEC: {fileID: 0}
   theTurret: {fileID: 5709559292214927127}
+  enemyHealthSliderCanvas: {fileID: 6957145227485049018}
+  enemyHealthSlider: {fileID: 712514091263325310}
 --- !u!1 &8337771317304500718
 GameObject:
   m_ObjectHideFlags: 0

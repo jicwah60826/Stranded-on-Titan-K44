@@ -6,26 +6,35 @@ using UnityEngine.UI;
 public class EnemyHealthController : MonoBehaviour
 {
     public GameObject enemyExplosionFX; // Explosion effect for enemy killed
-
-    public Canvas enemyHealthBar;
-
-    public int currentHealth = 5;
-
+    public int currentHealth;
     public EnemyController theEC;
-
     public Turret theTurret;
+    //public Camera mainCameraForEnemySliderFollow;
+    public Canvas enemyHealthSliderCanvas;
+    public Slider enemyHealthSlider;
+    Vector3 enemyHealthSliderScale;
+
+    private void Awake()
+    {
+        enemyHealthSlider.maxValue = currentHealth;
+        enemyHealthSliderCanvas.gameObject.SetActive(false);
+    }
 
     private void LateUpdate()
     {
-        if (enemyHealthBar != null)
-        {
-            enemyHealthBar.transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
-        }
 
+        Vector3 v = PlayerController.instance.transform.position - transform.position;
+        v.x = v.z = 0.0f;
+        enemyHealthSliderCanvas.transform.LookAt(PlayerController.instance.transform.position - v);
+        enemyHealthSliderCanvas.transform.Rotate(0, 180, 0);
+
+        //update slider
+        UpdateEnemyHealthBar();
     }
 
     public void DamageEnemy(int damageAmount)
     {
+        enemyHealthSliderCanvas.gameObject.SetActive(true);
 
         currentHealth -= damageAmount; // de-iterate enemy health
 
@@ -45,5 +54,10 @@ public class EnemyHealthController : MonoBehaviour
             Destroy(gameObject);
             Instantiate(enemyExplosionFX, transform.position, transform.rotation);
         }
+    }
+
+    public void UpdateEnemyHealthBar()
+    {
+        enemyHealthSlider.value = currentHealth;
     }
 }
