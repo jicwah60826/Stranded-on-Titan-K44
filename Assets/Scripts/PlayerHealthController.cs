@@ -8,7 +8,7 @@ public class PlayerHealthController : MonoBehaviour
     public static PlayerHealthController instance;
 
     [Header("Player Health")]
-    public bool injuredAtGameStart;
+    // public bool injuredAtGameStart;
     public bool receiveDamage;
     [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
@@ -44,16 +44,19 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!injuredAtGameStart)
-        {
-            currentHealth = maximumHealth;
-            currentAir = maximumAir;
-        }
-        else if (injuredAtGameStart)
-        {
-            currentHealth = 33;
-            currentAir = 33f;
-        }
+        /*         if (!injuredAtGameStart)
+                {
+                    currentHealth = maximumHealth;
+                    currentAir = maximumAir;
+                }
+                else if (injuredAtGameStart)
+                {
+                    currentHealth = 33;
+                    currentAir = 33f;
+                } */
+
+        currentHealth = maximumHealth;
+        currentAir = maximumAir;
 
         suffocateCounter = suffocateBuffer;
         suffocateDamageIntervalTimer = suffocationDamageInterval;
