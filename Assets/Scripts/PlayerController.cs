@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     // Define Global Variables
     public float moveSpeed, runSpeed, jumpPower, gravityModifier, mouseSensitivity, adsSpeed, muzzFlashDelay;
-    public bool useAmmo, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, useGunsAbility;
+    public bool useAmmo, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, useGunsAbility, wayPointsAbility;
     [HideInInspector]
     public bool canRun = true;
     [HideInInspector]
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     //booster boots
     public bool boosterBootsAbility;
-    // [HideInInspector]
+    [HideInInspector]
     public bool canBoostBoots;
     [Tooltip("The amount of time space bar must be held before boost boots are allowed")]
     public float boostBootsWaitTime, boosterBootPower;
@@ -44,10 +44,8 @@ public class PlayerController : MonoBehaviour
     public float staminaRegainSpeed; // used for giving buffs or debuffs to the stamina REGAIN speed
     public float waitToRegainStamina; // amount of wait time before stamina begins to go back up
     private bool isStaminaCoRoutineExecuting = false;
-
-    private float distanceToSurface, verticalSpeed, fallStartPos, fallEndPos, fallHeight;
-
-    public float fallHeightThreshold;
+    private bool previouslyGrounded, isOnGround;
+    public float fallThresholdVelocity;
 
     private void Awake()
     {
@@ -84,14 +82,9 @@ public class PlayerController : MonoBehaviour
             GunSwitching();
             AimDownSight();
             PlayerAnimations();
-            // HandleBoosterBoots();
+            HandleBoosterBoots();
         }
 
-    }
-
-    private void LateUpdate()
-    {
-        HandleFallDamage();
     }
 
     ////////////*****************     FUNCTIONS *****************////////////
@@ -100,14 +93,12 @@ public class PlayerController : MonoBehaviour
     {
         ///////////*********** Get Keyboard / Game Controller input ********** ///////////
 
-        //moveInput.x = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
-        //moveInput.z = Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime;
-
         //Store current Y velocity before every update
         float yStore = moveInput.y;
 
         Vector3 vertMove = transform.forward * Input.GetAxisRaw("Vertical");
         Vector3 horiMove = transform.right * Input.GetAxisRaw("Horizontal");
+
 
         moveInput = horiMove + vertMove;
         moveInput.Normalize();
@@ -138,8 +129,14 @@ public class PlayerController : MonoBehaviour
             moveInput.y = Physics.gravity.y * gravityModifier * Time.deltaTime;
         }
 
-        // check if we are within range of any ground layer object
+        // store if player was just on the ground (we do this BEFORE our next check to see if they are CURRENTLY on the ground)
+        bool previousGrounded = isOnGround;
+
+        // check if player is on the grouind (if we are within range of any ground layer object)
         canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
+        isOnGround = canJump;
+
+        HandleFallDamage(previousGrounded);
 
         HandleJumping();
 
@@ -168,6 +165,24 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+
+    private void HandleFallDamage(bool previousGrounded)
+    {
+        if (!previousGrounded && isOnGround && charCon.velocity.y < -fallThresholdVelocity)
+        {
+            fallVelocity = Mathf.Abs(charCon.velocity.y);
+
+            if (charCon.velocity.y < -fallThresholdVelocity)
+            {
+                //store the amount we fell so that we can damage player accordingly
+                float fallDamageAmount = Mathf.Abs(fallVelocity + fallThresholdVelocity); // ensure we return a positive value
+                fallDamageAmount = fallDamageAmount / 3f;
+                Debug.Log("Damage Dealt = " + fallDamageAmount);
+                int damageAmount = (int)fallDamageAmount; // convert from float to int so we can pass into DamagePlayer function
+                PlayerHealthController.instance.DamagePlayer(damageAmount);
+            }
+        }
     }
 
     private void HandleStamina()
@@ -284,19 +299,20 @@ public class PlayerController : MonoBehaviour
             if (boosBootTimer <= 0)
             {
                 canBoostBoots = true;
-            }
-        }
+                if (boosterBootsAbility)
+                {
+                    // Gravity test
+                    gravityModifier = boosterBootPower;
 
-        if (boosterBootsAbility && canBoostBoots)
-        {
-            // Gravity test
-            gravityModifier = boosterBootPower;
+                }
+            }
         }
         else
         {
             gravityModifier = 2f;
-        }
+            boosBootTimer = boostBootsWaitTime;
 
+        }
     }
 
     private void PlayerAnimations()
@@ -310,7 +326,7 @@ public class PlayerController : MonoBehaviour
     private void GunSwitching()
     {
         if (!useGunsAbility) { return; }
-        
+
         // Run Switch Gun when tab is pressed
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -514,86 +530,5 @@ public class PlayerController : MonoBehaviour
         bounce = true;
 
 
-    }
-
-    public void HandleFallDamage()
-    {
-        RaycastHit hit;
-        Ray downRay = new Ray(transform.position, -Vector3.up);
-
-        // Cast a ray straight downwards.
-        if (Physics.Raycast(downRay, out hit))
-        {
-            distanceToSurface = hit.distance;
-            //Debug.Log("Raycast is hitting something");
-            //Debug.Log("distanceToSurface: " + distanceToSurface);
-        }
-
-        // are we on a surface?
-        if (distanceToSurface <= 1f)
-        {
-            onGround = true;
-            verticalSpeed = 0;
-        }
-        else
-        {
-            onGround = false;
-            verticalSpeed = charCon.velocity.y;
-        }
-
-        //Debug.Log("onGround: " + onGround);
-        //Debug.Log("verticalSpeed: " + verticalSpeed);
-
-        if (!onGround && verticalSpeed < 0)
-        {
-            isFalling = true;
-            fallStartPos = charCon.transform.position.y;
-        }
-        else
-        {
-            isFalling = false;
-            fallEndPos = charCon.transform.position.y;
-        }
-
-        if (onGround && !isFalling)
-        {
-            fallHeight = fallStartPos - fallEndPos;
-            //Debug.Log("fallHeight: " + fallHeight);
-
-            if (fallHeight >= fallHeightThreshold)
-            {
-                //Debug.Log("OUCH");
-            }
-        }
-
-        if (isFalling && !onGround && verticalSpeed >= -20f)
-        {
-            //PlayerHealthController.instance.DamagePlayer(1);
-        }
-
-        if (fallHeight <= fallHeightThreshold && !onGround)
-        {
-            isFalling = true;
-            fallStartPos = charCon.transform.position.y;
-            //Debug.Log("fallStartPos: " + fallStartPos);
-        }
-        else
-        {
-            isFalling = false;
-            onGround = true;
-            fallEndPos = charCon.transform.position.y;
-            fallHeight = 0;
-            //Debug.Log("fallEndPos: " + fallEndPos);
-        }
-
-        //Debug.Log("isFalling: " + isFalling);
-
-        fallHeight = fallStartPos - fallEndPos;
-        //Debug.Log("fallHeight: " + fallHeight);
-
-        if (fallHeight >= fallHeightThreshold)
-        {
-            //Debug.Log("OUCH");
-        }
     }
 }

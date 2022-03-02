@@ -146,10 +146,7 @@ public class PlayerHealthController : MonoBehaviour
                     currentHealth -= damageAmount; // de-iterate player health
                 }
 
-
-
                 UIController.instance.ShowDamage(); // show damage
-                AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
 
                 if (currentHealth <= 0)
                 {

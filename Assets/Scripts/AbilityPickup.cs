@@ -5,16 +5,21 @@ using TMPro;
 
 public class AbilityPickup : MonoBehaviour
 {
-    public bool useGunsAbility, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, boosterBootsAbility;
-    public string onScreenMessage;
+    public bool useGunsAbility, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, boosterBootsAbility, wayPointsAbility, maxHealthIncrease;
+    public string onScreenMessage, hasWayPointPerk;
     public TMP_Text onScreenMessageText;
     public float textOnScreenTime;
     public float textFadeTime;
 
+    public int maxHealthToAdd;
+    private int currentMaxHealth;
+    private int newMaxHealth;
+    private bool collected;
+
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && !collected)
         {
 
             //Show Text
@@ -25,7 +30,6 @@ public class AbilityPickup : MonoBehaviour
 
             // Set Text
             onScreenMessageText.text = onScreenMessage;
-
 
 
             //  USE GUNS ABILITY
@@ -65,6 +69,30 @@ public class AbilityPickup : MonoBehaviour
             {
                 PlayerController.instance.boosterBootsAbility = true;
             }
+
+            // Max Health Increase 
+            if (maxHealthIncrease)
+            {
+                currentMaxHealth = PlayerHealthController.instance.maximumHealth;
+                newMaxHealth = currentMaxHealth + maxHealthToAdd;
+                PlayerHealthController.instance.currentHealth = newMaxHealth;
+                PlayerHealthController.instance.maximumHealth = newMaxHealth;
+                UIController.instance.healthSlider.maxValue = newMaxHealth;
+                PlayerHealthController.instance.UpdateHealthBarText();
+            }
+
+            // WAYPOINTS ABILITY 
+            if (wayPointsAbility)
+            {
+                PlayerController.instance.wayPointsAbility = true;
+                // Update Player Prefs
+                hasWayPointPerk = "true";
+                PlayerPrefs.SetString("hasWayPointPerk", hasWayPointPerk);
+                Debug.Log("hasWayPointPerk has been set to " + hasWayPointPerk);
+                // Enable Waypoint system in game
+                GameManager.instance.wayPointsEnabled = true;
+            }
+
 
             AudioManager.instance.PlaySFX(5); // play sfx element from audio manager SFX list
             Destroy(gameObject);

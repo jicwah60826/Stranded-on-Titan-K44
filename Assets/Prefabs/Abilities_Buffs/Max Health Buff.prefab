@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7695712950027650787}
   - component: {fileID: 7695712950027650786}
   - component: {fileID: 7695712950027650813}
-  - component: {fileID: 7695712950027650784}
+  - component: {fileID: 2910511777671391161}
   m_Layer: 0
   m_Name: Max Health Buff
   m_TagString: Untagged
@@ -62,7 +62,7 @@ MonoBehaviour:
   xRotation: 0
   yRotation: 1
   zRotation: 0
---- !u!114 &7695712950027650784
+--- !u!114 &2910511777671391161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,11 +71,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7695712950027650812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5992a52d4b9f54e9e125e5837286ea, type: 3}
+  m_Script: {fileID: 11500000, guid: da956e2fad20354448f386c1689c0c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthMultiplier: 2
-  onScreenMessage: Your MAXIMUM Health has been increased! You now take less damage
+  useGunsAbility: 0
+  runAbility: 0
+  jumpAbility: 0
+  doubleJumpAbility: 0
+  flashLightAbility: 0
+  boosterBootsAbility: 0
+  wayPointsAbility: 0
+  maxHealthIncrease: 1
+  onScreenMessage: Max Health Increased
+  hasWayPointPerk: 
+  onScreenMessageText: {fileID: 0}
+  textOnScreenTime: 0
+  textFadeTime: 0
+  maxHealthToAdd: 0
 --- !u!1001 &7695712951175389978
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 1850889903821977102}
   - component: {fileID: 1850889903821977101}
   - component: {fileID: 1850889903821977100}
-  - component: {fileID: -6738382028194548797}
   m_Layer: 0
   m_Name: EnemyBuilletImpactFX
   m_TagString: Untagged
@@ -4958,102 +4957,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!82 &-6738382028194548797
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850889903821977099}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 4758870492840032896, guid: c42013ef2849300428bf78c76fc33b63, type: 2}
-  m_audioClip: {fileID: 8300000, guid: e68e09b613d3eff4680ad3cc8c39248f, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.25
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &4039402933525944882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5083,23 +4986,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8901935919444641601, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.69592005
       objectReference: {fileID: 0}
     - target: {fileID: 8901935919444641601, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7181193
       objectReference: {fileID: 0}
     - target: {fileID: 8901935919444641601, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8901935919444641601, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8901935919444641601, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -91.799
       objectReference: {fileID: 0}
     - target: {fileID: 8901935919444641601, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -5112,6 +5015,10 @@ PrefabInstance:
     - target: {fileID: 9197796432312511805, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
       propertyPath: looping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9197796432312511805, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75f82f0d19edf6542a511f6cd9bec607, type: 3}

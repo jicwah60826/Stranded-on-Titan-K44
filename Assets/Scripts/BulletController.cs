@@ -20,6 +20,8 @@ public class BulletController : MonoBehaviour
 
     private float disableColliderCounter = .01f;
 
+    private string hitType;
+
     // Update is called once per frame
     void Update()
     {
@@ -38,34 +40,29 @@ public class BulletController : MonoBehaviour
         //check what object tag the bullet collided with
         if (other.gameObject.tag == "Enemy" && damageEnemy)
         {
-            //Debug.Log("Enemy Bodyshot");
-            impactFX();
             other.gameObject.GetComponent<EnemyHealthController>().DamageEnemy(damage);
+            hitType = "Enemy";
         }
-
-        /*         if (other.gameObject.tag == "Turret" && damageEnemy)
-                {
-                    impactFX();
-                    other.gameObject.GetComponent<TurretHealthController>().DamageTurret(damage);
-                } */
 
         // Check if headshot to enemy
         if (other.gameObject.tag == "Headshot" && damageEnemy)
         {
-            //Debug.Log("Enemy Headshot");
-            impactFX();
             // Call the DamageEnemy script on the parent of this game object
             other.transform.parent.GetComponent<EnemyHealthController>().DamageEnemy(damage * headShotMultiplier);
         }
 
         if (other.gameObject.tag == "Player" && damagePlayer)
         {
-
-            //Debug.Log("Player has been hit at " + transform.position);
-            impactFX();
             other.gameObject.GetComponent<PlayerHealthController>().DamagePlayer(damage);
+            hitType = "Player";
         }
-        // do bullet impact and destroy bullet
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            hitType = "Ground";
+        }
+
+        // do bullet impact FX, impact audio and destroy bullet
         impactFX();
     }
 
@@ -73,6 +70,22 @@ public class BulletController : MonoBehaviour
     {
         // Do impact Effect
         Instantiate(impactEffect, transform.position + (transform.forward * (-moveSpeed * Time.deltaTime)), transform.rotation);
+
+        // Impact sound based on layer type hit
+        if (hitType == "Player")
+        {
+            AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
+        }
+
+        if (hitType == "Enemy")
+        {
+            AudioManager.instance.PlaySFX(2); // play sfx element from audio manager SFX list
+        }
+
+        if (hitType == "Ground")
+        {
+            AudioManager.instance.PlaySFX(13); // play sfx element from audio manager SFX list
+        }
 
         disableColliderCounter -= Time.deltaTime; // begin disableColliderCounter countdown
 
