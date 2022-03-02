@@ -6,15 +6,18 @@ using TMPro;
 public class AbilityPickup : MonoBehaviour
 {
     public bool useGunsAbility, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, boosterBootsAbility, wayPointsAbility, maxHealthIncrease;
-    public string onScreenMessage, hasWayPointPerk;
-    public TMP_Text onScreenMessageText;
+    public string onScreenMessage;
+    private string hasWayPointPerk;
     public float textOnScreenTime;
-    public float textFadeTime;
 
     public int maxHealthToAdd;
     private int currentMaxHealth;
     private int newMaxHealth;
-    private bool collected;
+    private bool collected = false;
+
+    public GameObject thePickupModel;
+
+    public Collider theCollider;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,15 +25,16 @@ public class AbilityPickup : MonoBehaviour
         if (other.gameObject.tag == "Player" && !collected)
         {
 
-            //Show Text
-            onScreenMessageText.gameObject.SetActive(true);
+            // Invoke co routine
+            StartCoroutine(OnScreenTextController());
 
-            // Remove Ability Canvas as a child object
-            onScreenMessageText.transform.parent.SetParent(null);
+            collected = true;
 
-            // Set Text
-            onScreenMessageText.text = onScreenMessage;
+            // disable the collider
+            theCollider.enabled = false;
 
+            // deactivate the pickup model
+            thePickupModel.SetActive(false);
 
             //  USE GUNS ABILITY
             if (useGunsAbility)
@@ -93,12 +97,31 @@ public class AbilityPickup : MonoBehaviour
                 GameManager.instance.wayPointsEnabled = true;
             }
 
-
             AudioManager.instance.PlaySFX(5); // play sfx element from audio manager SFX list
-            Destroy(gameObject);
-
-            // Destroy Text after wait time
-            Destroy(onScreenMessageText.transform.parent.gameObject, textOnScreenTime);
         }
     }
+
+    public IEnumerator OnScreenTextController()
+    {
+
+        // Set On Screen Message UI text
+        UIController.instance.onScreenTextLowerThird.text = onScreenMessage;
+
+        // Enable the on screen message UI element
+        UIController.instance.onScreenTextCanvas.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(textOnScreenTime);
+
+        // Disable the on screen text after a certain amount of time
+        UIController.instance.onScreenTextCanvas.SetActive(false);
+
+        // Clear the text from the on screen text (ready for future use)
+        UIController.instance.onScreenTextLowerThird.text = "";
+
+        // Destroy this game object a short time after the text has been disabled
+        Destroy(gameObject, textOnScreenTime + .5f);
+        
+        yield return null;
+    }
+
 }

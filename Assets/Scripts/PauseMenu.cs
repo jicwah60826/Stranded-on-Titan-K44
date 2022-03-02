@@ -13,10 +13,9 @@ public class PauseMenu : MonoBehaviour
     public void MainMenu()
     {
         Debug.Log("Loading Main Menu");
-        //deactivate pause overlay at game start
-        //deactivate pause overlay at game start
-        //UIController.instance.pauseScreenOverlay.SetActive(false);
-        //SceneManager.LoadScene(0);
+        UIController.instance.pauseScreenOverlay.SetActive(false);
+        UIController.instance.blackScreen.gameObject.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
