@@ -7,7 +7,7 @@ public class AbilityPickup : MonoBehaviour
 {
     public bool useGunsAbility, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, boosterBootsAbility, wayPointsAbility, maxHealthIncrease;
     public string onScreenMessage;
-    private string hasWayPointPerk;
+    private string hasWayPointsAbility;
     public float textOnScreenTime;
 
     public int maxHealthToAdd;
@@ -90,9 +90,9 @@ public class AbilityPickup : MonoBehaviour
             {
                 PlayerController.instance.wayPointsAbility = true;
                 // Update Player Prefs
-                hasWayPointPerk = "true";
-                PlayerPrefs.SetString("hasWayPointPerk", hasWayPointPerk);
-                Debug.Log("hasWayPointPerk has been set to " + hasWayPointPerk);
+                hasWayPointsAbility = "true";
+                PlayerPrefs.SetString("wayPointsAbility", hasWayPointsAbility);
+                Debug.Log("hasWayPointPerk has been set to " + hasWayPointsAbility);
                 // Enable Waypoint system in game
                 GameManager.instance.wayPointsEnabled = true;
             }
@@ -120,7 +120,7 @@ public class AbilityPickup : MonoBehaviour
 
         // Destroy this game object a short time after the text has been disabled
         Destroy(gameObject, textOnScreenTime + .5f);
-        
+
         yield return null;
     }
 

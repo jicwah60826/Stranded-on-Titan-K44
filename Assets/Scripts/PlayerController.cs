@@ -181,6 +181,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Damage Dealt = " + fallDamageAmount);
                 int damageAmount = (int)fallDamageAmount; // convert from float to int so we can pass into DamagePlayer function
                 PlayerHealthController.instance.DamagePlayer(damageAmount);
+                AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
             }
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthController : MonoBehaviour
 {
-    public GameObject enemyExplosionFX; // Explosion effect for enemy killed
+    public GameObject enemyExplosionFX, lootDrop;
     public int currentHealth;
     public EnemyController theEC;
     public Turret theTurret;
@@ -52,7 +52,15 @@ public class EnemyHealthController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Destroy(gameObject);
-            Instantiate(enemyExplosionFX, transform.position, transform.rotation);
+            if (enemyExplosionFX != null)
+            {
+                Instantiate(enemyExplosionFX, transform.position, transform.rotation);
+            }
+
+            if (lootDrop != null)
+            {
+                Instantiate(lootDrop, transform.position, transform.rotation);
+            }
         }
     }
 
