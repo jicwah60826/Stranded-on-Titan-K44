@@ -29,4 +29,9 @@ public class PauseMenu : MonoBehaviour
     {
         //Debug.Log("Loading Options Menu");
     }
+
+    public void PlayerStuck()
+    {
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+    }
 }
