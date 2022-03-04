@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
+  lootDrop: {fileID: 6447974108626251601, guid: 1620063937fc82f4d842bfcd957b1901, type: 3}
   currentHealth: 20
   theEC: {fileID: 0}
   theTurret: {fileID: 5709559292214927127}

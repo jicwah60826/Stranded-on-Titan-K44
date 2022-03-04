@@ -1190,12 +1190,13 @@ MonoBehaviour:
   mouseSensitivity: 2
   adsSpeed: 1
   muzzFlashDelay: 0.05
-  useAmmo: 1
-  runAbility: 1
-  jumpAbility: 1
-  doubleJumpAbility: 1
-  flashLightAbility: 1
-  useGunsAbility: 1
+  useAmmo: 0
+  runAbility: 0
+  jumpAbility: 0
+  doubleJumpAbility: 0
+  flashLightAbility: 0
+  useGunsAbility: 0
+  wayPointsAbility: 0
   canRun: 1
   gunHolstered: 0
   charCon: {fileID: 5178579146541411590}
@@ -1227,6 +1228,7 @@ MonoBehaviour:
   staminaDrainSpeed: 0.25
   staminaRegainSpeed: 0.1
   waitToRegainStamina: 2
+  groundCheckDistance: 0.25
   fallThresholdVelocity: 12
 --- !u!114 &5178579146541411588
 MonoBehaviour:

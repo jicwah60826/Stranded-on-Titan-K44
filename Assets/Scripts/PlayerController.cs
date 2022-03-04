@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public float staminaRegainSpeed; // used for giving buffs or debuffs to the stamina REGAIN speed
     public float waitToRegainStamina; // amount of wait time before stamina begins to go back up
     private bool isStaminaCoRoutineExecuting = false;
+    public float groundCheckDistance;
     private bool previouslyGrounded, isOnGround;
     public float fallThresholdVelocity;
 
@@ -133,8 +134,9 @@ public class PlayerController : MonoBehaviour
         bool previousGrounded = isOnGround;
 
         // check if player is on the grouind (if we are within range of any ground layer object)
-        canJump = Physics.OverlapSphere(groundCheckPoint.position, .25f, whatIsGround).Length > 0;
+        canJump = Physics.OverlapSphere(groundCheckPoint.position, groundCheckDistance, whatIsGround).Length > 0;
         isOnGround = canJump;
+        Debug.Log("isOnGround: " + isOnGround);
 
         HandleFallDamage(previousGrounded);
 
@@ -179,6 +181,7 @@ public class PlayerController : MonoBehaviour
                 float fallDamageAmount = Mathf.Abs(fallVelocity + fallThresholdVelocity); // ensure we return a positive value
                 fallDamageAmount = fallDamageAmount / 3f;
                 Debug.Log("Damage Dealt = " + fallDamageAmount);
+                Debug.Log("fallVelocity: " + charCon.velocity.y);
                 int damageAmount = (int)fallDamageAmount; // convert from float to int so we can pass into DamagePlayer function
                 PlayerHealthController.instance.DamagePlayer(damageAmount);
                 AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
@@ -188,6 +191,16 @@ public class PlayerController : MonoBehaviour
 
     private void HandleStamina()
     {
+        // Show or Hide Stamina bar depending on if we have the run ability
+        if (!runAbility)
+        {
+            UIController.instance.staminaBar.SetActive(false);
+        }
+        else
+        {
+            UIController.instance.staminaBar.SetActive(true);
+        }
+
         // begin decreasing the stamina bar if player is running
         if (isRunning == true)
         {

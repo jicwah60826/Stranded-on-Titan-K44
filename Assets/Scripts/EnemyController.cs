@@ -30,6 +30,11 @@ public class EnemyController : MonoBehaviour
     public float fieldOfView; // angle amount from the player that enemy is allowed to fire within
     private float shotWaitCounter; //countdown timer for the waitBetweenShots
     private float shootTimeCounter; // countdown timer for the timeToShoot
+    private int targetLayer;
+
+    public GameObject rayCastFirePoint;
+
+    private bool lineOfSight;
 
     public Animator anim;
 
@@ -50,6 +55,31 @@ public class EnemyController : MonoBehaviour
         // enemy will look around on Y axis for player, but will not look up or down. Ensures enemy does not float up into air if player jumps
         targetPoint = PlayerController.instance.transform.position;
         targetPoint.y = transform.position.y;
+
+
+        // Player in Line of Sight?
+
+        targetLayer = LayerMask.NameToLayer("Player");
+
+        if (rayCastFirePoint != null)
+        {
+            var ray = new Ray(rayCastFirePoint.transform.position, rayCastFirePoint.transform.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000f))
+            {
+
+                if (hit.transform.gameObject.layer == targetLayer)
+                {
+                    lineOfSight = true;
+                }
+                else
+                {
+                    lineOfSight = false;
+                }
+                Debug.Log("Enemy & Player in lineOfSight = " + lineOfSight);
+            }
+
+        }
 
 
         if (!chasing)
