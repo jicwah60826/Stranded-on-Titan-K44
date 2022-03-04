@@ -5,28 +5,41 @@ using UnityEngine;
 public class LootPickupController : MonoBehaviour
 {
 
-    public enum LootType { Metal, Wires, Crystals }
+    private enum LootType { Metal, Wires, Crystals }
 
-    public LootType lootType;
-
-    private int currentLoot;
+    private LootType lootType;
 
     public float deSpawnTime;
 
     private void Start()
     {
-        Debug.Log("lootType = " + lootType);
-
-        // get current loot that player has
-
         StartCoroutine(DeSpawnController());
+
+        lootType = LootType.Metal;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            // add loot to current loot count
+
+            switch (lootType)
+            {
+                case LootType.Metal:
+                    // do stuff if Metal
+                    int lootCount = PlayerPrefs.GetInt("MetalCount", 0);
+                    // add to loot
+                    lootCount ++;
+                    // update player prefs
+                    PlayerPrefs.SetInt("MetalCount", lootCount);
+                    break;
+                case LootType.Crystals:
+                    // do stuff if Crystals
+                    break;
+                case LootType.Wires:
+                    // do stuff if Wires
+                    break;
+            }
 
             // play pickup sound
             AudioManager.instance.PlaySFX(5); // play sfx element from audio manager SFX list

@@ -24,7 +24,7 @@ public class BoosterBootTester : MonoBehaviour
     {
         //flip the boost power so it's a negative number to impact gravity
         boosterBootPower = -boosterBootPower * .1f; //lessen the impact
-        Debug.Log("boosterBootPower set to: " + boosterBootPower);
+        //("boosterBootPower set to: " + boosterBootPower);
     }
 
     void Update()
@@ -63,7 +63,7 @@ public class BoosterBootTester : MonoBehaviour
     // Method called after held for required time
     public void StartBoost()
     {
-        Debug.Log("held for " + boostBootsWaitTime + " seconds");
+        //Debug.Log("held for " + boostBootsWaitTime + " seconds");
         PlayerController.instance.gravityModifier = boosterBootPower;
         AudioManager.instance.PlaySFX(12);
     }

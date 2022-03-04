@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [Header("Way Point Markers")]
     [Tooltip("The parent game object item for ALL waypoint markersa in the game / level")]
     public GameObject wayPointSystem;
-    public bool hasWayPointPerk;
+    public bool wayPointsAbility;
     public bool wayPointsEnabled;
 
     private void Awake()
@@ -63,16 +63,16 @@ public class GameManager : MonoBehaviour
     {
         ///// ***** WAY POINT PERK ***** /////
 
-        // get value of hasWayPointPerk
-        if (PlayerPrefs.HasKey("hasWayPointPerk"))
+        // get value of wayPointsAbility
+        if (PlayerPrefs.HasKey("wayPointsAbility"))
         {
-            //Debug.Log("hasWayPointPerk exists");
+            //Debug.Log("wayPointsAbility exists");
 
-            //set hasWayPoint bool based on hasWayPointPerk player pref
-            if (PlayerPrefs.GetString("hasWayPointPerk") == "true")
+            //set hasWayPoint bool based on wayPointsAbility player pref
+            if (PlayerPrefs.GetString("wayPointsAbility") == "true")
             {
-                hasWayPointPerk = true;
-                //Debug.Log("hasWayPointPerk = " + hasWayPointPerk);
+                wayPointsAbility = true;
+                //Debug.Log("wayPointsAbility = " + wayPointsAbility);
             }
         }
     }
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Y) && wayPointSystem != null)
             {
-                if (hasWayPointPerk)
+                if (wayPointsAbility)
                 {
                     // toggle wayPointsEnabled
                     wayPointsEnabled = !wayPointsEnabled;
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             }
 
             //handle waypoint visibility
-            if (hasWayPointPerk)
+            if (wayPointsAbility)
             {
                 if (wayPointsEnabled)
                 {
@@ -125,6 +125,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ClearPlayerPrefs()
+    {
+        PlayerPrefs.DeleteKey("wayPointsAbility");
+        PlayerPrefs.DeleteKey("MetalCount");
+        wayPointsAbility = false;
+        wayPointsEnabled = false;
+        PlayerController.instance.useGunsAbility = false;
+        PlayerController.instance.runAbility = false;
+        PlayerController.instance.jumpAbility = false;
+        PlayerController.instance.doubleJumpAbility = false;
+        PlayerController.instance.flashLightAbility = false;
+        PlayerController.instance.boosterBootsAbility = false;
+    }
+
     private void DevCommands()
     {
 
@@ -134,15 +148,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            PlayerPrefs.DeleteKey("hasWayPointPerk");
-            hasWayPointPerk = false;
-            wayPointsEnabled = false;
-            PlayerController.instance.useGunsAbility = false;
-            PlayerController.instance.runAbility = false;
-            PlayerController.instance.jumpAbility = false;
-            PlayerController.instance.doubleJumpAbility = false;
-            PlayerController.instance.flashLightAbility = false;
-            PlayerController.instance.boosterBootsAbility = false;
+            ClearPlayerPrefs();
             Debug.Log("PlayerPrefs removed by player");
         }
 
@@ -188,6 +194,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitAfterDying);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // get the name of the currently active scene and re-load / start it over.
+
+        ClearPlayerPrefs();
     }
 
     public void PauseUnPause()

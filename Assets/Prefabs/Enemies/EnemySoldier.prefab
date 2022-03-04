@@ -2280,6 +2280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyExplosionFX: {fileID: 1121192042590650, guid: 678075d2145323c4a80687030a2099f0, type: 3}
+  lootDrop: {fileID: 6447974108626251601, guid: 1620063937fc82f4d842bfcd957b1901, type: 3}
   currentHealth: 10
   theEC: {fileID: 1734197920250844892}
   theTurret: {fileID: 0}
@@ -2299,16 +2300,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToChase: 25
   distanceToLose: 35
-  distanceToStop: 4
+  distanceToStop: 2
   agent: {fileID: 1734197920250844895}
   keepChasingTime: 5
   bullet: {fileID: 5874321473036919688, guid: b86dd0f1da413784cb4b67ceed673abd, type: 3}
   firePoint: {fileID: 1734197920007566325}
-  fireRate: 0.22
+  fireRate: 0.2
   waitTimeToFire: 0
-  waitBetweenShots: 2
+  waitBetweenShots: 1.5
   timeToShoot: 1.5
   fieldOfView: 30
+  rayCastFirePoint: {fileID: 1734197920007566322}
   anim: {fileID: 1734197918323449332}
 --- !u!195 &1734197920250844895
 NavMeshAgent:

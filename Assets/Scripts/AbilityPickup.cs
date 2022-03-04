@@ -92,7 +92,7 @@ public class AbilityPickup : MonoBehaviour
                 // Update Player Prefs
                 hasWayPointsAbility = "true";
                 PlayerPrefs.SetString("wayPointsAbility", hasWayPointsAbility);
-                Debug.Log("hasWayPointPerk has been set to " + hasWayPointsAbility);
+                //Debug.Log("wayPointsAbility has been set to " + hasWayPointsAbility);
                 // Enable Waypoint system in game
                 GameManager.instance.wayPointsEnabled = true;
             }

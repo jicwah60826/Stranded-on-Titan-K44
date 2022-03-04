@@ -58,7 +58,6 @@ public class EnemyController : MonoBehaviour
 
 
         // Player in Line of Sight?
-
         targetLayer = LayerMask.NameToLayer("Player");
 
         if (rayCastFirePoint != null)
@@ -76,7 +75,7 @@ public class EnemyController : MonoBehaviour
                 {
                     lineOfSight = false;
                 }
-                Debug.Log("Enemy & Player in lineOfSight = " + lineOfSight);
+                //Debug.Log("Enemy & Player in lineOfSight = " + lineOfSight);
             }
 
         }
@@ -189,15 +188,13 @@ public class EnemyController : MonoBehaviour
 
                             if (Mathf.Abs(angle) < fieldOfView) // Mathf.bs ensures we also feed in a positive value in the event the angle returned is a negative value
                             {
-
+                                //Fire a bullet
                                 if (lineOfSight)
                                 {
-                                    //Fire a bullet
                                     Instantiate(bullet, firePoint.position, firePoint.rotation);
                                     // Enemy firing animation
                                     anim.SetTrigger("fireShot");
                                 }
-
                                 anim.SetBool("isMoving", false);
                             }
                         }
