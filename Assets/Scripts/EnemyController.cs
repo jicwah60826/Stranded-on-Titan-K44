@@ -189,11 +189,15 @@ public class EnemyController : MonoBehaviour
 
                             if (Mathf.Abs(angle) < fieldOfView) // Mathf.bs ensures we also feed in a positive value in the event the angle returned is a negative value
                             {
-                                //Fire a bullet
-                                Instantiate(bullet, firePoint.position, firePoint.rotation);
-                                // Enemy firing animation
 
-                                anim.SetTrigger("fireShot");
+                                if (lineOfSight)
+                                {
+                                    //Fire a bullet
+                                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                                    // Enemy firing animation
+                                    anim.SetTrigger("fireShot");
+                                }
+
                                 anim.SetBool("isMoving", false);
                             }
                         }
