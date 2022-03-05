@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // Gravity test
                     gravityModifier = boosterBootPower;
-
+                    AudioManager.instance.PlaySFX(15);
                 }
             }
         }
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
         {
             gravityModifier = 2f;
             boosBootTimer = boostBootsWaitTime;
-
+            AudioManager.instance.StopSFX(15);
         }
     }
 

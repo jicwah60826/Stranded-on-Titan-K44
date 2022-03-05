@@ -97,7 +97,7 @@ public class AbilityPickup : MonoBehaviour
                 GameManager.instance.wayPointsEnabled = true;
             }
 
-            AudioManager.instance.PlaySFX(5); // play sfx element from audio manager SFX list
+            AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
         }
     }
 

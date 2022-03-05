@@ -43,5 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d33869b3a3e874c9dc27ac567b9398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fixedUpdateTime: 0.005
   waitAfterDying: 2
   levelEnding: 0
+  wayPointSystem: {fileID: 0}
+  wayPointsAbility: 0
+  wayPointsEnabled: 0
