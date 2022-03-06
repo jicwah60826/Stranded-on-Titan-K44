@@ -40,6 +40,7 @@ public class AbilityPickup : MonoBehaviour
             if (useGunsAbility)
             {
                 PlayerController.instance.useGunsAbility = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // RUN ABILITY
@@ -47,6 +48,7 @@ public class AbilityPickup : MonoBehaviour
             if (runAbility)
             {
                 PlayerController.instance.runAbility = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // JUMP ABILITY
@@ -54,24 +56,28 @@ public class AbilityPickup : MonoBehaviour
             if (jumpAbility)
             {
                 PlayerController.instance.jumpAbility = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // DOUBLE JUMP ABILITY 
             if (doubleJumpAbility)
             {
                 PlayerController.instance.doubleJumpAbility = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // USE FLASHLIGHT ABILITY 
             if (flashLightAbility)
             {
                 PlayerController.instance.flashLightAbility = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // BOOSTER BOOTS ABILITY 
             if (boosterBootsAbility)
             {
                 PlayerController.instance.boosterBootsAbility = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // Max Health Increase 
@@ -83,6 +89,8 @@ public class AbilityPickup : MonoBehaviour
                 PlayerHealthController.instance.maximumHealth = newMaxHealth;
                 UIController.instance.healthSlider.maxValue = newMaxHealth;
                 PlayerHealthController.instance.UpdateHealthBarText();
+                AudioManager.instance.PlaySFX(16); // play sfx element from audio manager SFX list
+                PlayerPrefs.SetInt("maximumHealth", newMaxHealth);
             }
 
             // WAYPOINTS ABILITY 
@@ -95,9 +103,8 @@ public class AbilityPickup : MonoBehaviour
                 //Debug.Log("wayPointsAbility has been set to " + hasWayPointsAbility);
                 // Enable Waypoint system in game
                 GameManager.instance.wayPointsEnabled = true;
+                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
-
-            AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
         }
     }
 

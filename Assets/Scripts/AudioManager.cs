@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource[] soundEffects;
 
+    public AudioSource[] playerShotSFX;
+
     private void Awake()
     {
         instance = this;
@@ -55,6 +57,14 @@ public class AudioManager : MonoBehaviour
     {
         soundEffects[sfxNumber].Stop(); // stop the sound if it is playing
         soundEffects[sfxNumber].Play(); // play the sound. allows playing sound in fast repetition
+    }
+
+    public void PlayerShotSFX()
+    {
+        int playerShotSFXLength = playerShotSFX.Length;
+        int clipToPlay = Random.Range(0,playerShotSFXLength);
+        Debug.Log("playersfx clip to play: " + clipToPlay);
+        playerShotSFX[clipToPlay].Play();
     }
 
     public void StopSFX(int sfxNumber)

@@ -74,7 +74,8 @@ public class BulletController : MonoBehaviour
         // Impact sound based on layer type hit
         if (hitType == "Player")
         {
-            AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
+            AudioManager.instance.PlayerShotSFX();
+            //AudioManager.instance.PlaySFX(7); // play sfx element from audio manager SFX list
         }
 
         if (hitType == "Enemy")

@@ -33,8 +33,6 @@ public class PlayerHealthController : MonoBehaviour
     public float invicibleLength;
     private float invincibleCounter;
     public bool useInvicDelay;
-    [Space]
-    private int playerPrefMaxHealth;
 
     private void Awake()
     {
@@ -55,6 +53,11 @@ public class PlayerHealthController : MonoBehaviour
                     currentAir = 33f;
                 } */
 
+        if (PlayerPrefs.HasKey("maximumHealth"))
+        {
+            maximumHealth = PlayerPrefs.GetInt("maximumHealth");
+        }
+
         currentHealth = maximumHealth;
         currentAir = maximumAir;
 
@@ -64,8 +67,6 @@ public class PlayerHealthController : MonoBehaviour
 
         UpdateHealthBarText();
         UpdateAirTankText();
-        PlayerPrefHealthAmount();
-
     }
 
     private void Update()
@@ -119,11 +120,6 @@ public class PlayerHealthController : MonoBehaviour
         }
     }
 
-    private void PlayerPrefHealthAmount()
-    {
-
-    }
-
     private void InvincibleCounter()
     {
         if (invincibleCounter > 0)
@@ -170,7 +166,7 @@ public class PlayerHealthController : MonoBehaviour
     public void UpdateHealthBarText()
     {
         UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
-        UIController.instance.healthText.text = "HEALTH: " + currentHealth + "/" + maximumHealth;
+        UIController.instance.healthText.text = currentHealth + "/" + maximumHealth;
     }
 
     public void UpdateAirTankText()
@@ -205,11 +201,5 @@ public class PlayerHealthController : MonoBehaviour
         //update air slider and text
         UpdateAirTankText();
 
-    }
-
-    public void IncreaseMaxHealth(int maxHealthIncreaseAmount)
-    {
-        Debug.Log("current MAX health is " + maximumHealth);
-        Debug.Log(maxHealthIncreaseAmount + " will be added to max health amount");
     }
 }

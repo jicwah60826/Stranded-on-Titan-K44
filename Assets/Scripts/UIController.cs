@@ -17,10 +17,10 @@ public class UIController : MonoBehaviour
     public float damageAlphaTarget;
     public float damageFadeSpeed, blackScreenFadeSpeed;
 
-    public GameObject inGameOverlays, pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit, crosshairs, ammoCounter, centerDot, onScreenTextCanvas, staminaBar;
+    public GameObject inGameOverlays, pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit, crosshairs, ammoCounter, centerDot, onScreenTextCanvas, staminaBar, scrapMetalOverlay;
 
     public AudioMixer theMixer;
-    public TMP_Text masterVolLabel, musicVolLabel, sfxVolLabel, ambientSFXVolLabel, onScreenTextLowerThird;
+    public TMP_Text masterVolLabel, musicVolLabel, sfxVolLabel, ambientSFXVolLabel, onScreenTextLowerThird, scrapMetalCounterText;
     public Slider masterVolSlider, musicVolSlider, sfxVolSlider, ambientSFXVolSlider;
 
     private void Awake()
