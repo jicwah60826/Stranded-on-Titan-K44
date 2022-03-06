@@ -1219,7 +1219,7 @@ MonoBehaviour:
   - {fileID: 5178579145390773888}
   - {fileID: 5178579146176398006}
   - {fileID: 5178579145533050406}
-  boosterBootsAbility: 0
+  boosterBootsAbility: 1
   canBoostBoots: 0
   boostBootsWaitTime: 0.25
   boosterBootPower: -1
@@ -1230,6 +1230,7 @@ MonoBehaviour:
   waitToRegainStamina: 2
   groundCheckDistance: 0.25
   fallThresholdVelocity: 12
+  timeToHolster: 5
 --- !u!114 &5178579146541411588
 MonoBehaviour:
   m_ObjectHideFlags: 0

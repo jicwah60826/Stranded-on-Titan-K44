@@ -10,6 +10,7 @@ public class SpawnerTest1 : MonoBehaviour
     [Space]
     public bool activateSpawner;
     [Space]
+    public GameObject positionRefObj;
     [Space]
     public int spawnCount;
     [Space]
@@ -66,6 +67,12 @@ public class SpawnerTest1 : MonoBehaviour
 
     private void Start()
     {
+        if (positionRefObj != null)
+        {
+            //hide ref object
+            positionRefObj.SetActive(false);
+        }
+
         if (!activateSpawner) { return; }
         // Spawn Test 1
         Spawner1Test();
