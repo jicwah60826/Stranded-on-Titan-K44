@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     public bool wayPointsAbility;
     public bool wayPointsEnabled;
 
+    public string stringSeed = "seed string";
+    public bool useStringSeed;
+    public int seed;
+    public bool randomizeSeed;
+
     private void Awake()
     {
         /* This doubles the number of times per second the fixedUpdate will run. You can keep decreasing the multiplier to increase number of checks. */
@@ -30,6 +35,20 @@ public class GameManager : MonoBehaviour
         textures = Resources.LoadAll("Art", typeof(Texture2D)); // load all textures on game start
 
         instance = this; // allow this script to be accessed anywhere
+
+        // Random Seed Controller
+        if (useStringSeed)
+        {
+            seed = stringSeed.GetHashCode();
+        }
+
+        if (randomizeSeed)
+        {
+            seed = Random.Range(0, 999999);
+        }
+
+        Random.InitState(seed);
+
 
     }
     // Start is called before the first frame update
@@ -182,7 +201,6 @@ public class GameManager : MonoBehaviour
 #endif
 
     }
-
 
 
     public void PlayerDied()

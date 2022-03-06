@@ -17,7 +17,7 @@ public class UIController : MonoBehaviour
     public float damageAlphaTarget;
     public float damageFadeSpeed, blackScreenFadeSpeed;
 
-    public GameObject pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit, crosshairs, ammoCounter, centerDot, onScreenTextCanvas, staminaBar;
+    public GameObject inGameOverlays, pauseScreenOverlay, pauseMenuMain, audioSubMenu, controlsSubMenu, confirmQuit, crosshairs, ammoCounter, centerDot, onScreenTextCanvas, staminaBar;
 
     public AudioMixer theMixer;
     public TMP_Text masterVolLabel, musicVolLabel, sfxVolLabel, ambientSFXVolLabel, onScreenTextLowerThird;
@@ -35,15 +35,27 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
+
+        // enable In Game Overlays by default
+        inGameOverlays.gameObject.SetActive(true);
+
         //deactivate pause overlay at game start
         pauseScreenOverlay.gameObject.SetActive(false);
         //Debug.Log("UIController: pauseScreenOverlay DISABLED at start");
+
+        // enable the pause menu main by default (child of pause overlay)
+        pauseMenuMain.gameObject.SetActive(true);
 
         // ensure we de-activate the on screen lower third text
         onScreenTextCanvas.gameObject.SetActive(false);
 
         //activate black fader for fade in effect
         blackScreen.gameObject.SetActive(true); //enable black on start
+
+        // hide sub-menus by default
+        controlsSubMenu.gameObject.SetActive(false);
+        audioSubMenu.gameObject.SetActive(false);
+
 
         //Disable / Enable Air UI based on useAir
         if (PlayerHealthController.instance.useAir == false)

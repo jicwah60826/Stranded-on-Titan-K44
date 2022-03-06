@@ -9,6 +9,8 @@ public class LootPickupController : MonoBehaviour
 
     private LootType lootType;
 
+    int lootCount;
+
     public float deSpawnTime;
 
     private void Start()
@@ -29,7 +31,7 @@ public class LootPickupController : MonoBehaviour
                     // do stuff if Metal
                     int lootCount = PlayerPrefs.GetInt("MetalCount", 0);
                     // add to loot
-                    lootCount ++;
+                    lootCount++;
                     // update player prefs
                     PlayerPrefs.SetInt("MetalCount", lootCount);
                     break;
