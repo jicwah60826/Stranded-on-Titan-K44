@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4134140330202445149}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -219, y: 0, z: -284}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 4134140331605148520}
   - component: {fileID: 4134140331605148522}
   - component: {fileID: 4134140331605148521}
-  - component: {fileID: 9150700632937872095}
   m_Layer: 6
   m_Name: Terrain_0_0_1b96df9e-a95c-42f9-8645-1b60979b2f79
   m_TagString: Untagged
@@ -72,7 +71,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4134140331605148527}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 103.5, y: 0, z: 166.5}
+  m_LocalPosition: {x: 103.5, y: -17.94, z: 166.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4134140330202445151}
@@ -122,119 +121,3 @@ TerrainCollider:
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: ec2c41a5796668342a47780ddcba0715, type: 2}
   m_EnableTreeColliders: 1
---- !u!114 &9150700632937872095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4134140331605148527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd9dc710c3c8349089599300e26804c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  groupName: <group name>
-  showGlobalPaintingLayersInspector: 1
-  layerMask: 0101000101010101010101010101010101010101010101010101010101010101
-  radius: 0.3
-  color: {r: 1, g: 1, b: 1, a: 1}
-  quantityRange: {x: 1, y: 1}
-  useDensity: 0
-  densityRange: {x: 0.5, y: 0.5}
-  delay: 0.25
-  offsetRange: {x: 0, y: 0}
-  slopeInfluenceRange: {x: 95, y: 100}
-  useSlopeFilter: 0
-  angleThresholdRange: {x: 25, y: 30}
-  inverseSlopeFilter: 0
-  slopeReferenceVector: {x: 0, y: 1, z: 0}
-  slopeReferenceVectorSampleLocation: {x: 0, y: 0, z: 0}
-  yAxisTangent: 0
-  strokeAlignment: 0
-  autoIgnoreRaycast: 0
-  scatteringRange: {x: 70, y: 80}
-  useOverlapFilter: 0
-  minimumAbsoluteDistanceRange: {x: 0.25, y: 0.5}
-  uniformRandomScale: 1
-  uniformAdditiveScale: 1
-  randomScaleRange: {x: 1, y: 1}
-  randomScaleRangeX: {x: 1, y: 1}
-  randomScaleRangeY: {x: 1, y: 1}
-  randomScaleRangeZ: {x: 1, y: 1}
-  additiveScaleRange: {x: 0, y: 0}
-  additiveScaleNonUniform: {x: 0, y: 0, z: 0}
-  randomScaleCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  randomScaleCurveVariation: 0
-  randomRotationRangeX: {x: 0, y: 0}
-  randomRotationRangeY: {x: 0, y: 5}
-  randomRotationRangeZ: {x: 0, y: 0}
-  positionBrushRandomizer: 0
-  rotationBrushRandomizer: 1
-  scaleBrushRandomizer: 1
-  paintKey: 112
-  deleteKey: 108
-  combineKey: 107
-  randomizeKey: 106
-  increaseRadiusKey: 111
-  decreaseRadiusKey: 105
-  maxQuantityLimit: 100
-  maxDelayLimit: 1
-  maxDensityLimit: 10
-  minOffsetLimit: -50
-  maxOffsetLimit: 50
-  maxMinimumAbsoluteDistanceLimit: 3
-  maxAdditiveScaleLimit: 3
-  maxRandomScaleLimit: 3
-  helpFoldout: 1
-  helpTemplatesFoldout: 0
-  helpGeneralUsageFoldout: 0
-  helpOptimizationFoldout: 0
-  meshesFoldout: 1
-  templatesFoldout: 1
-  keyBindingsFoldout: 0
-  brushFoldout: 1
-  slopesFoldout: 1
-  randomizersFoldout: 1
-  overlapFilterFoldout: 1
-  additiveScaleFoldout: 1
-  optimizationFoldout: 1
-  globalPaintingMode: 0
-  collapsed: 0
-  stats: 0
-  lockSceneView: 0
-  classicUI: 0
-  previewIconSize: 60
-  manualReferenceVectorSampling: 0
-  showReferenceVectorInSceneView: 1
-  autoStatic: 0
-  autoSelectOnCombine: 1
-  lastPaintLocation: {x: -3.6954727, y: 0.09955025, z: -17.670097}
-  brushStrokeDirection: {x: 0.427536, y: -0.00045204163, z: 0.13896179}
-  meshes:
-  - {fileID: 919132149155446097, guid: 890817facc198d84a928f742b6d2a559, type: 3}
-  deactivatedMeshes: []

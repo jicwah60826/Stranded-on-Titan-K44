@@ -8,7 +8,6 @@ public class PlayerHealthController : MonoBehaviour
     public static PlayerHealthController instance;
 
     [Header("Player Health")]
-    // public bool injuredAtGameStart;
     public bool receiveDamage;
     [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
@@ -42,17 +41,6 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*         if (!injuredAtGameStart)
-                {
-                    currentHealth = maximumHealth;
-                    currentAir = maximumAir;
-                }
-                else if (injuredAtGameStart)
-                {
-                    currentHealth = 33;
-                    currentAir = 33f;
-                } */
-
         if (PlayerPrefs.HasKey("maximumHealth"))
         {
             maximumHealth = PlayerPrefs.GetInt("maximumHealth");
@@ -164,7 +152,7 @@ public class PlayerHealthController : MonoBehaviour
     }
 
     public void UpdateHealthBarText()
-    {
+    { 
         UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
         UIController.instance.healthText.text = currentHealth + "/" + maximumHealth;
     }

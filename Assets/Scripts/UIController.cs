@@ -70,6 +70,10 @@ public class UIController : MonoBehaviour
         }
 
 
+        // Update Loot Count UI
+        int lootCount = PlayerPrefs.GetInt("MetalCount", 0);
+        scrapMetalCounterText.text = lootCount.ToString();
+
     }
 
     private void Update()
@@ -98,25 +102,29 @@ public class UIController : MonoBehaviour
 
     public void setMasterVolume()
     {
-        masterVolLabel.text = Mathf.RoundToInt(masterVolSlider.value).ToString() + "%";
+        //masterVolLabel.text = Mathf.RoundToInt(masterVolSlider.value).ToString() + "%";
         theMixer.SetFloat("MasterVolumeParam", Mathf.Log10(masterVolSlider.value) * 20);
+        PlayerPrefs.SetFloat("MasterVolume", Mathf.Log10(masterVolSlider.value) * 20);
     }
 
     public void setMusicVolume()
     {
-        musicVolLabel.text = Mathf.RoundToInt(musicVolSlider.value).ToString() + "%";
+        //musicVolLabel.text = Mathf.RoundToInt(musicVolSlider.value).ToString() + "%";
         theMixer.SetFloat("MusicVolumeParam", Mathf.Log10(musicVolSlider.value) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", Mathf.Log10(musicVolSlider.value) * 20);
     }
 
     public void setSFXVolume()
     {
-        sfxVolLabel.text = Mathf.RoundToInt(sfxVolSlider.value).ToString() + "%";
+        //sfxVolLabel.text = Mathf.RoundToInt(sfxVolSlider.value).ToString() + "%";
         theMixer.SetFloat("SFXVolumeParam", Mathf.Log10(sfxVolSlider.value) * 20);
+        PlayerPrefs.SetFloat("SFXVolume", Mathf.Log10(musicVolSlider.value) * 20);
     }
 
     public void setAmbienceVolume()
     {
-        ambientSFXVolLabel.text = Mathf.RoundToInt(ambientSFXVolSlider.value).ToString() + "%";
+        //ambientSFXVolLabel.text = Mathf.RoundToInt(ambientSFXVolSlider.value).ToString() + "%";
         theMixer.SetFloat("AmbienceVolumeParam", Mathf.Log10(ambientSFXVolSlider.value) * 20);
+        PlayerPrefs.SetFloat("AmbientSFXVolume", Mathf.Log10(musicVolSlider.value) * 20);
     }
 }

@@ -19,15 +19,15 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
 
+        GetAudioPrefs();
+    }
 
+    private static void GetAudioPrefs()
+    {
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
-            PlayerPrefs.SetFloat("MusicVolume", 0.5f);
-            //sliderMusic.value = 0.5f;
-        }
-        else
-        {
-            //sliderMusic.value = PlayerPrefs.GetFloat("MusicVolume");
+            float masterVolAmount = PlayerPrefs.GetFloat("MusicVolume");
+            UIController.instance.theMixer.SetFloat("MasterVolumeParam", masterVolAmount);
         }
 
         if (!PlayerPrefs.HasKey("SFXVolume"))
@@ -35,11 +35,6 @@ public class AudioManager : MonoBehaviour
             PlayerPrefs.SetFloat("SFXVolume", 1.0f);
             //sliderSFX.value = 1.0f;
         }
-        else
-        {
-            //sliderSFX.value = PlayerPrefs.GetFloat("SFXVolume");
-        }
-
     }
 
     public void StopBGM()

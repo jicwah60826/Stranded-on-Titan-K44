@@ -146,8 +146,11 @@ public class GameManager : MonoBehaviour
 
     private void ClearPlayerPrefs()
     {
-        PlayerPrefs.DeleteKey("wayPointsAbility");
-        PlayerPrefs.DeleteKey("MetalCount");
+        //PlayerPrefs.DeleteKey("wayPointsAbility");
+        PlayerPrefs.SetString("wayPointsAbility", "false");
+        PlayerPrefs.SetInt("maximumHealth", 100);
+        PlayerPrefs.SetInt("MetalCount", 0);
+        //PlayerPrefs.DeleteKey("MetalCount");
         wayPointsAbility = false;
         wayPointsEnabled = false;
         PlayerController.instance.useGunsAbility = false;
@@ -155,7 +158,8 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.jumpAbility = false;
         PlayerController.instance.doubleJumpAbility = false;
         PlayerController.instance.flashLightAbility = false;
-        PlayerController.instance.boosterBootsAbility = false;
+        // Update UI elements
+        PlayerHealthController.instance.UpdateHealthBarText();
     }
 
     private void DevCommands()

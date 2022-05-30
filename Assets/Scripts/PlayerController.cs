@@ -26,14 +26,6 @@ public class PlayerController : MonoBehaviour
     public int currentGun;
     public List<GunController> unlockableGuns = new List<GunController>();
 
-    //booster boots
-    public bool boosterBootsAbility;
-    [HideInInspector]
-    public bool canBoostBoots;
-    [Tooltip("The amount of time space bar must be held before boost boots are allowed")]
-    public float boostBootsWaitTime, boosterBootPower;
-    private float boosBootTimer;
-
     private Vector3 moveInput, gunStartPos;
     private float bounceAmount;
     private bool bounce, canJump, canDoubleJump, isRunning, lightOn, hasStamina = true, onGround, isFalling;
@@ -58,9 +50,6 @@ public class PlayerController : MonoBehaviour
     {
         gunHolstered = true;
 
-        // initialize boost boots timer timer
-        boosBootTimer = boostBootsWaitTime;
-
         currentStamina = maximumStamina;
         UIController.instance.staminaSlider.maxValue = maximumStamina; //set stamina slider max value
         currentGun--; //de-iterate the active gun index
@@ -83,7 +72,6 @@ public class PlayerController : MonoBehaviour
             GunSwitching();
             AimDownSight();
             PlayerAnimations();
-            HandleBoosterBoots();
         }
 
     }
@@ -295,37 +283,6 @@ public class PlayerController : MonoBehaviour
                 moveInput.y = bounceAmount; // applty the bounce
                 canDoubleJump = true; // allow double jump if bouncepad hit
             }
-        }
-    }
-
-    private void HandleBoosterBoots()
-    {
-        if (!boosterBootsAbility)
-        {
-            return;
-        }
-
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            boosBootTimer -= Time.deltaTime;
-
-            if (boosBootTimer <= 0)
-            {
-                canBoostBoots = true;
-                if (boosterBootsAbility)
-                {
-                    // Gravity test
-                    gravityModifier = boosterBootPower;
-                    AudioManager.instance.PlaySFX(15);
-                }
-            }
-        }
-        else
-        {
-            gravityModifier = 2f;
-            boosBootTimer = boostBootsWaitTime;
-            AudioManager.instance.StopSFX(15);
         }
     }
 

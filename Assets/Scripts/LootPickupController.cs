@@ -34,6 +34,7 @@ public class LootPickupController : MonoBehaviour
                     lootCount++;
                     // update player prefs
                     PlayerPrefs.SetInt("MetalCount", lootCount);
+                    UpdateMetalCountUI();
                     break;
                 case LootType.Crystals:
                     // do stuff if Crystals
@@ -58,5 +59,11 @@ public class LootPickupController : MonoBehaviour
         Destroy(gameObject);
 
 
+    }
+
+    private void UpdateMetalCountUI()
+    {
+        int lootCount = PlayerPrefs.GetInt("MetalCount", 0);
+        UIController.instance.scrapMetalCounterText.text = lootCount.ToString();
     }
 }

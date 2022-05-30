@@ -5,7 +5,7 @@ using TMPro;
 
 public class AbilityPickup : MonoBehaviour
 {
-    public bool useGunsAbility, runAbility, jumpAbility, doubleJumpAbility, flashLightAbility, boosterBootsAbility, wayPointsAbility, maxHealthIncrease;
+    public bool useGunsAbility, canRunAbility, canJumpAbility, canDoubleJumpAbility, useFlashLightAbility, useWayPointsAbility, maxHealthIncrease;
     public string onScreenMessage;
     private string hasWayPointsAbility;
     public float textOnScreenTime;
@@ -45,7 +45,7 @@ public class AbilityPickup : MonoBehaviour
 
             // RUN ABILITY
 
-            if (runAbility)
+            if (canRunAbility)
             {
                 PlayerController.instance.runAbility = true;
                 AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
@@ -53,30 +53,24 @@ public class AbilityPickup : MonoBehaviour
 
             // JUMP ABILITY
 
-            if (jumpAbility)
+            if (canJumpAbility)
             {
                 PlayerController.instance.jumpAbility = true;
                 AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
+                PlayerPrefs.SetString("wayPointsAbility", hasWayPointsAbility);
             }
 
             // DOUBLE JUMP ABILITY 
-            if (doubleJumpAbility)
+            if (canDoubleJumpAbility)
             {
                 PlayerController.instance.doubleJumpAbility = true;
                 AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
             // USE FLASHLIGHT ABILITY 
-            if (flashLightAbility)
+            if (useFlashLightAbility)
             {
                 PlayerController.instance.flashLightAbility = true;
-                AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
-            }
-
-            // BOOSTER BOOTS ABILITY 
-            if (boosterBootsAbility)
-            {
-                PlayerController.instance.boosterBootsAbility = true;
                 AudioManager.instance.PlaySFX(17); // play sfx element from audio manager SFX list
             }
 
@@ -94,7 +88,7 @@ public class AbilityPickup : MonoBehaviour
             }
 
             // WAYPOINTS ABILITY 
-            if (wayPointsAbility)
+            if (useWayPointsAbility)
             {
                 PlayerController.instance.wayPointsAbility = true;
                 // Update Player Prefs
