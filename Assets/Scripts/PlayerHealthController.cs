@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
-
     public static PlayerHealthController instance;
 
     [Header("Player Health")]
     public bool receiveDamage;
+
     [Tooltip("Player maximum health in integers")]
     public int maximumHealth;
+
     [Space]
     [Header("Player Oxygen Settings")]
     public bool useAir;
@@ -21,11 +22,16 @@ public class PlayerHealthController : MonoBehaviour
     public int suffocationDamageAmount;
     public float suffocationDamageInterval;
     private float suffocateDamageIntervalTimer;
+
     [Space]
-    [Tooltip("Player current health and current air. This is what is reduced with damage or increased with a pickup.")]
+    [Tooltip(
+        "Player current health and current air. This is what is reduced with damage or increased with a pickup."
+    )]
     public int currentHealth;
+
     [Tooltip("Only used if the Player is injured at game start.")]
     public float currentAir;
+
     [Space]
     [Header("Grace Period")]
     [Tooltip("The amount of time the player goes without damager after being shot.")]
@@ -80,7 +86,6 @@ public class PlayerHealthController : MonoBehaviour
             currentAir = 0;
         }
 
-
         if (currentAir <= 0)
         {
             suffocateCounter -= Time.deltaTime;
@@ -99,12 +104,11 @@ public class PlayerHealthController : MonoBehaviour
         else
         {
             suffocateCounter = suffocateBuffer;
-
         }
 
         if (suffocateCounter <= 0)
         {
-            // begin countdown clock to hurt player every 
+            // begin countdown clock to hurt player every
         }
     }
 
@@ -118,10 +122,8 @@ public class PlayerHealthController : MonoBehaviour
 
     public void DamagePlayer(int damageAmount)
     {
-
         if (invincibleCounter <= 0 || useInvicDelay == false)
         {
-
             // if level is NOT ending - then we can allow the below
             if (!GameManager.instance.levelEnding)
             {
@@ -138,21 +140,19 @@ public class PlayerHealthController : MonoBehaviour
                     // Player dead
                     //Debug.Log("Player has been killed");
                     gameObject.SetActive(false); // disable player controls / movement
-                    currentHealth = 0;  // reset health to 0 so healthbar display never shows a negative #
+                    currentHealth = 0; // reset health to 0 so healthbar display never shows a negative #
                     GameManager.instance.PlayerDied(); // call player function from GameManager
                     AudioManager.instance.StopBGM(); // stop the background music
                     AudioManager.instance.PlaySFX(14); // play sfx element from audio manager SFX list
                 }
             }
-
-
         }
         invincibleCounter = invicibleLength;
         UpdateHealthBarText();
     }
 
     public void UpdateHealthBarText()
-    { 
+    {
         UIController.instance.healthSlider.value = currentHealth; // initialize slider value to current health
         UIController.instance.healthText.text = currentHealth + "/" + maximumHealth;
     }
@@ -174,7 +174,6 @@ public class PlayerHealthController : MonoBehaviour
 
         //update slider and text
         UpdateHealthBarText();
-
     }
 
     public void GiveAir(float airAmount)
@@ -188,6 +187,5 @@ public class PlayerHealthController : MonoBehaviour
 
         //update air slider and text
         UpdateAirTankText();
-
     }
 }

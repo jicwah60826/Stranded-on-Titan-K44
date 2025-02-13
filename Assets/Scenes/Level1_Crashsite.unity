@@ -6393,6 +6393,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d31beebd8a56d546b93e0861a42ac2c, type: 3}
+--- !u!4 &1499423145 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4938031827281388715, guid: 8b764eff582aa064c838a11285478893, type: 3}
+  m_PrefabInstance: {fileID: 1946328287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1499857011 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1773526391034185154, guid: 1af53644d1852a943bd1a249c714d9e7, type: 3}
@@ -6845,6 +6850,7 @@ Transform:
   - {fileID: 977934402}
   - {fileID: 1762300132}
   - {fileID: 1376433395}
+  - {fileID: 1499423145}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1574302982
@@ -8800,7 +8806,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1565402324}
     m_Modifications:
     - target: {fileID: 4938031827281388708, guid: 8b764eff582aa064c838a11285478893, type: 3}
       propertyPath: maxHealthToAdd
@@ -8844,15 +8850,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4938031827281388715, guid: 8b764eff582aa064c838a11285478893, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4938031827281388715, guid: 8b764eff582aa064c838a11285478893, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4938031827281388715, guid: 8b764eff582aa064c838a11285478893, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4938031827281388715, guid: 8b764eff582aa064c838a11285478893, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10073,11 +10079,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 582050456396743090, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.39
+      value: 1.119
       objectReference: {fileID: 0}
     - target: {fileID: 582050456396743090, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.027571201
+      value: 1.76
       objectReference: {fileID: 0}
     - target: {fileID: 582050456396743090, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10120,12 +10126,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 582050456396743101, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
+      propertyPath: useGunsAbility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 582050456396743101, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
       propertyPath: onScreenMessage
       value: All abilities unlocked!
       objectReference: {fileID: 0}
     - target: {fileID: 582050456396743101, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
-      propertyPath: useWayPointsAbility
+      propertyPath: maxHealthIncrease
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 582050456396743101, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
+      propertyPath: useWayPointsAbility
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 582050456396743101, guid: 2fc60003a41d2c644a13c058ca72bced, type: 3}
       propertyPath: canDoubleJumpAbility
@@ -10562,12 +10576,16 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5178579146541411588, guid: ad8e004d851b6b44a988f0f5d1fbe8a6, type: 3}
+      propertyPath: maximumAir
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178579146541411588, guid: ad8e004d851b6b44a988f0f5d1fbe8a6, type: 3}
       propertyPath: receiveDamage
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5178579146541411588, guid: ad8e004d851b6b44a988f0f5d1fbe8a6, type: 3}
       propertyPath: airDepleteRate
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10836,6 +10854,22 @@ PrefabInstance:
     - target: {fileID: 5762804628711485149, guid: 9053998f0903b89458e861bbd38839b7, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762804628711485151, guid: 9053998f0903b89458e861bbd38839b7, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762804628711485151, guid: 9053998f0903b89458e861bbd38839b7, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762804628711485151, guid: 9053998f0903b89458e861bbd38839b7, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762804628711485151, guid: 9053998f0903b89458e861bbd38839b7, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11453,6 +11487,5 @@ SceneRoots:
   - {fileID: 1414508359}
   - {fileID: 1087220485}
   - {fileID: 392212636}
-  - {fileID: 1946328287}
   - {fileID: 1565402324}
   - {fileID: 159286539}
