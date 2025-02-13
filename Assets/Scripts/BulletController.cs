@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        theRB.velocity = transform.forward * moveSpeed; //moves the rigidbody along the Z axis
+        theRB.linearVelocity = transform.forward * moveSpeed; //moves the rigidbody along the Z axis
 
         lifeTime -= Time.deltaTime;
 

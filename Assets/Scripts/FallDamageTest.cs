@@ -18,7 +18,7 @@ public class FallDamageTest : MonoBehaviour
     void Update()
     {
 
-/*         verticalSpeed = charCon.velocity.y;
+        verticalSpeed = charCon.velocity.y;
         //Debug.Log("verticalSpeed: " + verticalSpeed);
 
         if (verticalSpeed <= -1f)
@@ -50,6 +50,6 @@ public class FallDamageTest : MonoBehaviour
             fallHeight = 0;
         }
 
-        Debug.Log("isFalling = " + isFalling); */
+        Debug.Log("isFalling = " + isFalling);
     }
 }

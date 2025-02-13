@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         // store if player was just on the ground (we do this BEFORE our next check to see if they are CURRENTLY on the ground)
         bool previousGrounded = isOnGround;
 
-        // check if player is on the grouind (if we are within range of any ground layer object)
+        // check if player is on the ground (if we are within range of any ground layer object)
         canJump = Physics.OverlapSphere(groundCheckPoint.position, groundCheckDistance, whatIsGround).Length > 0;
         isOnGround = canJump;
         //Debug.Log("isOnGround: " + isOnGround);
